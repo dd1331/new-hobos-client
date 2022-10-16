@@ -12,7 +12,7 @@ import WelcomeItem from "./WelcomeItem.vue";
     <template #icon>
       <DocumentationIcon />
     </template>
-    <template #heading>Docume2ntation</template>
+    <template #heading>Documentation</template>
 
     Vue’s
     <a href="https://vuejs.org/" target="_blank" rel="noopener"
