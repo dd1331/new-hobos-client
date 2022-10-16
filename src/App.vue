@@ -1,33 +1,76 @@
-<script setup lang="ts">
-import { RouterLink, RouterView } from "vue-router";
-import HelloWorld from "./components/HelloWorld.vue";
-</script>
-
 <template>
-  <header>
-    <img
-      alt="Vue logo"
-      class="logo"
-      src="@/assets/logo.svg"
-      width="125"
-      height="125"
-    />
+  <v-app>
+    <HeaderBar></HeaderBar>
+    <v-layout v-if="mobile" style="z-index: 0" class="mt-16">
+      <!-- Sizes your content based upon application components -->
+      <v-main class="mt-10 bg-grey-lighten-4">
+        <!-- Provides the application the proper gutter -->
+        <v-container fluid>
+          <!-- If using vue-router -->
+          <router-view></router-view>
+        </v-container>
+      </v-main>
+    </v-layout>
+    <v-layout v-else style="z-index: 0" class="mt-16">
+      <v-navigation-drawer
+        class="bg-grey-lighten-4"
+        permanent
+      ></v-navigation-drawer>
+      <v-navigation-drawer
+        class="bg-grey-lighten-4"
+        permanent
+        location="right"
+      ></v-navigation-drawer>
+      <!-- Sizes your content based upon application components -->
+      <v-main class="mt-10 bg-grey-lighten-4">
+        <!-- Provides the application the proper gutter -->
+        <v-container fluid>
+          <!-- If using vue-router -->
+          <router-view></router-view>
+        </v-container>
+      </v-main>
+    </v-layout>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+    <GoodFooter></GoodFooter>
+  </v-app>
 </template>
+<script>
+import HeaderBar from "./components/HeaderBar.vue";
+import GoodFooter from "./components/GoodFooter.vue";
 
-<style scoped>
-header {
+import { reactive } from "vue";
+import { useDisplay } from "vuetify";
+export default {
+  components: {
+    HeaderBar,
+    GoodFooter,
+  },
+  // `setup` is a special hook dedicated for composition API.
+  setup() {
+    const state = reactive({ draw: false });
+    const { mobile, mdAndUp } = useDisplay();
+
+    const logo = mdAndUp ? "w-50" : "";
+
+    return {
+      state,
+      mobile,
+      logo,
+    };
+  },
+};
+</script>
+<style>
+.rounded-12 {
+  border-radius: 12px;
+}
+.rounded-20 {
+  border-radius: 20px;
+}
+</style>
+
+<!-- <style scoped>
+headerBar {
   line-height: 1.5;
   max-height: 100vh;
 }
@@ -63,7 +106,7 @@ nav a:first-of-type {
 }
 
 @media (min-width: 1024px) {
-  header {
+  headerBar {
     display: flex;
     place-items: center;
     padding-right: calc(var(--section-gap) / 2);
@@ -73,7 +116,7 @@ nav a:first-of-type {
     margin: 0 2rem 0 0;
   }
 
-  header .wrapper {
+  headerBar .wrapper {
     display: flex;
     place-items: flex-start;
     flex-wrap: wrap;
@@ -87,5 +130,4 @@ nav a:first-of-type {
     padding: 1rem 0;
     margin-top: 1rem;
   }
-}
-</style>
+} -->
