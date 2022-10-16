@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <HeaderBar></HeaderBar>
+    <GoodHeader></GoodHeader>
     <v-layout v-if="mobile" style="z-index: 0" class="mt-16">
       <!-- Sizes your content based upon application components -->
       <v-main class="mt-10 bg-grey-lighten-4">
@@ -13,11 +13,11 @@
     </v-layout>
     <v-layout v-else style="z-index: 0" class="mt-16">
       <v-navigation-drawer
-        class="bg-grey-lighten-4"
+        class="bg-grey-lighten-4 border-none"
         permanent
       ></v-navigation-drawer>
       <v-navigation-drawer
-        class="bg-grey-lighten-4"
+        class="bg-grey-lighten-4 border-none"
         permanent
         location="right"
       ></v-navigation-drawer>
@@ -35,27 +35,24 @@
   </v-app>
 </template>
 <script>
-import HeaderBar from "./components/HeaderBar.vue";
+import GoodHeader from "./components/GoodHeader.vue";
 import GoodFooter from "./components/GoodFooter.vue";
 
 import { reactive } from "vue";
 import { useDisplay } from "vuetify";
 export default {
   components: {
-    HeaderBar,
+    GoodHeader,
     GoodFooter,
   },
   // `setup` is a special hook dedicated for composition API.
   setup() {
     const state = reactive({ draw: false });
-    const { mobile, mdAndUp } = useDisplay();
-
-    const logo = mdAndUp ? "w-50" : "";
+    const { mobile } = useDisplay();
 
     return {
       state,
       mobile,
-      logo,
     };
   },
 };

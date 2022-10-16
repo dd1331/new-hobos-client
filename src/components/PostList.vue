@@ -20,7 +20,7 @@
     </v-list>
   </v-card>
 </template>
-<script type="module">
+<script>
 export default {
   setup() {
     // expose the state to the template

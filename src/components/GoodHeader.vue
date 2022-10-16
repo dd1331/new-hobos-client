@@ -36,13 +36,9 @@ export default {
   // `setup` is a special hook dedicated for composition API.
   setup() {
     const state = reactive({ draw: false });
-    const { mobile, mdAndUp } = useDisplay();
-    console.log(
-      "🚀 ~ file: HeaderBar.vue ~ line 40 ~ setup ~ mdAndUp",
-      mdAndUp
-    );
+    const { mobile } = useDisplay();
 
-    const logo = mdAndUp ? "w-50" : "";
+    const logo = mobile ? "w-50" : "";
 
     // expose the state to the template
     return {
