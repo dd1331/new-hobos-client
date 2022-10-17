@@ -3,6 +3,8 @@
     <!-- <TheWelcome /> -->
     <HomeCarousel></HomeCarousel>
     <PostList></PostList>
+    <PostList></PostList>
+    <PostList></PostList>
   </main>
 </template>
 

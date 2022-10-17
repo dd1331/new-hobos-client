@@ -1,15 +1,15 @@
 <template>
-  <v-app-bar :elevation="2" class="pa-5 mb-16">
+  <v-app-bar :elevation="2" class="pa-5">
     <v-navigation-drawer v-if="false" app> </v-navigation-drawer>
     <div>
-      <div>
-        <img
-          :class="logo"
-          src="https://theyouthdream.com/files/attach/images/main/dream_logo.png"
-          alt=""
-        />
-      </div>
-      <div class="d-md-flex d-none">
+      <img
+        :class="logo"
+        src="https://theyouthdream.com/files/attach/images/main/dream_logo.png"
+        alt=""
+      />
+    </div>
+    <div>
+      <div class="d-md-flex d-none justify-center">
         <v-btn variant="plain"> 청문홍답 </v-btn>
         <v-btn variant="plain"> 홍문청답 </v-btn>
         <v-btn variant="plain"> 인기게시판 </v-btn>

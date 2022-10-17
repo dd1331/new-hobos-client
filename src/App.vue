@@ -10,6 +10,7 @@
           <router-view></router-view>
         </v-container>
       </v-main>
+      <GoodFooter></GoodFooter>
     </v-layout>
     <v-layout v-else style="z-index: 0" class="mt-16">
       <v-navigation-drawer
@@ -29,9 +30,21 @@
           <router-view></router-view>
         </v-container>
       </v-main>
+      <GoodFooter></GoodFooter>
     </v-layout>
-
-    <GoodFooter></GoodFooter>
+    <v-footer v-if="mobile" app class="bg-grey-lighten-4">
+      <div class="d-flex w-100 justify-center">
+        <div>
+          <v-btn
+            v-for="icon in icons"
+            :key="icon"
+            class="mx-0 px-0"
+            variant="text"
+            >{{ icon }}</v-btn
+          >
+        </div>
+      </div>
+    </v-footer>
   </v-app>
 </template>
 <script>
@@ -49,10 +62,13 @@ export default {
   setup() {
     const state = reactive({ draw: false });
     const { mobile } = useDisplay();
+    const icons = ["청문홍답", "홍문청답", "인기", "자유", "정치"];
 
     return {
       state,
+      icons,
       mobile,
+      tab: null,
     };
   },
 };
