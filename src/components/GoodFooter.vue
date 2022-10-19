@@ -1,5 +1,5 @@
 <template>
-  <v-footer app class="bg-grey-lighten-4">
+  <div app class="bg-grey-lighten-4 mb-16">
     <v-row justify="center" no-gutters class="text-center d-flex flex-column">
       <div>
         <v-btn
@@ -25,7 +25,7 @@
         Copyright 2021 - 2022 호보스 All Rights Reserved. 광고문의 ddd1331@gmail
       </div>
     </v-row>
-  </v-footer>
+  </div>
 </template>
 <script>
 export default {

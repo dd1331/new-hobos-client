@@ -9,8 +9,8 @@
           <!-- If using vue-router -->
           <router-view></router-view>
         </v-container>
+        <GoodFooter></GoodFooter>
       </v-main>
-      <GoodFooter></GoodFooter>
     </v-layout>
     <v-layout v-else style="z-index: 0" class="mt-16">
       <v-navigation-drawer
@@ -29,8 +29,8 @@
           <!-- If using vue-router -->
           <router-view></router-view>
         </v-container>
+        <GoodFooter></GoodFooter>
       </v-main>
-      <GoodFooter></GoodFooter>
     </v-layout>
     <v-footer v-if="mobile" app class="bg-grey-lighten-4">
       <div class="d-flex w-100 justify-center">
