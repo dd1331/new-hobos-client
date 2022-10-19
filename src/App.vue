@@ -1,9 +1,10 @@
 <template>
-  <v-app>
+  <v-app class="bg-grey-lighten-4">
     <GoodHeader></GoodHeader>
-    <v-layout v-if="mobile" style="z-index: 0" class="mt-16">
+    <v-layout v-if="mobile" style="z-index: 0" class="mt-6">
       <!-- Sizes your content based upon application components -->
-      <v-main class="mt-10 bg-grey-lighten-4">
+      <v-main class="mt-10">
+        <!-- <v-main class="mt-10 bg-grey-lighten-4"> -->
         <!-- Provides the application the proper gutter -->
         <v-container fluid>
           <!-- If using vue-router -->
@@ -12,7 +13,7 @@
         <GoodFooter></GoodFooter>
       </v-main>
     </v-layout>
-    <v-layout v-else style="z-index: 0" class="mt-16">
+    <v-layout v-else style="z-index: 0" class="mt-6">
       <v-navigation-drawer
         class="bg-grey-lighten-4 border-none"
         permanent
@@ -23,7 +24,8 @@
         location="right"
       ></v-navigation-drawer>
       <!-- Sizes your content based upon application components -->
-      <v-main class="mt-10 bg-grey-lighten-4">
+      <v-main class="mt-10">
+        <!-- <v-main class="mt-10 bg-grey-lighten-4"> -->
         <!-- Provides the application the proper gutter -->
         <v-container fluid>
           <!-- If using vue-router -->

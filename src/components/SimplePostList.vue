@@ -18,7 +18,7 @@
     </v-list>
   </v-card>
 </template>
-<script>
+<script lang="ts">
 export default {
   setup() {
     // expose the state to the template

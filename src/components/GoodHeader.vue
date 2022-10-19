@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar :elevation="2" class="pa-5">
+  <v-app-bar :elevation="2" class="px-4 py-0">
     <v-navigation-drawer v-if="false" app> </v-navigation-drawer>
     <div>
       <img

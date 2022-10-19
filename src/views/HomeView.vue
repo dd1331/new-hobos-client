@@ -2,13 +2,13 @@
   <main>
     <!-- <TheWelcome /> -->
     <HomeCarousel></HomeCarousel>
-    <PostList></PostList>
-    <PostList></PostList>
-    <PostList></PostList>
+    <SimplePostList></SimplePostList>
+    <SimplePostList></SimplePostList>
+    <SimplePostList></SimplePostList>
   </main>
 </template>
 
-<script setup>
-import PostList from "../components/PostList.vue";
+<script setup lang="ts">
 import HomeCarousel from "../components/HomeCarousel.vue";
+import SimplePostList from "../components/SimplePostList.vue";
 </script>
