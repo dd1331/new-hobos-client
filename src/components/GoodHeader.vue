@@ -1,7 +1,7 @@
 <template>
   <v-app-bar :elevation="2" class="px-4 py-0">
     <v-navigation-drawer v-if="false" app> </v-navigation-drawer>
-    <div>
+    <div @click="$router.push('/')">
       <img
         :class="logo"
         src="https://theyouthdream.com/files/attach/images/main/dream_logo.png"

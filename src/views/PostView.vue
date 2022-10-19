@@ -17,12 +17,14 @@
   </v-card>
 
   <GoodComment></GoodComment>
+  <PostList></PostList>
 </template>
 
-<script>
+<script lang="ts">
 import GoodComment from "../components/GoodComment.vue";
+import PostList from "../components/PostList.vue";
 export default {
-  components: { GoodComment },
+  components: { GoodComment, PostList },
   setup() {
     const text = `시장님
 
