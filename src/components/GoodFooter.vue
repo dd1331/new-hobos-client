@@ -27,7 +27,7 @@
     </v-row>
   </div>
 </template>
-<script>
+<script lang="ts">
 export default {
   setup() {
     const links = ["소개", "개인정보처리방침", "이용약관", "청소년보호정책"];

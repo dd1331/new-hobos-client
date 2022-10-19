@@ -11,9 +11,9 @@
       <template v-slot:subtitle="{ subtitle }">
         <div v-html="subtitle" class="pb-2"></div>
         <div class="d-flex pb-2">
-          <v-btn class="mx-3"> 좋아요 </v-btn>
-          <v-btn class="mx-3"> 싫어요 </v-btn>
-          <v-btn class="mx-3"> 더보기 </v-btn>
+          <v-btn style="border-radius: 12px" class="mx-3"> 좋아요 </v-btn>
+          <v-btn style="border-radius: 12px" class="mx-3"> 싫어요 </v-btn>
+          <v-btn style="border-radius: 12px" class="mx-3"> 더보기 </v-btn>
         </div>
       </template>
     </v-list>

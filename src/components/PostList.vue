@@ -34,6 +34,9 @@
       </tr>
     </tbody>
   </v-table>
+  <div class="text-center mt-10">
+    <v-pagination density="compact" v-model="page" :length="5"></v-pagination>
+  </div>
 </template>
 
 <script lang="ts">
@@ -82,7 +85,7 @@ export default {
       },
     ];
 
-    return { desserts };
+    return { desserts, page: 1 };
   },
 };
 </script>

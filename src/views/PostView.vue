@@ -10,9 +10,9 @@
     </v-card-item>
     <v-divider></v-divider>
     <v-card-text> {{ text }} </v-card-text>
-    <div class="d-flex justify-center">
-      <v-btn class="mx-3"> 좋아요 </v-btn>
-      <v-btn class="mx-3"> 싫어요 </v-btn>
+    <div class="d-flex justify-center mb-5">
+      <v-btn style="border-radius: 12px" class="mx-3"> 좋아요 </v-btn>
+      <v-btn style="border-radius: 12px" class="mx-3"> 싫어요 </v-btn>
     </div>
   </v-card>
 

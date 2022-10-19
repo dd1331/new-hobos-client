@@ -29,7 +29,7 @@
   </v-app-bar>
 </template>
 
-<script>
+<script lang="ts">
 import { reactive } from "vue";
 import { useDisplay } from "vuetify";
 export default {
