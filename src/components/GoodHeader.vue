@@ -20,32 +20,29 @@
       </div>
     </div>
     <template v-slot:append>
-      <v-btn icon="mdi-heart"></v-btn>
+      <v-btn icon="mdi-heart" @click="toggleLogin"></v-btn>
 
-      <v-btn icon="mdi-magnify"></v-btn>
+      <v-btn icon="mdi-magnify" @click="toggleLogin"></v-btn>
 
-      <v-btn icon="mdi-dots-vertical"></v-btn>
+      <v-btn icon="mdi-dots-vertical" @click="toggleLogin"></v-btn>
     </template>
   </v-app-bar>
+  <GoodLogin :hidden="isLoginPopped" @hide-login="toggleLogin"></GoodLogin>
 </template>
 
-<script lang="ts">
-import { reactive } from "vue";
+<script lang="ts" setup>
+import GoodLogin from "../components/GoodLogin.vue";
+
+import { ref } from "vue";
 import { useDisplay } from "vuetify";
-export default {
-  // `setup` is a special hook dedicated for composition API.
-  setup() {
-    const state = reactive({ draw: false });
-    const { mobile } = useDisplay();
 
-    const logo = mobile ? "w-50" : "";
+const { mobile } = useDisplay();
 
-    // expose the state to the template
-    return {
-      state,
-      mobile,
-      logo,
-    };
-  },
-};
+const logo = mobile ? "w-50" : "";
+
+// expose the state to the template
+const isLoginPopped = ref(false);
+function toggleLogin() {
+  isLoginPopped.value = !isLoginPopped.value;
+}
 </script>

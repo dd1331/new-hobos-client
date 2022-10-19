@@ -42,8 +42,9 @@
             :key="icon"
             class="mx-0 px-0"
             variant="text"
-            >{{ icon }}</v-btn
           >
+            {{ icon }}
+          </v-btn>
         </div>
       </div>
     </v-footer>
