@@ -17,15 +17,21 @@
   </v-card>
 
   <GoodComment></GoodComment>
-  <PostList></PostList>
+  <GoodCategory class="mt-5"></GoodCategory>
+  <SimplePostList v-if="mobile" :pagination="true"></SimplePostList>
+  <PostTable v-else></PostTable>
 </template>
 
 <script lang="ts">
+import { useDisplay } from "vuetify";
+import GoodCategory from "../components/GoodCategory.vue";
 import GoodComment from "../components/GoodComment.vue";
-import PostList from "../components/PostList.vue";
+import PostTable from "../components/PostTable.vue";
+import SimplePostList from "../components/SimplePostList.vue";
 export default {
-  components: { GoodComment, PostList },
+  components: { GoodComment, PostTable, SimplePostList, GoodCategory },
   setup() {
+    const { mobile } = useDisplay();
     const text = `시장님
 
 	현대통령이 잘못한부분이 대해서는 귀신같이 한마디도 안하시고 비판글에 대해서는 골라서 절대 대답안하시네요
@@ -40,7 +46,7 @@ export default {
 
 	`;
 
-    return { text };
+    return { text, mobile };
   },
 };
 </script>

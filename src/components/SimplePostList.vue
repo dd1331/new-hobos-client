@@ -17,9 +17,18 @@
       </v-list-item>
     </v-list>
   </v-card>
+  <div class="text-center mt-10">
+    <v-pagination
+      v-if="pagination"
+      density="compact"
+      v-model="page"
+      :length="5"
+    ></v-pagination>
+  </div>
 </template>
 <script lang="ts">
 export default {
+  props: { pagination: Boolean },
   setup() {
     // expose the state to the template
     const items = [
@@ -54,6 +63,7 @@ export default {
     ];
     return {
       items,
+      page: 1,
     };
   },
 };

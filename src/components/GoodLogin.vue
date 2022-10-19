@@ -55,7 +55,6 @@ const props = defineProps({ hidden: Boolean });
 defineEmits(["hideLogin"]);
 const dialog = computed(() => props.hidden);
 const valid = true;
-const firstname = "";
 const lastname = "";
 const nameRules = [
   (v) => !!v || "Name is required",
