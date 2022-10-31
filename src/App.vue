@@ -27,7 +27,7 @@
       <v-main class="mt-10">
         <!-- <v-main class="mt-10 bg-grey-lighten-4"> -->
         <!-- Provides the application the proper gutter -->
-        <v-container fluid>
+        <v-container fluid class="w-50">
           <!-- If using vue-router -->
           <router-view></router-view>
         </v-container>

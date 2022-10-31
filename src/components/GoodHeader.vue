@@ -1,31 +1,35 @@
 <template>
   <v-app-bar :elevation="2" class="px-4 py-0">
     <v-navigation-drawer v-if="false" app> </v-navigation-drawer>
-    <div @click="$router.push('/')">
+    <div @click="$router.push('/')" class="w-25">
       <img
         :class="logo"
         src="https://theyouthdream.com/files/attach/images/main/dream_logo.png"
         alt=""
       />
     </div>
-    <div>
-      <div class="d-md-flex d-none justify-center">
-        <v-btn variant="plain"> 청문홍답 </v-btn>
-        <v-btn variant="plain"> 홍문청답 </v-btn>
-        <v-btn variant="plain"> 인기게시판 </v-btn>
-        <v-btn variant="plain"> 자유게시판 </v-btn>
-        <v-btn variant="plain"> 정치게시판 </v-btn>
-        <v-btn variant="plain"> 아레나 </v-btn>
-        <v-btn variant="plain"> 문의 </v-btn>
+    <div class="d-flex w-75">
+      <div class="w-100">
+        <div class="d-md-flex d-none justify-center">
+          <v-btn variant="plain"> 청문홍답 </v-btn>
+          <v-btn variant="plain"> 홍문청답 </v-btn>
+          <v-btn variant="plain"> 인기게시판 </v-btn>
+          <v-btn variant="plain"> 자유게시판 </v-btn>
+          <v-btn variant="plain"> 정치게시판 </v-btn>
+          <v-btn variant="plain"> 아레나 </v-btn>
+          <v-btn variant="plain"> 문의 </v-btn>
+        </div>
       </div>
     </div>
-    <template v-slot:append>
+    <!-- <template v-slot:append> -->
+    <div class="w-25 d-flex justify-end">
       <v-btn icon="mdi-heart" @click="toggleLogin"></v-btn>
 
       <v-btn icon="mdi-magnify" @click="toggleLogin"></v-btn>
 
       <v-btn icon="mdi-dots-vertical" @click="toggleLogin"></v-btn>
-    </template>
+    </div>
+    <!-- </template> -->
   </v-app-bar>
   <GoodLogin :hidden="isLoginPopped" @hide-login="toggleLogin"></GoodLogin>
 </template>
