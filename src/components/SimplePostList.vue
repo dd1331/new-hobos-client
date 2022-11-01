@@ -1,8 +1,14 @@
 <template>
   <v-card class="my-8" style="border-radius: 20px">
     <div class="d-flex justify-space-between align-center">
-      <div class="text-h6 mx-4 my-1">자유</div>
-      <v-btn style="border-radius: 12px" class="mx-4" size="small">more</v-btn>
+      <div class="text-h6 mx-4 my-1">{{ category }}</div>
+      <v-btn
+        style="border-radius: 12px"
+        class="mx-4"
+        size="small"
+        @click="$router.push({ path: '/post', query: { category } })"
+        >more</v-btn
+      >
     </div>
     <v-divider></v-divider>
 
@@ -26,45 +32,40 @@
     ></v-pagination>
   </div>
 </template>
-<script lang="ts">
-export default {
-  props: { pagination: Boolean },
-  setup() {
-    // expose the state to the template
-    const items = [
-      {
-        title: "기자회견을 보고",
-        info: { name: "홍준표", date: "08.21", like: 10 },
-      },
-      {
-        title: "기자회견을 보고",
-        info: { name: "홍준표", date: "08.21", like: 10 },
-      },
-      {
-        title: "기자회견을 보고",
-        info: { name: "홍준표", date: "08.21", like: 10 },
-      },
-      {
-        title: "기자회견을 보고",
-        info: { name: "홍준표", date: "08.21", like: 10 },
-      },
-      {
-        title: "기자회견을 보고",
-        info: { name: "홍준표", date: "08.21", like: 10 },
-      },
-      {
-        title: "기자회견을 보고",
-        info: { name: "홍준표", date: "08.21", like: 10 },
-      },
-      {
-        title: "기자회견을 보고",
-        info: { name: "홍준표", date: "08.21", like: 10 },
-      },
-    ];
-    return {
-      items,
-      page: 1,
-    };
+<script lang="ts" setup>
+defineProps({
+  pagination: Boolean,
+  category: String,
+});
+const page = 1;
+const items = [
+  {
+    title: "기자회견을 보고 (12)",
+    info: { name: "홍준표", date: "08.21", like: 10 },
   },
-};
+  {
+    title: "기자회견을 보고 (12)",
+    info: { name: "홍준표", date: "08.21", like: 10 },
+  },
+  {
+    title: "기자회견을 보고 (12)",
+    info: { name: "홍준표", date: "08.21", like: 10 },
+  },
+  {
+    title: "기자회견을 보고 (12)",
+    info: { name: "홍준표", date: "08.21", like: 10 },
+  },
+  {
+    title: "기자회견을 보고 (12)",
+    info: { name: "홍준표", date: "08.21", like: 10 },
+  },
+  {
+    title: "기자회견을 보고 (12)",
+    info: { name: "홍준표", date: "08.21", like: 10 },
+  },
+  {
+    title: "기자회견을 보고 (12)",
+    info: { name: "홍준표", date: "08.21", like: 10 },
+  },
+];
 </script>

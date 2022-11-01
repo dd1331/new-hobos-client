@@ -1,60 +1,27 @@
 <template>
   <div class="mb-3">
     <v-btn
+      v-for="category in categories"
+      :key="category"
       class="mr-2 bg-grey-lighten-2 mb-2"
       variant="flat"
       height="35"
       style="border-radius: 12px"
-      >🌍 전체</v-btn
-    >
-    <v-btn
-      class="mr-2 bg-grey-lighten-2 mb-2"
-      variant="flat"
-      height="35"
-      style="border-radius: 12px"
-      >🌍 정치 (2131)</v-btn
-    >
-    <v-btn
-      class="mr-2 bg-grey-lighten-2 mb-2"
-      variant="flat"
-      height="35"
-      style="border-radius: 12px"
-      >🌍 뉴스 (2131)</v-btn
-    >
-    <v-btn
-      class="mr-2 bg-grey-lighten-2 mb-2"
-      variant="flat"
-      height="35"
-      style="border-radius: 12px"
-      >🌍 토론 (2131)</v-btn
-    >
-    <v-btn
-      class="mr-2 bg-grey-lighten-2 mb-2"
-      variant="flat"
-      height="35"
-      style="border-radius: 12px"
-      >🌍 자유 (2131)</v-btn
-    >
-    <v-btn
-      class="mr-2 bg-grey-lighten-2 mb-2"
-      variant="flat"
-      height="35"
-      style="border-radius: 12px"
-      >🌍 인기 (2131)</v-btn
-    >
-    <v-btn
-      class="mr-2 bg-grey-lighten-2 mb-2"
-      variant="flat"
-      height="35"
-      style="border-radius: 12px"
-      >🌍 세금 (2131)</v-btn
-    >
-    <v-btn
-      class="mr-2 bg-grey-lighten-2 mb-2"
-      variant="flat"
-      height="35"
-      style="border-radius: 12px"
-      >🌍 일상 (2131)</v-btn
+      @click="$router.push({ path: '/post', query: { category } })"
+      >{{ category }}</v-btn
     >
   </div>
 </template>
+
+<script lang="ts" setup>
+const categories = [
+  "🌍 전체 ",
+  "🌍 정치 ",
+  "🌍 뉴스 ",
+  "🌍 토론 ",
+  "🌍 자유 ",
+  "🌍 인기 ",
+  "🌍 세금 ",
+  "🌍 일상 ",
+];
+</script>

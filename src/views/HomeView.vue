@@ -2,16 +2,16 @@
   <main>
     <!-- <TheWelcome /> -->
     <HomeCarousel></HomeCarousel>
-    <SimplePostList class="mx-0 px-0"></SimplePostList>
+    <SimplePostList category="인기" class="mx-0 px-0"></SimplePostList>
     <div v-if="mobile">
-      <SimplePostList></SimplePostList>
-      <SimplePostList></SimplePostList>
-      <SimplePostList></SimplePostList>
+      <SimplePostList category="자유"></SimplePostList>
+      <SimplePostList category="주식"></SimplePostList>
+      <SimplePostList category="재테크"></SimplePostList>
     </div>
     <div v-else class="">
       <v-row v-for="m in 3" :key="m">
         <v-col v-for="n in 3" :key="n" cols="12" sm="4">
-          <SimplePostList class=""></SimplePostList>
+          <SimplePostList category="부업"></SimplePostList>
         </v-col>
       </v-row>
     </div>

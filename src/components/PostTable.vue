@@ -14,7 +14,8 @@
     <tbody>
       <tr v-for="item in desserts" :key="item.name">
         <td>{{ 1 }}</td>
-        <td>
+
+        <td @click="$router.push({ name: 'Post', params: { id: 1 } })">
           {{ item.name }}
           <span style="color: #3493ff" class="font-weight-bold"> (2) </span>
         </td>
