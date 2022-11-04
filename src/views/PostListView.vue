@@ -1,6 +1,20 @@
 <template>
   <GoodCategory></GoodCategory>
-  {{ state.category }}
+  <div class="d-flex justify-space-between">
+    <div>
+      {{ state.category }}
+    </div>
+    <v-btn
+      class="mr-2 bg-grey-lighten-2 mb-2"
+      variant="flat"
+      height="35"
+      style="border-radius: 12px"
+      @click="$router.push('/poster')"
+      color="primary"
+    >
+      ✏️ 쓰기
+    </v-btn>
+  </div>
   <PostTable></PostTable>
 </template>
 

@@ -1,8 +1,32 @@
 <template>
   <v-card style="border-radius: 20px" class="my-1">
     <v-card-item>
-      <v-card-title>실망스럽습니다</v-card-title>
-
+      <div class="d-flex justify-space-between">
+        <v-card-title>실망스럽습니다</v-card-title>
+        <v-menu>
+          <template v-slot:activator="{ isActive, props }">
+            <div
+              dark
+              icon
+              v-bind="props"
+              v-on="isActive"
+              style="cursor: pointer"
+            >
+              <v-icon>mdi-dots-vertical</v-icon>
+            </div>
+          </template>
+          <v-list
+            density="compact"
+            class="pa-0"
+            elevation="2"
+            style="cursor: pointer"
+          >
+            <v-list-item v-for="(item, i) in items" :key="i" class="py-0">
+              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </div>
       <v-card-subtitle>
         <div>보리쌀</div>
         <div>2022.09.23 ・ 조회 수 4664 ・ 추천 수 15 ・ 댓글 2</div>
@@ -11,8 +35,12 @@
     <v-divider></v-divider>
     <v-card-text> {{ text }} </v-card-text>
     <div class="d-flex justify-center mb-5">
-      <v-btn style="border-radius: 12px" class="mx-3"> 좋아요 </v-btn>
-      <v-btn style="border-radius: 12px" class="mx-3"> 싫어요 </v-btn>
+      <v-btn style="border-radius: 12px" class="mx-3" color="primary">
+        좋아요
+      </v-btn>
+      <v-btn style="border-radius: 12px" class="mx-3" color="primary">
+        싫어요
+      </v-btn>
     </div>
   </v-card>
 
@@ -45,8 +73,9 @@ export default {
 	계속 그렇게 사십시오
 
 	`;
+    const items = [{ title: "수정" }, { title: "삭제" }];
 
-    return { text, mobile };
+    return { text, mobile, items };
   },
 };
 </script>

@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import Poster from "../components/Poster.vue";
 import HomeView from "../views/HomeView.vue";
 import PostListView from "../views/PostListView.vue";
 import PostView from "../views/PostView.vue";
@@ -20,6 +21,11 @@ const router = createRouter({
       path: "/post",
       name: "PostList",
       component: PostListView,
+    },
+    {
+      path: "/poster",
+      name: "PostList",
+      component: Poster,
     },
     {
       path: "/about",

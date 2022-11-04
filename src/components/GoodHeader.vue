@@ -4,6 +4,7 @@
     <div @click="$router.push('/')" class="w-25">
       <img
         :class="logo"
+        style="cursor: pointer"
         src="https://theyouthdream.com/files/attach/images/main/dream_logo.png"
         alt=""
       />
