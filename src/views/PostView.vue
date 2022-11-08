@@ -46,7 +46,11 @@
 
   <GoodComment></GoodComment>
   <GoodCategory class="mt-5"></GoodCategory>
-  <SimplePostList v-if="mobile" :pagination="true"></SimplePostList>
+  <SimplePostList
+    v-if="mobile"
+    :pagination="true"
+    :category="'test'"
+  ></SimplePostList>
   <PostTable v-else></PostTable>
 </template>
 

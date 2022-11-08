@@ -42,7 +42,9 @@
             로그인
           </v-btn>
         </v-card-actions>
-        <div class="text-center">회원가입하기</div>
+        <v-btn color="primary" @click="$emit('hideLogin')" variant="text">
+          회원가입
+        </v-btn>
       </v-card>
     </v-dialog>
   </div>

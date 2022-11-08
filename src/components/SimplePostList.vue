@@ -1,7 +1,7 @@
 <template>
   <v-card class="my-8" style="border-radius: 20px">
     <div class="d-flex justify-space-between align-center">
-      <div class="text-h6 mx-4 my-1">{{ category }}</div>
+      <div class="text-h6 mx-4 my-1 pa-1">{{ category }}</div>
       <v-btn
         style="border-radius: 12px; opacity: 90%"
         class="mx-4"
