@@ -23,7 +23,6 @@
                 :counter="10"
                 placeholder="아이디"
                 required
-                size="small"
               ></v-text-field>
 
               <v-text-field
@@ -42,9 +41,7 @@
             로그인
           </v-btn>
         </v-card-actions>
-        <v-btn color="primary" @click="$emit('hideLogin')" variant="text">
-          회원가입
-        </v-btn>
+        <v-btn color="primary" @click="signup" variant="text"> 회원가입 </v-btn>
       </v-card>
     </v-dialog>
   </div>
@@ -52,10 +49,12 @@
 
 <script lang="ts" setup>
 import { computed } from "vue";
+import { useRouter } from "vue-router";
 
 const props = defineProps({ hidden: Boolean });
-defineEmits(["hideLogin"]);
+const emit = defineEmits(["hideLogin"]);
 const dialog = computed(() => props.hidden);
+const router = useRouter();
 const valid = true;
 const lastname = "";
 const nameRules = [
@@ -63,4 +62,8 @@ const nameRules = [
   (v) => v.length <= 10 || "Name must be less than 10 characters",
 ];
 const email = "";
+function signup() {
+  emit("hideLogin");
+  router.push("/signup");
+}
 </script>

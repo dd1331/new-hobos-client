@@ -22,7 +22,8 @@
         ></v-btn>
       </div>
       <div>
-        Copyright 2021 - 2022 호보스 All Rights Reserved. 광고문의 ddd1331@gmail
+        Copyright 2021 - 2022 호보스 All Rights Reserved. 광고문의
+        ddd1331@gmail.com
       </div>
     </v-row>
   </div>

@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Poster from "../components/Poster.vue";
+import Signup from "../components/Signup.vue";
 import HomeView from "../views/HomeView.vue";
 import PostListView from "../views/PostListView.vue";
 import PostView from "../views/PostView.vue";
@@ -26,6 +27,11 @@ const router = createRouter({
       path: "/poster",
       name: "Poster",
       component: Poster,
+    },
+    {
+      path: "/signup",
+      name: "Signup",
+      component: Signup,
     },
     {
       path: "/about",

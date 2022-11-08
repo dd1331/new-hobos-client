@@ -6,10 +6,10 @@
     show-arrows="hover"
     class="rounded-20"
   >
-    <v-carousel-item src="../../src/assets/ship.jpg" cover></v-carousel-item>
+    <v-carousel-item src="../../src/assets/ship3.jpg" cover></v-carousel-item>
 
     <v-carousel-item src="../../src/assets/ship2.jpg" cover></v-carousel-item>
 
-    <v-carousel-item src="../../src/assets/ship3.jpg" cover></v-carousel-item>
+    <v-carousel-item src="../../src/assets/ship.jpg" cover></v-carousel-item>
   </v-carousel>
 </template>
