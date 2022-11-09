@@ -26,7 +26,7 @@
     <v-container>
       <div class="d-flex align-center w-100 ml-1">
         <input
-          v-model="text"
+          v-model="signupState.email"
           type="email"
           placeholder="메일"
           style="border-radius: 12px; border: 1px solid"
@@ -38,8 +38,7 @@
     <v-container>
       <div class="w-100 ml-1">
         <input
-          v-model="text"
-          type=""
+          v-model="signupState.nickname"
           placeholder="닉네임"
           style="border-radius: 12px; border: 1px solid"
           class="w-100 pa-2 pl-4"
@@ -49,7 +48,7 @@
     <v-container>
       <div class="w-100 ml-1">
         <input
-          v-model="text"
+          v-model="signupState.password"
           type="password"
           placeholder="비밀번호"
           style="border-radius: 12px; border: 1px solid"
@@ -60,7 +59,7 @@
     <v-container>
       <div class="w-100 ml-1">
         <input
-          v-model="text"
+          v-model="signupState.password2"
           type="password"
           placeholder="비밀번호 확인"
           style="border-radius: 12px; border: 1px solid"
@@ -73,7 +72,7 @@
         color="primary"
         class="ma-2"
         style="border-radius: 12px"
-        @click="signup"
+        @click="signupLocal"
         >확인</v-btn
       >
       <v-btn
@@ -87,11 +86,26 @@
   </v-card>
 </template>
 <script lang="ts" setup>
+import { useUserStore, type SignupPayload } from "@/stores/user";
+import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
+
 const router = useRouter();
 
-const text = "";
-function signup() {
+const userStore = useUserStore();
+
+const signupState: SignupPayload & { password2: string } = reactive({
+  email: "",
+  nickname: "",
+  password: "",
+  password2: "",
+});
+
+async function signupLocal() {
+  if (signupState.password !== signupState.password2)
+    throw new Error("비밀번호 일치하지 않음");
+
+  await userStore.signupLocal(signupState);
   router.push("/");
 }
 </script>

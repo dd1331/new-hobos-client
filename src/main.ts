@@ -6,5 +6,9 @@ import { loadFonts } from "./plugins/webfontloader";
 import router from "./router";
 
 loadFonts();
+const app = createApp(App);
 
-createApp(App).use(createPinia()).use(router).use(vuetify).mount("#app");
+app.use(createPinia()).use(router).use(vuetify).mount("#app");
+app.config.errorHandler = (err: any, instance: any, info: any) => {
+  console.log("🚀 ~ file: main.ts ~ line 10 ~ err", err);
+};
