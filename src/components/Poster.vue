@@ -14,7 +14,7 @@
       </select>
       <div class="w-100 ml-1">
         <input
-          v-model="text"
+          v-model="title"
           placeholder="제목"
           class="w-100 pa-2 pl-4"
           style="border-radius: 12px; border: 1px solid"
@@ -24,6 +24,7 @@
 
     <v-container style="border-radius: 20px">
       <v-textarea
+        v-model="content"
         style="border-radius: 20px"
         label="내용"
         variant="outlined"
@@ -32,24 +33,25 @@
     </v-container>
     <v-container class="d-flex justify-center">
       <v-btn class="ma-2" style="border-radius: 12px" @click="post">확인</v-btn>
-      <v-btn
-        class="ma-2"
-        style="border-radius: 12px"
-        @click="$router.push('/post')"
-        >취소</v-btn
-      >
+      <v-btn class="ma-2" style="border-radius: 12px" @click="post">취소</v-btn>
     </v-container>
   </v-card>
 </template>
 <script setup lang="ts">
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
+import { usePostStore } from "../stores/post";
+
+const postStore = usePostStore();
 
 const router = useRouter();
 const category = "자유";
 const state = reactive({ category });
-const text = "dd";
-const post = () => {
+const title = "dd";
+const content = "dd";
+const post = async () => {
+  // TODO: use real categoryId
+  await postStore.post({ title, content, categoryIds: [1] });
   router.push("/post");
 };
 </script>

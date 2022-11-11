@@ -11,6 +11,8 @@
     </div>
     <div class="d-flex w-75">
       <div class="w-100">
+        {{ userStore.accessToken }}
+
         <div class="d-md-flex d-none justify-center">
           <v-btn
             variant="plain"
