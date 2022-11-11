@@ -73,6 +73,7 @@
     </div>
     <!-- <template v-slot:append> -->
     <div class="w-25 d-flex justify-end">
+      {{ userStore.accessToken }}
       <v-btn icon="mdi-heart" @click="toggleLogin"></v-btn>
 
       <v-btn icon="mdi-magnify" @click="toggleLogin"></v-btn>
@@ -86,10 +87,11 @@
 
 <script lang="ts" setup>
 import GoodLogin from "../components/GoodLogin.vue";
-
 import { ref } from "vue";
 import { useDisplay } from "vuetify";
+import { useUserStore } from "@/stores/user";
 
+const userStore = useUserStore();
 const { mobile } = useDisplay();
 
 const logo = mobile ? "w-50" : "";
