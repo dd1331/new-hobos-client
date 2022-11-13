@@ -1,12 +1,14 @@
 <template>
   <v-card class="my-8" style="border-radius: 20px">
     <div class="d-flex justify-space-between align-center">
-      <div class="text-h6 mx-4 my-1 pa-1">{{ category }}</div>
+      <div class="text-h6 mx-4 my-1 pa-1">{{ category.name }}</div>
       <v-btn
         style="border-radius: 12px; opacity: 90%"
         class="mx-4"
         size="small"
-        @click="$router.push({ path: '/post', query: { category: 1 } })"
+        @click="
+          $router.push({ path: '/post', query: { category: category.id } })
+        "
         color="primary"
         >more</v-btn
       >
@@ -14,15 +16,29 @@
     <v-divider></v-divider>
 
     <v-list lines="one">
-      <v-list-item v-for="({ title, id }, index) in posts" :key="id">
+      <v-list-item v-for="({ title, id, createdAt }, index) in posts" :key="id">
         <div style="cursor: pointer">
-          <div @click="$router.push({ path: '/post', params: { id } })">
-            {{ title }}
-          </div>
-          <div class="d-flex align-center">
-            홍준표 {{ dayjs(new Date()).fromNow() }}
-            <v-icon size="13" color="red">mdi-heart</v-icon>
-            11
+          <div class="" :class="thumbnail ? 'd-flex align-center' : ''">
+            <v-img
+              v-if="thumbnail"
+              class="mr-2"
+              max-height="50"
+              max-width="50"
+              src="../../src/assets/ship.jpg"
+            ></v-img>
+            <div>
+              <div
+                class="mr-2"
+                @click="$router.push({ name: 'Post', params: { id } })"
+              >
+                {{ title }}
+              </div>
+              <div class="d-flex align-center">
+                홍준표 {{ dayjs(createdAt).fromNow() }}
+                <v-icon size="13" color="red">mdi-heart</v-icon>
+                11
+              </div>
+            </div>
           </div>
         </div>
         <v-divider v-if="posts.length - 1 > index"></v-divider>
@@ -46,8 +62,9 @@ const dayjs = inject("dayjs");
 
 defineProps<{
   pagination?: Boolean;
-  category: String;
+  category: { name: string; id: number };
   posts: IPost4List[];
+  thumbnail?: boolean;
 }>();
 const page = 1;
 </script>

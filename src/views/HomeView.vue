@@ -2,16 +2,21 @@
   <main>
     <!-- <TheWelcome /> -->
     <HomeCarousel></HomeCarousel>
+
     <SimplePostList
-      :category="popularCategory?.title"
+      :category="{ name: popularCategory.title, id: 1 }"
       :posts="popularPosts"
       class="mx-0 px-0 border-solid"
+      :thumbnail="true"
     ></SimplePostList>
     <div v-if="mobile">
       <SimplePostList
         v-for="post in homePosts.posts"
         :key="post.categoryId"
-        :category="post.categoryName"
+        :category="{
+          name: post.categoryName,
+          id: post.categoryId,
+        }"
         :posts="post.posts"
       ></SimplePostList>
     </div>
@@ -19,7 +24,10 @@
       <v-row v-for="(r, index) in homePosts.splited" :key="index + 'r'">
         <v-col v-for="post in r" :key="post.categoryId" cols="12" sm="4">
           <SimplePostList
-            :category="post.categoryName"
+            :category="{
+              name: post.categoryName,
+              id: post.categoryId,
+            }"
             :posts="post.posts"
           ></SimplePostList>
         </v-col>

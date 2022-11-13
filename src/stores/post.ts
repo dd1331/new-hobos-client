@@ -57,7 +57,9 @@ export const usePostStore = defineStore("Post", () => {
   }
   // TODO: merge into fetchHomePosts?
   async function fetchPopularPosts() {
-    const { data } = await goodAxios.get("post");
+    const { data } = await goodAxios.get("post", {
+      params: { page: 1, size: 5 },
+    });
     state.popularPosts = data;
   }
   async function fetchHomePosts() {
