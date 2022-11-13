@@ -16,7 +16,7 @@
         <td>{{ id }}</td>
 
         <td
-          @click="$router.push({ name: 'Post', params: { id: 1 } })"
+          @click="$router.push({ name: 'Post', params: { id } })"
           style="cursor: pointer"
         >
           {{ title }}

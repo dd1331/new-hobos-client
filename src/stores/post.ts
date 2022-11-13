@@ -12,9 +12,20 @@ export interface IPost4List {
   title: string;
   content?: string;
 }
+export interface IPost {
+  id: number;
+  title: string;
+  content: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
 export const usePostStore = defineStore("Post", () => {
-  const state: { posts: IPost4List[] } = reactive({ posts: [] });
+  const state: { posts: IPost4List[]; post: IPost | null } = reactive({
+    posts: [],
+    post: null,
+  });
   const getPosts = computed(() => state.posts);
+  const getPost = computed(() => state.post);
   async function post(payload: PostPayload) {
     return goodAxios.post("post", payload);
   }
@@ -22,5 +33,11 @@ export const usePostStore = defineStore("Post", () => {
     const { data } = await goodAxios.get("post");
     state.posts = data;
   }
-  return { post, fetchPosts, getPosts };
+
+  async function fetchPost(id: number) {
+    const { data } = await goodAxios.get(`post/${id}`);
+    console.log("🚀 ~ file: post.ts ~ line 40 ~ fetchPost ~ data", data);
+    state.post = data;
+  }
+  return { post, fetchPosts, getPosts, fetchPost, getPost };
 });

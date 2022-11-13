@@ -19,8 +19,8 @@
 </template>
 
 <script lang="ts" setup>
-import { onBeforeMount, reactive } from "vue";
-import { useRoute } from "vue-router";
+import { reactive } from "vue";
+import { onBeforeRouteUpdate, useRoute } from "vue-router";
 import GoodCategory from "../components/GoodCategory.vue";
 import PostTable from "../components/PostTable.vue";
 import { usePostStore } from "@/stores/post";
@@ -28,7 +28,7 @@ const route = useRoute();
 
 const state = reactive({ category: route.query.category });
 const postStore = usePostStore();
-onBeforeMount(async () => {
+onBeforeRouteUpdate(async () => {
   state.category = route.query.category as string;
   await postStore.fetchPosts();
 });

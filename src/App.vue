@@ -53,14 +53,19 @@
 <script lang="ts" setup>
 import GoodFooter from "./components/GoodFooter.vue";
 import GoodHeader from "./components/GoodHeader.vue";
+import * as dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
 import { useCategoryStore } from "@/stores/category";
 import { useDisplay } from "vuetify";
-import { onBeforeMount } from "vue";
+import { onBeforeMount, provide } from "vue";
 const { mobile } = useDisplay();
 const icons = ["청문홍답", "홍문청답", "인기", "자유", "정치"];
 onBeforeMount(() => {
   useCategoryStore().fetchCategory();
 });
+dayjs.extend(relativeTime);
+provide("dayjs", dayjs);
 </script>
 <style>
 .rounded-12 {
