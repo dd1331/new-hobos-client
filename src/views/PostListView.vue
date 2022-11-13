@@ -19,14 +19,11 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, onUpdated, reactive } from "vue";
-import { useRoute } from "vue-router";
+import { computed, reactive } from "vue";
 import GoodCategory from "../components/GoodCategory.vue";
 import PostTable from "../components/PostTable.vue";
 import { usePostStore } from "@/stores/post";
 import { useCategoryStore, type ICategory } from "@/stores/category";
-
-const route = useRoute();
 
 const state = reactive({ categoryId: 0 });
 const postStore = usePostStore();
@@ -36,14 +33,4 @@ const currentCategory = computed(
       (category) => category.id === Number(state.categoryId)
     ) as ICategory
 );
-
-onUpdated(async () => {
-  state.categoryId = Number(route.query.category);
-  await postStore.fetchPostsByCategory(state.categoryId);
-});
-
-onMounted(async () => {
-  state.categoryId = Number(route.query.category);
-  // await postStore.fetchPostsByCategory(state.categoryId);
-});
 </script>

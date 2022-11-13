@@ -18,68 +18,10 @@
             v-for="category in useCategoryStore().categories"
             :key="category.id"
             variant="plain"
-            @click="
-              $router.push({ path: '/post', query: { category: category.id } })
-            "
+            @click="toCategoryPostList(category.id)"
           >
             {{ category.title }}
           </v-btn>
-          <!-- <v-btn
-            variant="plain"
-            @click="
-              $router.push({ path: '/post', query: { category: '청문홍답' } })
-            "
-          >
-            청문홍답
-          </v-btn>
-          <v-btn
-            variant="plain"
-            @click="
-              $router.push({ path: '/post', query: { category: '홍문청답' } })
-            "
-          >
-            홍문청답
-          </v-btn>
-          <v-btn
-            variant="plain"
-            @click="
-              $router.push({ path: '/post', query: { category: '인기게시판' } })
-            "
-          >
-            인기게시판
-          </v-btn>
-          <v-btn
-            variant="plain"
-            @click="
-              $router.push({ path: '/post', query: { category: '자유게시판' } })
-            "
-          >
-            자유게시판
-          </v-btn>
-          <v-btn
-            variant="plain"
-            @click="
-              $router.push({ path: '/post', query: { category: '정치게시판' } })
-            "
-          >
-            정치게시판
-          </v-btn>
-          <v-btn
-            variant="plain"
-            @click="
-              $router.push({ path: '/post', query: { category: '아레나' } })
-            "
-          >
-            아레나
-          </v-btn>
-          <v-btn
-            variant="plain"
-            @click="
-              $router.push({ path: '/post', query: { category: '문의' } })
-            "
-          >
-            문의
-          </v-btn> -->
         </div>
       </div>
     </div>
@@ -103,6 +45,8 @@ import { ref } from "vue";
 import { useDisplay } from "vuetify";
 import { useUserStore } from "@/stores/user";
 import { useCategoryStore } from "@/stores/category";
+import { usePostStore } from "@/stores/post";
+import { useRouter } from "vue-router";
 
 const userStore = useUserStore();
 const { mobile } = useDisplay();
@@ -111,7 +55,13 @@ const logo = mobile ? "w-50" : "";
 
 // expose the state to the template
 const isLoginPopped = ref(false);
+const postStore = usePostStore();
+const router = useRouter();
 function toggleLogin() {
   isLoginPopped.value = !isLoginPopped.value;
+}
+async function toCategoryPostList(categoryId: number) {
+  await postStore.fetchPostsByCategory(categoryId);
+  router.push({ path: "/post", query: { category: categoryId } });
 }
 </script>

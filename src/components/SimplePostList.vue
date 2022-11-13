@@ -6,7 +6,7 @@
         style="border-radius: 12px; opacity: 90%"
         class="mx-4"
         size="small"
-        @click="$router.push({ path: '/post', query: { category } })"
+        @click="$router.push({ path: '/post', query: { category: 1 } })"
         color="primary"
         >more</v-btn
       >
@@ -14,22 +14,23 @@
     <v-divider></v-divider>
 
     <v-list lines="one">
-      <v-list-item v-for="({ title, info, id }, index) in items" :key="index">
+      <v-list-item v-for="({ title, id }, index) in posts" :key="id">
         <div style="cursor: pointer">
           <div @click="$router.push({ path: '/post', params: { id } })">
             {{ title }}
           </div>
           <div class="d-flex align-center">
-            {{ info.name }} {{ info.date }}
+            홍준표 {{ dayjs(new Date()).fromNow() }}
             <v-icon size="13" color="red">mdi-heart</v-icon>
-            {{ info.like }}
+            11
           </div>
         </div>
-        <v-divider v-if="items.length - 1 > index"></v-divider>
+        <v-divider v-if="posts.length - 1 > index"></v-divider>
       </v-list-item>
     </v-list>
   </v-card>
   <div class="text-center mt-10">
+    {{ pagination }}
     <v-pagination
       v-if="pagination"
       density="compact"
@@ -39,46 +40,14 @@
   </div>
 </template>
 <script lang="ts" setup>
-defineProps({
-  pagination: Boolean,
-  category: String,
-});
+import type { IPost4List } from "@/stores/post";
+import { inject } from "vue";
+const dayjs = inject("dayjs");
+
+defineProps<{
+  pagination?: Boolean;
+  category: String;
+  posts: IPost4List[];
+}>();
 const page = 1;
-const items = [
-  {
-    title: "기자회견을 보고 (12)",
-    info: { name: "홍준표", date: "08.21", like: 10 },
-    id: 1,
-  },
-  {
-    title: "기자회견을 보고 (12)",
-    info: { name: "홍준표", date: "08.21", like: 10 },
-    id: 2,
-  },
-  {
-    title: "기자회견을 보고 (12)",
-    info: { name: "홍준표", date: "08.21", like: 10 },
-    id: 3,
-  },
-  {
-    title: "기자회견을 보고 (12)",
-    info: { name: "홍준표", date: "08.21", like: 10 },
-    id: 4,
-  },
-  {
-    title: "기자회견을 보고 (12)",
-    info: { name: "홍준표", date: "08.21", like: 10 },
-    id: 5,
-  },
-  {
-    title: "기자회견을 보고 (12)",
-    info: { name: "홍준표", date: "08.21", like: 10 },
-    id: 6,
-  },
-  {
-    title: "기자회견을 보고 (12)",
-    info: { name: "홍준표", date: "08.21", like: 10 },
-    id: 1,
-  },
-];
 </script>

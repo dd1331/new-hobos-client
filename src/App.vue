@@ -62,7 +62,7 @@ import { onBeforeMount, provide } from "vue";
 const { mobile } = useDisplay();
 const icons = ["청문홍답", "홍문청답", "인기", "자유", "정치"];
 onBeforeMount(() => {
-  useCategoryStore().fetchCategory();
+  useCategoryStore().fetchCategories();
 });
 dayjs.extend(relativeTime);
 provide("dayjs", dayjs);

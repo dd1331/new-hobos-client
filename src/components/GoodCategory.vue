@@ -7,7 +7,7 @@
       variant="flat"
       height="35"
       style="border-radius: 12px; opacity: 90%"
-      @click="$router.push({ path: '/post', query: { category: category.id } })"
+      @click="toCategoryPostList(category.id)"
       color="primary"
       >{{ category.title }}</v-btn
     >
@@ -16,4 +16,12 @@
 
 <script lang="ts" setup>
 import { useCategoryStore } from "@/stores/category";
+import { usePostStore } from "@/stores/post";
+import { useRouter } from "vue-router";
+const postStore = usePostStore();
+const router = useRouter();
+async function toCategoryPostList(categoryId: number) {
+  await postStore.fetchPostsByCategory(categoryId);
+  router.push({ path: "/post", query: { category: categoryId } });
+}
 </script>

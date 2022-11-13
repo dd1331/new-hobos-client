@@ -4,7 +4,7 @@ import goodAxios from "../common/good-axios";
 
 export interface ICategory {
   id: number;
-  title: number;
+  title: string;
 }
 export const useCategoryStore = defineStore("Category", () => {
   const state: { categories: ICategory[] } = reactive({
@@ -12,11 +12,11 @@ export const useCategoryStore = defineStore("Category", () => {
   });
   const categories = computed(() => state.categories);
 
-  async function fetchCategory() {
+  async function fetchCategories() {
     const { data } = await goodAxios.get("category");
 
     state.categories = data;
   }
 
-  return { categories, fetchCategory };
+  return { categories, fetchCategories };
 });
