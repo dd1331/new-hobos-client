@@ -7,8 +7,8 @@ export interface ICategory {
   title: number;
 }
 export const useCategoryStore = defineStore("Category", () => {
-  const state: { categories: ICategory[] | null } = reactive({
-    categories: null,
+  const state: { categories: ICategory[] } = reactive({
+    categories: [],
   });
   const categories = computed(() => state.categories);
 

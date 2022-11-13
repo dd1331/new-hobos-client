@@ -11,6 +11,7 @@ export interface IPost4List {
   id: number;
   title: string;
   content?: string;
+  createdAt: Date;
 }
 export interface IPost {
   id: number;
@@ -33,11 +34,22 @@ export const usePostStore = defineStore("Post", () => {
     const { data } = await goodAxios.get("post");
     state.posts = data;
   }
+  async function fetchPostsByCategory(categoryId: number) {
+    const { data } = await goodAxios.get("post", { params: { categoryId } });
+    state.posts = data;
+  }
 
   async function fetchPost(id: number) {
     const { data } = await goodAxios.get(`post/${id}`);
     console.log("🚀 ~ file: post.ts ~ line 40 ~ fetchPost ~ data", data);
     state.post = data;
   }
-  return { post, fetchPosts, getPosts, fetchPost, getPost };
+  return {
+    post,
+    fetchPosts,
+    getPosts,
+    fetchPost,
+    getPost,
+    fetchPostsByCategory,
+  };
 });

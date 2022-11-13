@@ -15,6 +15,16 @@
 
         <div class="d-md-flex d-none justify-center">
           <v-btn
+            v-for="category in useCategoryStore().categories"
+            :key="category.id"
+            variant="plain"
+            @click="
+              $router.push({ path: '/post', query: { category: category.id } })
+            "
+          >
+            {{ category.title }}
+          </v-btn>
+          <!-- <v-btn
             variant="plain"
             @click="
               $router.push({ path: '/post', query: { category: '청문홍답' } })
@@ -69,7 +79,7 @@
             "
           >
             문의
-          </v-btn>
+          </v-btn> -->
         </div>
       </div>
     </div>
@@ -92,6 +102,7 @@ import GoodLogin from "../components/GoodLogin.vue";
 import { ref } from "vue";
 import { useDisplay } from "vuetify";
 import { useUserStore } from "@/stores/user";
+import { useCategoryStore } from "@/stores/category";
 
 const userStore = useUserStore();
 const { mobile } = useDisplay();

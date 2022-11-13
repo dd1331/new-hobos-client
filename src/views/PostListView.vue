@@ -2,7 +2,7 @@
   <GoodCategory></GoodCategory>
   <div class="d-flex justify-space-between">
     <div>
-      {{ state.category }}
+      {{ currentCategory?.title }}
     </div>
     <v-btn
       class="mr-2 bg-grey-lighten-2 mb-2"
@@ -19,17 +19,31 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive } from "vue";
-import { onBeforeRouteUpdate, useRoute } from "vue-router";
+import { computed, onMounted, onUpdated, reactive } from "vue";
+import { useRoute } from "vue-router";
 import GoodCategory from "../components/GoodCategory.vue";
 import PostTable from "../components/PostTable.vue";
 import { usePostStore } from "@/stores/post";
+import { useCategoryStore, type ICategory } from "@/stores/category";
+
 const route = useRoute();
 
-const state = reactive({ category: route.query.category });
+const state = reactive({ categoryId: 0 });
 const postStore = usePostStore();
-onBeforeRouteUpdate(async () => {
-  state.category = route.query.category as string;
-  await postStore.fetchPosts();
+const currentCategory = computed(
+  () =>
+    useCategoryStore().categories.find(
+      (category) => category.id === Number(state.categoryId)
+    ) as ICategory
+);
+
+onUpdated(async () => {
+  state.categoryId = Number(route.query.category);
+  await postStore.fetchPostsByCategory(state.categoryId);
+});
+
+onMounted(async () => {
+  state.categoryId = Number(route.query.category);
+  // await postStore.fetchPostsByCategory(state.categoryId);
 });
 </script>

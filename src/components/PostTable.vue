@@ -12,7 +12,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="{ id, title } in posts" :key="id">
+      <!-- {{
+        posts
+      }} -->
+      <tr v-for="{ id, title, createdAt } in posts" :key="id">
         <td>{{ id }}</td>
 
         <td
@@ -33,7 +36,7 @@
         </td>
         <td style="color: #ff4a57">98</td>
         <td>30</td>
-        <td>22.09.21</td>
+        <td>{{ dayjs(createdAt).fromNow() }}</td>
         <td>2295</td>
       </tr>
     </tbody>
@@ -45,9 +48,11 @@
 
 <script lang="ts" setup>
 import type { IPost4List } from "@/stores/post";
+import { inject } from "vue";
 
 defineProps<{
   posts: IPost4List[];
 }>();
+const dayjs = inject("dayjs");
 const page = 1;
 </script>
