@@ -15,7 +15,10 @@
       ✏️ 쓰기
     </v-btn>
   </div>
-  <PostTable :posts="postStore.getPosts"></PostTable>
+  <PostTable
+    :posts="postStore.getPosts"
+    @on-page-clicked="onPageClicked"
+  ></PostTable>
 </template>
 
 <script lang="ts" setup>
@@ -46,4 +49,7 @@ onMounted(async () => {
   state.categoryId = Number(route.query.category);
   await postStore.fetchPostsByCategory(state.categoryId);
 });
+function onPageClicked(page: number) {
+  postStore.fetchPostsByCategory(state.categoryId, page);
+}
 </script>

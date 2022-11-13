@@ -48,9 +48,13 @@ export const usePostStore = defineStore("Post", () => {
     const { data } = await goodAxios.get("post");
     state.posts = data;
   }
-  async function fetchPostsByCategory(categoryId: number) {
+  async function fetchPostsByCategory(
+    categoryId: number,
+    page: number = 0,
+    size: number = 5
+  ) {
     const { data } = await goodAxios.get("post/category", {
-      params: { categoryId },
+      params: { categoryId, page, size },
     });
     state.posts = data;
     return data as IPost[];

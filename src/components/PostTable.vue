@@ -42,17 +42,26 @@
     </tbody>
   </v-table>
   <div class="text-center mt-10">
-    <v-pagination density="compact" v-model="page" :length="5"></v-pagination>
+    <v-pagination
+      density="compact"
+      @click="clicked"
+      v-model="page"
+      :length="5"
+    ></v-pagination>
   </div>
 </template>
 
 <script lang="ts" setup>
 import type { IPost4List } from "@/stores/post";
-import { inject } from "vue";
+import { inject, ref } from "vue";
 
 defineProps<{
   posts: IPost4List[];
 }>();
 const dayjs = inject("dayjs");
-const page = 1;
+const page = ref(1);
+const emit = defineEmits(["onPageClicked"]);
+function clicked() {
+  emit("onPageClicked", page.value);
+}
 </script>
