@@ -15,18 +15,21 @@
       ✏️ 쓰기
     </v-btn>
   </div>
-  <PostTable></PostTable>
+  <PostTable :posts="postStore.getPosts"></PostTable>
 </template>
 
 <script lang="ts" setup>
-import { onBeforeUpdate, reactive } from "vue";
+import { onBeforeMount, reactive } from "vue";
 import { useRoute } from "vue-router";
 import GoodCategory from "../components/GoodCategory.vue";
 import PostTable from "../components/PostTable.vue";
+import { usePostStore } from "@/stores/post";
 const route = useRoute();
 
 const state = reactive({ category: route.query.category });
-onBeforeUpdate(() => {
+const postStore = usePostStore();
+onBeforeMount(async () => {
   state.category = route.query.category as string;
+  await postStore.fetchPosts();
 });
 </script>

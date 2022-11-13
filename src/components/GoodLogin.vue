@@ -80,6 +80,5 @@ async function loginLocal() {
   };
   await userStore.loginLocal(payload);
   emit("hideLogin");
-  router.push("/signup");
 }
 </script>

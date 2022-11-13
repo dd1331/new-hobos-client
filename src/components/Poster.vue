@@ -4,13 +4,20 @@
     <v-divider />
     <v-container class="d-flex mb-3">
       <select
-        v-model="state.category"
+        v-model="state.categoryId"
         class="pa-2 w-25"
         style="border-radius: 12px; border: 1px solid"
       >
-        <option value="자유">자유</option>
-        <option value="경제">경제</option>
-        <option value="취미">취미</option>
+        {{
+          categories
+        }}
+        <option
+          v-for="category in categoryStore.categories"
+          :value="category.id"
+          :key="category.id"
+        >
+          title:{{ category.title }} id:{{ category.id }}
+        </option>
       </select>
       <div class="w-100 ml-1">
         <input
@@ -38,20 +45,26 @@
   </v-card>
 </template>
 <script setup lang="ts">
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { usePostStore } from "../stores/post";
+import { useCategoryStore, type ICategory } from "@/stores/category";
 
 const postStore = usePostStore();
+const categoryStore = useCategoryStore();
+const categories = categoryStore.categories;
 
 const router = useRouter();
-const category = "자유";
-const state = reactive({ category });
-const title = "dd";
-const content = "dd";
+const state = reactive({ categoryId: 1 });
+const title = ref("dd");
+const content = ref("dd");
 const post = async () => {
   // TODO: use real categoryId
-  await postStore.post({ title, content, categoryIds: [1] });
+  await postStore.post({
+    title: title.value,
+    content: content.value,
+    categoryIds: [state.categoryId],
+  });
   router.push("/post");
 };
 </script>

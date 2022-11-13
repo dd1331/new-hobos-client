@@ -50,31 +50,17 @@
     </v-footer>
   </v-app>
 </template>
-<script lang="ts">
+<script lang="ts" setup>
 import GoodFooter from "./components/GoodFooter.vue";
 import GoodHeader from "./components/GoodHeader.vue";
-
-import { reactive } from "vue";
+import { useCategoryStore } from "@/stores/category";
 import { useDisplay } from "vuetify";
-export default {
-  components: {
-    GoodHeader,
-    GoodFooter,
-  },
-  // `setup` is a special hook dedicated for composition API.
-  setup() {
-    const state = reactive({ draw: false });
-    const { mobile } = useDisplay();
-    const icons = ["청문홍답", "홍문청답", "인기", "자유", "정치"];
-
-    return {
-      state,
-      icons,
-      mobile,
-      tab: null,
-    };
-  },
-};
+import { onBeforeMount } from "vue";
+const { mobile } = useDisplay();
+const icons = ["청문홍답", "홍문청답", "인기", "자유", "정치"];
+onBeforeMount(() => {
+  useCategoryStore().fetchCategory();
+});
 </script>
 <style>
 .rounded-12 {
