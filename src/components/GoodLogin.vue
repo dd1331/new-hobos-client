@@ -39,9 +39,17 @@
           </v-form>
         </v-card-content>
         <v-card-actions class="pt-0">
-          <v-btn color="primary" block @click="loginLocal"> 로그인 </v-btn>
+          <v-btn
+            color="primary"
+            block
+            @click="loginLocal"
+            variant="text"
+            rounded="lg"
+          >
+            로그인
+          </v-btn>
         </v-card-actions>
-        <v-btn color="primary" @click="signupLocal" variant="text">
+        <v-btn color="primary" @click="signupLocal" variant="text" rounded="lg">
           회원가입
         </v-btn>
       </v-card>

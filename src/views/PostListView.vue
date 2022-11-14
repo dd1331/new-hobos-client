@@ -10,6 +10,7 @@
       height="35"
       @click="$router.push('/poster')"
       color="primary"
+      rounded="lg"
     >
       ✏️ 쓰기
     </v-btn>

@@ -7,7 +7,7 @@
           :key="link"
           variant="text"
           class="mx-2 px-0"
-          rounded="xl"
+          rounded="lg"
         >
           {{ link }}
         </v-btn>

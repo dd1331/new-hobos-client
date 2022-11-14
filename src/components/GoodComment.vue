@@ -19,9 +19,9 @@
           <div v-html="subtitle" class="pb-2"></div>
         </div>
         <div class="d-flex py-2 justify-center">
-          <v-btn class="mx-3" color="primary"> 좋아요 </v-btn>
-          <v-btn class="mx-3" color="primary"> 싫어요 </v-btn>
-          <v-btn class="mx-3" color="primary"> 댓글 </v-btn>
+          <v-btn class="mx-3" color="primary" rounded="lg"> 좋아요 </v-btn>
+          <v-btn class="mx-3" color="primary" rounded="lg"> 싫어요 </v-btn>
+          <v-btn class="mx-3" color="primary" rounded="lg"> 댓글 </v-btn>
         </div>
         <v-divider v-if="items.length - 1 > index" class="my-2"></v-divider>
       </v-list-item>

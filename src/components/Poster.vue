@@ -38,8 +38,8 @@
       ></v-textarea>
     </v-container>
     <v-container class="d-flex justify-center">
-      <v-btn class="ma-2" @click="post">확인</v-btn>
-      <v-btn class="ma-2" @click="post">취소</v-btn>
+      <v-btn class="ma-2" rounded="lg" @click="post">확인</v-btn>
+      <v-btn class="ma-2" rounded="lg" @click="post">취소</v-btn>
     </v-container>
   </v-card>
 </template>

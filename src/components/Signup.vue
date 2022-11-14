@@ -32,7 +32,7 @@
           style="border-radius: 12px; border: 1px solid"
           class="w-100 pa-2 pl-4"
         />
-        <v-btn color="primary">인증</v-btn>
+        <v-btn rounded="lg" color="primary">인증</v-btn>
       </div>
     </v-container>
     <v-container>
@@ -68,8 +68,14 @@
       </div>
     </v-container>
     <v-container class="d-flex justify-center">
-      <v-btn color="primary" class="ma-2" @click="signupLocal">확인</v-btn>
-      <v-btn color="primary" class="ma-2" @click="$router.push('/')"
+      <v-btn rounded="lg" color="primary" class="ma-2" @click="signupLocal"
+        >확인</v-btn
+      >
+      <v-btn
+        rounded="lg"
+        color="primary"
+        class="ma-2"
+        @click="$router.push('/')"
         >취소</v-btn
       >
     </v-container>

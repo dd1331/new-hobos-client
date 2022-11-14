@@ -6,6 +6,7 @@
         style="opacity: 90%"
         class="mx-4"
         size="small"
+        rounded="lg"
         @click="
           $router.push({ path: '/post', query: { category: category.id } })
         "

@@ -4,6 +4,7 @@
       v-for="category in useCategoryStore().categories"
       :key="category.id"
       class="mr-2 mb-2"
+      rounded="lg"
       variant="flat"
       height="35"
       @click="toCategoryPostList(category.id)"

@@ -38,8 +38,8 @@
     <v-divider></v-divider>
     <v-card-text> {{ post.content }} </v-card-text>
     <div class="d-flex justify-center mb-5">
-      <v-btn class="mx-3" color="primary"> 좋아요 </v-btn>
-      <v-btn class="mx-3" color="primary"> 싫어요 </v-btn>
+      <v-btn class="mx-3" rounded="lg" color="primary"> 좋아요 </v-btn>
+      <v-btn class="mx-3" rounded="lg" color="primary"> 싫어요 </v-btn>
     </div>
   </v-card>
 
