@@ -1,5 +1,5 @@
 <template>
-  <v-card style="border-radius: 20px" class="my-1">
+  <v-card style="border-radius: 12px" class="my-1">
     <v-card-item>
       <div class="d-flex justify-space-between">
         <v-card-title>{{ post.title }}</v-card-title>

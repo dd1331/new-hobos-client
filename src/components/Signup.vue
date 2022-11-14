@@ -1,5 +1,5 @@
 <template>
-  <v-card style="border-radius: 20px">
+  <v-card style="border-radius: 12px">
     <v-container class="text-sm-h4 text-h6">회원가입</v-container>
     <v-divider></v-divider>
     <v-container>

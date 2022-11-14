@@ -72,7 +72,7 @@ provide("dayjs", dayjs);
   border-radius: 12px;
 }
 .rounded-20 {
-  border-radius: 20px;
+  border-radius: 12px;
 }
 </style>
 

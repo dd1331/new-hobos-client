@@ -10,7 +10,7 @@
         <v-btn color="primary" v-bind="props"> Open Dialog </v-btn>
       </template> -->
 
-      <v-card style="border-radius: 20px" class="py-3">
+      <v-card style="border-radius: 12px" class="py-3">
         <v-card-title> 로그인 </v-card-title>
         <v-card-content>
           <v-form v-model="valid">

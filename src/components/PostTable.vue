@@ -1,5 +1,5 @@
 <template>
-  <v-table style="border-radius: 20px">
+  <v-table style="border-radius: 12px">
     <thead>
       <tr>
         <th class="text-left">번호</th>

@@ -1,5 +1,5 @@
 <template>
-  <v-card style="border-radius: 20px" class="my-1">
+  <v-card style="border-radius: 12px" class="my-1">
     <v-card-item>
       <div class="d-flex align-center">
         <v-card-title> 댓글 </v-card-title>

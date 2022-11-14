@@ -1,5 +1,5 @@
 <template>
-  <v-card style="border-radius: 20px" min-height="800">
+  <v-card style="border-radius: 12px" min-height="800">
     <v-container class="text-sm-h4 text-h6">글쓰기</v-container>
     <v-divider />
     <v-container class="d-flex mb-3">
@@ -29,10 +29,10 @@
       </div>
     </v-container>
 
-    <v-container style="border-radius: 20px">
+    <v-container style="border-radius: 12px">
       <v-textarea
         v-model="content"
-        style="border-radius: 20px"
+        style="border-radius: 12px"
         label="내용"
         variant="outlined"
         hide-details

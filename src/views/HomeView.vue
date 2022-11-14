@@ -1,12 +1,12 @@
 <template>
   <main>
     <!-- <TheWelcome /> -->
-    <HomeCarousel></HomeCarousel>
+    <HomeCarousel class="mb-8"></HomeCarousel>
 
     <SimplePostList
       :category="{ name: popularCategory.title, id: 1 }"
       :posts="popularPosts"
-      class="mx-0 px-0 border-solid"
+      class="mx-0 px-0"
       :thumbnail="true"
     ></SimplePostList>
     <div v-if="mobile">
@@ -22,7 +22,7 @@
     </div>
     <div v-else class="">
       <v-row v-for="(r, index) in homePosts.splited" :key="index + 'r'">
-        <v-col v-for="post in r" :key="post.categoryId" cols="12" sm="4">
+        <v-col v-for="post in r" :key="post.categoryId" cols="12" sm="6">
           <SimplePostList
             :category="{
               name: post.categoryName,
@@ -60,7 +60,7 @@ const popularPosts = computed(() => usePostStore().getPopularPosts);
 const homePosts = computed(() => {
   const posts = usePostStore().getHomePosts.slice();
 
-  const splited = [posts.slice(0, 3), posts.slice(3)];
+  const splited = [posts.slice(0, 2), posts.slice(2)];
 
   return { posts, splited };
 });
