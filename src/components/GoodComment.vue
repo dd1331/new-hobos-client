@@ -1,5 +1,5 @@
 <template>
-  <v-card style="border-radius: 12px" class="my-1">
+  <v-card class="my-1">
     <v-card-item>
       <div class="d-flex align-center">
         <v-card-title> 댓글 </v-card-title>
@@ -19,15 +19,9 @@
           <div v-html="subtitle" class="pb-2"></div>
         </div>
         <div class="d-flex py-2 justify-center">
-          <v-btn style="border-radius: 12px" class="mx-3" color="primary">
-            좋아요
-          </v-btn>
-          <v-btn style="border-radius: 12px" class="mx-3" color="primary">
-            싫어요
-          </v-btn>
-          <v-btn style="border-radius: 12px" class="mx-3" color="primary">
-            댓글
-          </v-btn>
+          <v-btn class="mx-3" color="primary"> 좋아요 </v-btn>
+          <v-btn class="mx-3" color="primary"> 싫어요 </v-btn>
+          <v-btn class="mx-3" color="primary"> 댓글 </v-btn>
         </div>
         <v-divider v-if="items.length - 1 > index" class="my-2"></v-divider>
       </v-list-item>

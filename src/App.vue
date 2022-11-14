@@ -67,14 +67,6 @@ onBeforeMount(() => {
 dayjs.extend(relativeTime);
 provide("dayjs", dayjs);
 </script>
-<style>
-.rounded-12 {
-  border-radius: 12px;
-}
-.rounded-20 {
-  border-radius: 12px;
-}
-</style>
 
 <!-- <style scoped>
 headerBar {

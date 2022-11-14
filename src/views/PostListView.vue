@@ -8,14 +8,15 @@
       class="mr-2 bg-grey-lighten-2 mb-2"
       variant="flat"
       height="35"
-      style="border-radius: 12px"
       @click="$router.push('/poster')"
       color="primary"
     >
       ✏️ 쓰기
     </v-btn>
   </div>
+  <div v-if="mobile"></div>
   <PostTable
+    v-else
     :posts="postStore.getPosts"
     @on-page-clicked="onPageClicked"
   ></PostTable>
@@ -28,8 +29,10 @@ import GoodCategory from "../components/GoodCategory.vue";
 import PostTable from "../components/PostTable.vue";
 import { usePostStore } from "@/stores/post";
 import { useCategoryStore, type ICategory } from "@/stores/category";
+import { useDisplay } from "vuetify/lib/framework.mjs";
 
 const route = useRoute();
+const { mobile } = useDisplay();
 
 const state = reactive({ categoryId: 0 });
 const postStore = usePostStore();

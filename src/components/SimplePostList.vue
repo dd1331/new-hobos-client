@@ -1,9 +1,9 @@
 <template>
-  <v-card class="" style="border-radius: 12px">
+  <v-card class="rounded-lg">
     <div class="d-flex justify-space-between align-center">
       <div class="text-h6 mx-4 my-1 pa-1">{{ category.name }}</div>
       <v-btn
-        style="border-radius: 12px; opacity: 90%"
+        style="opacity: 90%"
         class="mx-4"
         size="small"
         @click="

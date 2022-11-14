@@ -6,6 +6,7 @@ import "vuetify/styles";
 
 // Vuetify
 import { createVuetify, type ThemeDefinition } from "vuetify";
+import { md3 } from "vuetify/blueprints";
 
 const myCustomLightTheme: ThemeDefinition = {
   // dark: false,
@@ -22,17 +23,14 @@ const myCustomLightTheme: ThemeDefinition = {
     warning: "#FB8C00",
   },
 };
-export default createVuetify(
-  {
-    components,
-    directives,
-    ssr: true,
-    theme: {
-      defaultTheme: "myCustomLightTheme",
-      themes: {
-        myCustomLightTheme,
-      },
+export default createVuetify({
+  components,
+  blueprint: md3,
+  directives,
+  theme: {
+    defaultTheme: "myCustomLightTheme",
+    themes: {
+      myCustomLightTheme,
     },
-  }
-  // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
-);
+  },
+});

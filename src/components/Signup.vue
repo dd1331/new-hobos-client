@@ -1,5 +1,5 @@
 <template>
-  <v-card style="border-radius: 12px">
+  <v-card>
     <v-container class="text-sm-h4 text-h6">회원가입</v-container>
     <v-divider></v-divider>
     <v-container>
@@ -32,7 +32,7 @@
           style="border-radius: 12px; border: 1px solid"
           class="w-100 pa-2 pl-4"
         />
-        <v-btn color="primary" style="border-radius: 12px">인증</v-btn>
+        <v-btn color="primary">인증</v-btn>
       </div>
     </v-container>
     <v-container>
@@ -68,18 +68,8 @@
       </div>
     </v-container>
     <v-container class="d-flex justify-center">
-      <v-btn
-        color="primary"
-        class="ma-2"
-        style="border-radius: 12px"
-        @click="signupLocal"
-        >확인</v-btn
-      >
-      <v-btn
-        color="primary"
-        class="ma-2"
-        style="border-radius: 12px"
-        @click="$router.push('/')"
+      <v-btn color="primary" class="ma-2" @click="signupLocal">확인</v-btn>
+      <v-btn color="primary" class="ma-2" @click="$router.push('/')"
         >취소</v-btn
       >
     </v-container>

@@ -3,12 +3,10 @@
     <v-btn
       v-for="category in useCategoryStore().categories"
       :key="category.id"
-      class="mr-2 bg-grey-lighten-2 mb-2"
+      class="mr-2 mb-2"
       variant="flat"
       height="35"
-      style="border-radius: 12px; opacity: 90%"
       @click="toCategoryPostList(category.id)"
-      color="primary"
       >{{ category.title }}</v-btn
     >
   </div>
