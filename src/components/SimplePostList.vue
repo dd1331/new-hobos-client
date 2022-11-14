@@ -22,7 +22,7 @@
           <div class="" :class="thumbnail ? 'd-flex align-center' : ''">
             <v-img
               v-if="thumbnail"
-              class="mr-2"
+              class="mr-2 rounded-lg"
               max-height="50"
               max-width="50"
               src="../../src/assets/ship.jpg"

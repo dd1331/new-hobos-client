@@ -15,7 +15,11 @@
       ✏️ 쓰기
     </v-btn>
   </div>
-  <div v-if="mobile"></div>
+  <FancyPostList
+    v-if="mobile"
+    :posts="postStore.getPosts"
+    @on-page-clicked="onPageClicked"
+  ></FancyPostList>
   <PostTable
     v-else
     :posts="postStore.getPosts"
@@ -31,6 +35,7 @@ import PostTable from "../components/PostTable.vue";
 import { usePostStore } from "@/stores/post";
 import { useCategoryStore, type ICategory } from "@/stores/category";
 import { useDisplay } from "vuetify/lib/framework.mjs";
+import FancyPostList from "@/components/FancyPostList.vue";
 
 const route = useRoute();
 const { mobile } = useDisplay();
