@@ -57,7 +57,7 @@
                     {{ post.content }}
                   </div>
                   <v-img
-                    v-if="index % 2 === 0 && mobile"
+                    v-if="index % 2 === 0 && xs"
                     class="mr-2 rounded-lg"
                     max-height="300"
                     max-width="300"
@@ -89,7 +89,7 @@
                     </v-chip-group>
                   </v-container>
                 </div>
-                <div v-if="mobile">
+                <div v-if="xs">
                   <v-btn size="small" rounded="lg" variant="text">좋아요</v-btn>
                   <span class="text-overline">54</span>
                   <v-btn size="small" rounded="lg" variant="text">댓글</v-btn>
@@ -98,14 +98,14 @@
               </div>
 
               <v-img
-                v-if="index % 2 === 0 && !mobile"
+                v-if="index % 2 === 0 && !xs"
                 class="mr-2 rounded-lg w-50 h-100"
                 max-height="300"
                 max-width="300"
                 src="../../src/assets/ship.jpg"
               ></v-img>
             </v-container>
-            <div v-if="!mobile">
+            <div v-if="!xs">
               <v-btn size="small" rounded="lg" variant="text">좋아요</v-btn>
               <span class="text-overline">54</span>
               <v-btn size="small" rounded="lg" variant="text">댓글</v-btn>
@@ -132,7 +132,7 @@ import type { IPost4List } from "@/stores/post";
 import { inject, ref } from "vue";
 import { useDisplay } from "vuetify/lib/framework.mjs";
 const dayjs = inject("dayjs");
-const { mobile } = useDisplay();
+const { xs } = useDisplay();
 defineProps<{
   posts: IPost4List[];
 }>();
