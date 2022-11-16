@@ -20,6 +20,7 @@
             variant="plain"
             @click="toCategoryPostList(category.id)"
           >
+            {{ category.view }}
             {{ category.title }}
           </v-btn>
         </div>

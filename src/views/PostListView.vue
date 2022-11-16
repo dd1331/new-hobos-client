@@ -16,7 +16,7 @@
     </v-btn>
   </div>
   <FancyPostList
-    v-if="mobile"
+    v-if="mobile || currentCategory.view === View.FANCY"
     :posts="postStore.getPosts"
     @on-page-clicked="onPageClicked"
   ></FancyPostList>
@@ -33,7 +33,7 @@ import { onBeforeRouteUpdate, useRoute } from "vue-router";
 import GoodCategory from "../components/GoodCategory.vue";
 import PostTable from "../components/PostTable.vue";
 import { usePostStore } from "@/stores/post";
-import { useCategoryStore, type ICategory } from "@/stores/category";
+import { useCategoryStore, type ICategory, View } from "@/stores/category";
 import { useDisplay } from "vuetify/lib/framework.mjs";
 import FancyPostList from "@/components/FancyPostList.vue";
 
