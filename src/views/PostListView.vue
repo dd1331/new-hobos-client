@@ -16,7 +16,7 @@
     </v-btn>
   </div>
   <FancyPostList
-    v-if="mobile || currentCategory.view === View.FANCY"
+    v-if="mobile || currentCategory?.view === View.FANCY"
     :posts="postStore.getPosts"
     @on-page-clicked="onPageClicked"
   ></FancyPostList>
