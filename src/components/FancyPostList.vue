@@ -1,11 +1,7 @@
 <template>
   <v-card>
     <v-list>
-      <v-list-item
-        v-for="(post, index) in posts"
-        :key="post.title"
-        class="pa-1"
-      >
+      <v-list-item v-for="(post, index) in posts" :key="post.id" class="pa-1">
         <v-container class="d-flex">
           <v-avatar
             class="border-solid"
@@ -13,7 +9,7 @@
             size="40"
           ></v-avatar>
           <v-container class="pa-0">
-            <v-container class="py-0 d-flex justify-space-between">
+            <v-container class="py-0 d-flex justify-space-between pr-0">
               <div>
                 <div class="d-flex align-center">
                   <div class="mr-2">홍준표</div>

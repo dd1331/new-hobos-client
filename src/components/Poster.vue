@@ -47,7 +47,7 @@
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { usePostStore } from "../stores/post";
-import { useCategoryStore, type ICategory } from "@/stores/category";
+import { useCategoryStore } from "@/stores/category";
 
 const postStore = usePostStore();
 const categoryStore = useCategoryStore();
@@ -58,7 +58,6 @@ const state = reactive({ categoryId: 1 });
 const title = ref("dd");
 const content = ref("dd");
 const post = async () => {
-  // TODO: use real categoryId
   await postStore.post({
     title: title.value,
     content: content.value,

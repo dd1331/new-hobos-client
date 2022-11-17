@@ -1,3 +1,4 @@
+import * as qs from "qs";
 import { defineStore } from "pinia";
 import { computed, reactive } from "vue";
 import goodAxios from "../common/good-axios";
@@ -14,9 +15,8 @@ export interface IPost4List {
   createdAt: Date;
 }
 export interface IPost4HomeList {
-  categoryId: number;
-  categoryName: string;
   posts: IPost4List[];
+  category: { title: string; id: number };
 }
 export interface IPost {
   id: number;
@@ -53,8 +53,8 @@ export const usePostStore = defineStore("Post", () => {
     page: number = 0,
     size: number = 5
   ) {
-    const { data } = await goodAxios.get("post/category", {
-      params: { categoryId, page, size },
+    const { data } = await goodAxios.get("post/category/" + categoryId, {
+      params: { page, size },
     });
     state.posts = data;
     return data as IPost[];
@@ -67,7 +67,10 @@ export const usePostStore = defineStore("Post", () => {
     state.popularPosts = data;
   }
   async function fetchHomePosts() {
-    const { data } = await goodAxios.get("post/home");
+    const { data } = await goodAxios.get("post/home", {
+      params: { categoryIds: [3, 4, 5] },
+      paramsSerializer: { serialize: (params) => qs.stringify(params) },
+    });
     state.homePosts = data;
   }
 

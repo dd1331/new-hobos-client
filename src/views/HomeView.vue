@@ -12,21 +12,21 @@
     <div v-if="mobile">
       <SimplePostList
         v-for="post in homePosts.posts"
-        :key="post.categoryId"
+        :key="post.category.id"
         :category="{
-          name: post.categoryName,
-          id: post.categoryId,
+          name: post.category.title,
+          id: post.category.id,
         }"
         :posts="post.posts"
       ></SimplePostList>
     </div>
     <div v-else class="">
       <v-row v-for="(r, index) in homePosts.splited" :key="index + 'r'">
-        <v-col v-for="post in r" :key="post.categoryId" cols="12" sm="6">
+        <v-col v-for="post in r" :key="post.category.id" cols="12" sm="6">
           <SimplePostList
             :category="{
-              name: post.categoryName,
-              id: post.categoryId,
+              name: post.category.title,
+              id: post.category.id,
             }"
             :posts="post.posts"
           ></SimplePostList>
