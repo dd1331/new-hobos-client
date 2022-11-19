@@ -35,12 +35,9 @@
     </div>
     <!-- </template> -->
   </v-app-bar>
-  <GoodLogin :hidden="isLoginPopped" @hide-login="toggleLogin"></GoodLogin>
 </template>
 
 <script lang="ts" setup>
-import GoodLogin from "../components/GoodLogin.vue";
-import { ref } from "vue";
 import { useDisplay } from "vuetify";
 import { useUserStore } from "@/stores/user";
 import { useCategoryStore } from "@/stores/category";
@@ -53,11 +50,11 @@ const { mobile } = useDisplay();
 const logo = mobile ? "w-50" : "";
 
 // expose the state to the template
-const isLoginPopped = ref(false);
 const postStore = usePostStore();
 const router = useRouter();
+const emit = defineEmits(["hideLogin"]);
 function toggleLogin() {
-  isLoginPopped.value = !isLoginPopped.value;
+  emit("hideLogin");
 }
 async function toCategoryPostList(categoryId: number) {
   await postStore.fetchPostsByCategory(categoryId);

@@ -5,6 +5,8 @@ import HomeView from "../views/HomeView.vue";
 import PostListView from "../views/PostListView.vue";
 import PostView from "../views/PostView.vue";
 
+import { useUserStore } from "../stores/user";
+import { UNAUTHORIZED } from "../constants";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -27,6 +29,7 @@ const router = createRouter({
       path: "/poster",
       name: "Poster",
       component: Poster,
+      meta: { authRequired: true },
     },
     {
       path: "/signup",
@@ -45,6 +48,12 @@ const router = createRouter({
   scrollBehavior(to, from, savedPosition) {
     return { top: 0 };
   },
+});
+router.beforeEach((to, from) => {
+  const token = useUserStore().accessToken;
+  if (to.meta.authRequired && !token) throw new Error(UNAUTHORIZED);
+  // explicitly return false to cancel the navigation
+  return true;
 });
 
 export default router;

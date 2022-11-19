@@ -1,6 +1,6 @@
 <template>
   <v-app class="bg-grey-lighten-4">
-    <GoodHeader></GoodHeader>
+    <GoodHeader @hide-login="toggleLogin"></GoodHeader>
     <v-layout v-if="mobile" style="z-index: 0" class="mt-6">
       <!-- Sizes your content based upon application components -->
       <v-main class="mt-10">
@@ -14,10 +14,8 @@
       </v-main>
     </v-layout>
     <v-layout v-else style="z-index: 0" class="mt-6">
-      <v-navigation-drawer
-        class="bg-grey-lighten-4 border-none"
-        permanent
-      ></v-navigation-drawer>
+      <v-navigation-drawer class="bg-grey-lighten-4 border-none" permanent>
+      </v-navigation-drawer>
       <v-navigation-drawer
         class="bg-grey-lighten-4 border-none"
         permanent
@@ -48,17 +46,31 @@
         </div>
       </div>
     </v-footer>
+    <GoodLogin :hidden="isLoginPopped" @hide-login="toggleLogin"></GoodLogin>
   </v-app>
 </template>
 <script lang="ts" setup>
 import GoodFooter from "./components/GoodFooter.vue";
 import GoodHeader from "./components/GoodHeader.vue";
+import GoodLogin from "./components/GoodLogin.vue";
 import * as dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
 import { useCategoryStore } from "@/stores/category";
 import { useDisplay } from "vuetify";
-import { onBeforeMount, provide } from "vue";
+import {
+  onBeforeMount,
+  onErrorCaptured,
+  provide,
+  ref,
+  type ComponentPublicInstance,
+} from "vue";
+import { UNAUTHORIZED } from "./constants";
+const isLoginPopped = ref(false);
+
+function toggleLogin() {
+  isLoginPopped.value = !isLoginPopped.value;
+}
 const { mobile } = useDisplay();
 const icons = ["청문홍답", "홍문청답", "인기", "자유", "정치"];
 onBeforeMount(() => {
@@ -66,6 +78,12 @@ onBeforeMount(() => {
 });
 dayjs.extend(relativeTime);
 provide("dayjs", dayjs);
+onErrorCaptured(
+  (err: unknown, instance: ComponentPublicInstance | null, info: string) => {
+    if (err.response?.status === 401 || err.message === UNAUTHORIZED)
+      toggleLogin();
+  }
+);
 </script>
 
 <!-- <style scoped>
