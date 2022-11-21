@@ -49,7 +49,7 @@
                   @click="
                     $router.push({
                       path: '/post/' + post.id,
-                      query: { categoryId },
+                      query: { categoryId: category.id },
                     })
                   "
                 >
@@ -131,15 +131,15 @@
 </template>
 
 <script lang="ts" setup>
+import type { ICategory } from "@/stores/category";
 import type { IPost4List } from "@/stores/post";
-import { inject, onBeforeMount, ref } from "vue";
-import { useRoute } from "vue-router";
+import { inject, ref } from "vue";
 import { useDisplay } from "vuetify/lib/framework.mjs";
 const dayjs = inject("dayjs");
 const { xs } = useDisplay();
-const categoryId = ref(0);
 defineProps<{
   posts: IPost4List[];
+  category: ICategory;
 }>();
 const page = ref(1);
 const emit = defineEmits(["onPageClicked"]);
@@ -147,8 +147,4 @@ function clicked() {
   emit("onPageClicked", page.value);
   window.scrollTo(0, 0);
 }
-onBeforeMount(() => {
-  const route = useRoute();
-  categoryId.value = Number(route.query.category as string);
-});
 </script>

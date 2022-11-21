@@ -24,13 +24,44 @@
       </div>
     </div>
     <!-- <template v-slot:append> -->
-    <div class="w-25 d-flex justify-end">
-      {{ !!userStore.accessToken }}
-      <v-btn icon="mdi-heart" @click="toggleLogin"></v-btn>
+    <div class="w-25 d-flex justify-end align-center">
+      <!-- <v-btn icon="mdi-heart" @click="toggleLogin"></v-btn>
 
-      <v-btn icon="mdi-magnify" @click="toggleLogin"></v-btn>
+      <v-btn icon="mdi-magnify" @click="toggleLogin"></v-btn> -->
 
-      <v-btn icon="mdi-dots-vertical" @click="toggleLogin"></v-btn>
+      <v-btn
+        v-if="!userStore.getUser"
+        icon="mdi-dots-vertical"
+        @click="toggleLogin"
+      ></v-btn>
+      <v-menu v-else min-width="200px" rounded>
+        <template v-slot:activator="{ props }">
+          <v-btn icon v-bind="props">
+            <v-avatar
+              color="brown"
+              image="../../src/assets/ship2.jpg"
+            ></v-avatar>
+          </v-btn>
+        </template>
+        <v-card>
+          <v-card-text>
+            <div class="mx-auto text-center">
+              <v-avatar
+                color="brown"
+                image="../../src/assets/ship2.jpg"
+              ></v-avatar>
+              <h3>{{ userStore.getUser.nickname }}</h3>
+              <p class="text-caption mt-1">
+                {{ userStore.getUser.email }}
+              </p>
+              <v-divider></v-divider>
+              <v-btn rounded variant="text"> 내정보 </v-btn>
+              <v-divider></v-divider>
+              <v-btn rounded variant="text" @click="logout"> 로그아웃 </v-btn>
+            </div>
+          </v-card-text>
+        </v-card>
+      </v-menu>
     </div>
     <!-- </template> -->
   </v-app-bar>
@@ -58,5 +89,8 @@ function toggleLogin() {
 async function toCategoryPostList(categoryId: number) {
   await postStore.fetchPostsByCategory(categoryId);
   router.push({ path: "/post", query: { category: categoryId } });
+}
+function logout() {
+  userStore.logout();
 }
 </script>

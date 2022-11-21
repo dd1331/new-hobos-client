@@ -12,17 +12,19 @@
       color="primary"
       rounded="lg"
     >
-      ✏️ 쓰기
+      ✏️
     </v-btn>
   </div>
   <FancyPostList
     v-if="mobile || currentCategory?.view === View.FANCY"
     :posts="postStore.getPosts"
+    :category="currentCategory"
     @on-page-clicked="onPageClicked"
   ></FancyPostList>
   <PostTable
     v-else
     :posts="postStore.getPosts"
+    :category="currentCategory"
     @on-page-clicked="onPageClicked"
   ></PostTable>
 </template>

@@ -16,11 +16,17 @@
         <!-- {{
         posts
       }} -->
-        <tr v-for="{ id, title, createdAt } in posts" :key="id">
+        <tr v-for="{ id, title, createdAt, poster } in posts" :key="id">
           <td>{{ id }}</td>
 
           <td
-            @click="$router.push({ name: 'Post', params: { id } })"
+            @click="
+              $router.push({
+                name: 'Post',
+                params: { id },
+                query: { categoryId: category.id },
+              })
+            "
             style="cursor: pointer"
           >
             {{ title }}
@@ -33,7 +39,7 @@
                 src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
               ></v-img>
             </v-avatar>
-            홍준표
+            {{ poster.nickname }}
           </td>
           <td style="color: #ff4a57">98</td>
           <td>30</td>
@@ -54,11 +60,13 @@
 </template>
 
 <script lang="ts" setup>
+import type { ICategory } from "@/stores/category";
 import type { IPost4List } from "@/stores/post";
 import { inject, ref } from "vue";
 
 defineProps<{
   posts: IPost4List[];
+  category: ICategory;
 }>();
 const dayjs = inject("dayjs");
 const page = ref(1);

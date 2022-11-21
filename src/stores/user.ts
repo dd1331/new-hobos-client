@@ -12,10 +12,23 @@ export type LoginLocalPayload = {
   email: string;
   password: string;
 };
+type Tokens = {
+  accessToken: string;
+  refreshToken: string;
+};
+type User = {
+  id: number;
+  nickname: string;
+  email: string;
+};
 export const useUserStore = defineStore("User", () => {
   const count = ref(0);
-  const state = reactive({ tokens: { accessToken: "", refreshToken: "" } });
-  const accessToken = computed(() => state.tokens.accessToken);
+
+  const state: {
+    tokens: Tokens | null;
+    user: User | null;
+  } = reactive({ tokens: {} as Tokens, user: {} as User });
+  const accessToken = computed(() => state.tokens?.accessToken);
   async function signupLocal(payload: SignupPayload) {
     return goodAxios.post(API_URL + "user/signup/local", payload);
   }
@@ -30,7 +43,8 @@ export const useUserStore = defineStore("User", () => {
       }
       return config;
     });
-    state.tokens = data.tokens;
+    state.tokens = data.tokens as Tokens;
+    state.user = data.user;
     localStorage.setItem("accessToken", state.tokens.accessToken);
     localStorage.setItem("refreshToken", state.tokens.refreshToken);
     return state.tokens;
@@ -48,6 +62,21 @@ export const useUserStore = defineStore("User", () => {
     state.tokens = { accessToken, refreshToken };
 
     const { data } = await goodAxios.get(API_URL + "user");
+    state.user = data;
   }
-  return { count, accessToken, signupLocal, loginLocal, fetchUser };
+  const getUser = computed(() => state.user);
+  function logout() {
+    state.tokens = null;
+    state.user = null;
+    localStorage.clear();
+  }
+  return {
+    count,
+    accessToken,
+    signupLocal,
+    loginLocal,
+    fetchUser,
+    getUser,
+    logout,
+  };
 });
