@@ -43,7 +43,7 @@
     </div>
   </v-card>
 
-  <GoodComment></GoodComment>
+  <GoodComment :postId="post.id"></GoodComment>
   <GoodCategory class="mt-5"></GoodCategory>
   <SimplePostList
     v-if="mobile"

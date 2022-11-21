@@ -5,7 +5,7 @@
       <img
         :class="logo"
         style="cursor: pointer"
-        src="https://theyouthdream.com/files/attach/images/main/dream_logo.png"
+        src="../../src/assets/ship2.jpg"
         alt=""
       />
     </div>

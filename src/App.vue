@@ -10,7 +10,7 @@
           <!-- If using vue-router -->
           <router-view></router-view>
         </v-container>
-        <GoodFooter class="mt-10"></GoodFooter>
+        <GoodFooter></GoodFooter>
       </v-main>
     </v-layout>
     <v-layout v-else style="z-index: 0" class="mt-6">
@@ -29,7 +29,7 @@
           <!-- If using vue-router -->
           <router-view></router-view>
         </v-container>
-        <GoodFooter class="mt-10"></GoodFooter>
+        <GoodFooter></GoodFooter>
       </v-main>
     </v-layout>
     <v-footer v-if="mobile" app class="bg-grey-lighten-4">

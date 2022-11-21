@@ -3,68 +3,112 @@
     <v-card-item>
       <div class="d-flex align-center">
         <v-card-title> 댓글 </v-card-title>
-        <div class="ml-3">총 2개</div>
+        {{ content }}
+        <div class="ml-3">총 {{ store.getComments.length }}개</div>
+      </div>
+      <div class="d-flex">
+        <v-textarea
+          label="댓글"
+          variant="outlined"
+          auto-grow
+          rows="3"
+          v-model="content"
+        ></v-textarea>
+        <v-btn class="ml-3" @click="registerComment" icon="mdi-comment"></v-btn>
       </div>
     </v-card-item>
     <v-divider></v-divider>
     <v-list>
-      <v-list-item v-for="({ subtitle }, index) in items" :key="index">
+      <v-list-item
+        v-for="({ content, createdAt, user }, index) in store.getComments"
+        :key="index"
+      >
         <div class="d-flex">
-          <v-avatar size="36px" class="ma-3">
+          <v-avatar size="36px" class="ma-2">
             <v-img
               alt="Avatar"
               src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
             ></v-img>
           </v-avatar>
-          <div v-html="subtitle" class="pb-2"></div>
+          <div class="">
+            <div class="d-flex align-center">
+              <div class="mr-2">
+                {{ user.nickname }}
+              </div>
+              <v-chip
+                class="mr-1"
+                size="x-small"
+                color="pink"
+                density="comfortable"
+                text-color="white"
+              >
+                Tags
+              </v-chip>
+
+              <v-chip
+                class="mr-1"
+                size="x-small"
+                density="comfortable"
+                color="primary"
+              >
+                John Leider
+              </v-chip>
+
+              <v-chip
+                class="mr-1"
+                size="x-small"
+                density="comfortable"
+                color="cyan"
+              >
+                New Tweets
+              </v-chip>
+            </div>
+            <div class="ma-0">
+              {{ dayjs(createdAt).fromNow() }}
+            </div>
+          </div>
+          <!-- <div v-html="content" class="pb-2"></div> -->
         </div>
+        <v-container class="py-2">
+          {{ content }}
+        </v-container>
         <div class="d-flex py-2 justify-center">
           <v-btn class="mx-3" color="primary" rounded="lg"> 좋아요 </v-btn>
           <v-btn class="mx-3" color="primary" rounded="lg"> 싫어요 </v-btn>
           <v-btn class="mx-3" color="primary" rounded="lg"> 댓글 </v-btn>
         </div>
-        <v-divider v-if="items.length - 1 > index" class="my-2"></v-divider>
+        <v-divider
+          v-if="store.getComments.length - 1 > index"
+          class="my-2"
+        ></v-divider>
       </v-list-item>
     </v-list>
   </v-card>
 </template>
 
-<script lang="ts">
-export default {
-  setup() {
-    const items = [
-      // { type: "subheader", title: "Today" },
-      {
-        prependAvatar: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-        title: "Brunch this weekend?",
-        subtitle: `<span class="text-primary">Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?I'll be in your neighborhood doing errands this weekend. Do you want to hang out?I'll be in your neighborhood doing errands this weekend. Do you want to hang out?I'll be in your neighborhood doing errands this weekend. Do you want to hang out?I'll be in your neighborhood doing errands this weekend. Do you want to hang out?I'll be in your neighborhood doing errands this weekend. Do you want to hang out?I'll be in your neighborhood doing errands this weekend. Do you want to hang out?I'll be in your neighborhood doing errands this weekend. Do you want to hang out?I'll be in your neighborhood doing errands this weekend. Do you want to hang out?I'll be in your neighborhood doing errands this weekend. Do you want to hang out?I'll be in your neighborhood doing errands this weekend. Do you want to hang out?I'll be in your neighborhood doing errands this weekend. Do you want to hang out?I'll be in your neighborhood doing errands this weekend. Do you want to hang out?`,
-      },
-      {
-        prependAvatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
-        title: "Summer BBQ",
-        subtitle: `<span class="text-primary">to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'mWish I could come, but I'mWish I could come, but I'mWish I could come, but I'mWish I could come, but I'm out of town this weekend.`,
-      },
-      {
-        prependAvatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
-        title: "Oui oui",
-        subtitle:
-          '<span class="text-primary">Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been? Do you have Paris recommendations? Have you ever been? Do you have Paris recommendations? Have you ever been? Do you have Paris recommendations? Have you ever been? Do you have Paris recommendations? Have you ever been?',
-      },
-      {
-        prependAvatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
-        title: "Birthday gift",
-        subtitle:
-          '<span class="text-primary">Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?',
-      },
-      {
-        prependAvatar: "https://cdn.vuetifyjs.com/images/lists/5.jpg",
-        title: "Recipe to try",
-        subtitle:
-          '<span class="text-primary">Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.',
-      },
-    ];
+<script lang="ts" setup>
+import { useCommentStore, type registerCommentPayload } from "@/stores/comment";
+import { inject, onBeforeMount, ref } from "vue";
 
-    return { items };
-  },
-};
+const dayjs = inject("dayjs");
+
+const props = defineProps<{
+  postId: number;
+}>();
+
+const content = ref("");
+
+const store = useCommentStore();
+async function registerComment() {
+  const payload: registerCommentPayload = {
+    postId: props.postId,
+    content: content.value,
+  };
+
+  await store.regsiterComment(payload);
+  store.fetchComments(props.postId);
+}
+onBeforeMount(() => {
+  store.fetchComments(props.postId);
+});
 </script>
