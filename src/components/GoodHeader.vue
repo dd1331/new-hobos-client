@@ -11,8 +11,6 @@
     </div>
     <div class="d-flex w-75">
       <div class="w-100">
-        {{ !!userStore.accessToken }}
-
         <div class="d-md-flex d-none justify-center">
           <v-btn
             v-for="category in useCategoryStore().categories"
@@ -27,6 +25,7 @@
     </div>
     <!-- <template v-slot:append> -->
     <div class="w-25 d-flex justify-end">
+      {{ !!userStore.accessToken }}
       <v-btn icon="mdi-heart" @click="toggleLogin"></v-btn>
 
       <v-btn icon="mdi-magnify" @click="toggleLogin"></v-btn>

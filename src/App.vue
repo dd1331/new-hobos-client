@@ -66,6 +66,7 @@ import {
   type ComponentPublicInstance,
 } from "vue";
 import { UNAUTHORIZED } from "./constants";
+import { useUserStore } from "./stores/user";
 const isLoginPopped = ref(false);
 
 function toggleLogin() {
@@ -74,6 +75,7 @@ function toggleLogin() {
 const { mobile } = useDisplay();
 const icons = ["청문홍답", "홍문청답", "인기", "자유", "정치"];
 onBeforeMount(() => {
+  useUserStore().fetchUser();
   useCategoryStore().fetchCategories();
 });
 dayjs.extend(relativeTime);

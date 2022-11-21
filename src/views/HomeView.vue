@@ -4,7 +4,7 @@
     <HomeCarousel class="mb-8"></HomeCarousel>
 
     <SimplePostList
-      :category="{ name: popularCategory.title, id: 1 }"
+      :category="{ name: popularCategory?.title, id: 1 }"
       :posts="popularPosts"
       class="mx-0 px-0"
       :thumbnail="true"

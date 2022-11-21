@@ -31,7 +31,23 @@ export const useUserStore = defineStore("User", () => {
       return config;
     });
     state.tokens = data.tokens;
+    localStorage.setItem("accessToken", state.tokens.accessToken);
+    localStorage.setItem("refreshToken", state.tokens.refreshToken);
     return state.tokens;
   }
-  return { count, accessToken, signupLocal, loginLocal };
+  async function fetchUser() {
+    const accessToken = localStorage.getItem("accessToken");
+    const refreshToken = localStorage.getItem("refreshToken");
+    if (!accessToken || !refreshToken) return;
+    goodAxios.interceptors.request.use((config: AxiosRequestConfig<any>) => {
+      if (accessToken && config.headers) {
+        config.headers["Authorization"] = "Bearer " + accessToken;
+      }
+      return config;
+    });
+    state.tokens = { accessToken, refreshToken };
+
+    const { data } = await goodAxios.get(API_URL + "user");
+  }
+  return { count, accessToken, signupLocal, loginLocal, fetchUser };
 });
