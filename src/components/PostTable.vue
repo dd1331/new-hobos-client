@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card v-if="posts">
     <v-table>
       <thead>
         <tr>

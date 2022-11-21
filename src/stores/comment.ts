@@ -6,7 +6,7 @@ export interface IComment {
   id: number;
   createdAt: Date;
   content: string;
-  user: { nickname: string };
+  commenter: { nickname: string };
 }
 
 export type registerCommentPayload = {

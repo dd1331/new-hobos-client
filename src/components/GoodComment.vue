@@ -20,7 +20,7 @@
     <v-divider></v-divider>
     <v-list>
       <v-list-item
-        v-for="({ content, createdAt, user }, index) in store.getComments"
+        v-for="({ content, createdAt, commenter }, index) in store.getComments"
         :key="index"
       >
         <div class="d-flex">
@@ -33,7 +33,7 @@
           <div class="">
             <div class="d-flex align-center">
               <div class="mr-2">
-                {{ user.nickname }}
+                {{ commenter.nickname }}
               </div>
               <v-chip
                 class="mr-1"

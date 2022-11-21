@@ -13,6 +13,7 @@ export interface IPost4List {
   title: string;
   content?: string;
   createdAt: Date;
+  poster: { nickname: string };
 }
 export interface IPost4HomeList {
   posts: IPost4List[];
@@ -50,7 +51,7 @@ export const usePostStore = defineStore("Post", () => {
   }
   async function fetchPostsByCategory(
     categoryId: number,
-    page: number = 0,
+    page: number = 1,
     size: number = 5
   ) {
     const { data } = await goodAxios.get("post/category/" + categoryId, {
@@ -76,8 +77,10 @@ export const usePostStore = defineStore("Post", () => {
 
   async function fetchPost(id: number) {
     const { data } = await goodAxios.get(`post/${id}`);
-    console.log("🚀 ~ file: post.ts ~ line 40 ~ fetchPost ~ data", data);
     state.post = data;
+  }
+  function resetPosts() {
+    state.post = null;
   }
   return {
     post,
@@ -90,5 +93,6 @@ export const usePostStore = defineStore("Post", () => {
     getPopularPosts,
     fetchHomePosts,
     getHomePosts,
+    resetPosts,
   };
 });

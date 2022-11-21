@@ -63,6 +63,6 @@ const post = async () => {
     content: content.value,
     categoryIds: [state.categoryId],
   });
-  router.push("/post");
+  router.back();
 };
 </script>

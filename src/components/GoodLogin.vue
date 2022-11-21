@@ -12,32 +12,30 @@
 
       <v-card class="py-3">
         <v-card-title> 로그인 </v-card-title>
-        <v-card-content>
-          <v-form v-model="valid">
-            <v-container>
-              <v-text-field
-                variant="outlined"
-                v-model="email"
-                type="email"
-                :rules="nameRules"
-                density="compact"
-                :counter="10"
-                placeholder="이메일"
-                required
-              ></v-text-field>
+        <v-form v-model="valid">
+          <v-container>
+            <v-text-field
+              variant="outlined"
+              v-model="email"
+              type="email"
+              :rules="nameRules"
+              density="compact"
+              :counter="10"
+              placeholder="이메일"
+              required
+            ></v-text-field>
 
-              <v-text-field
-                variant="outlined"
-                v-model="password"
-                type="password"
-                :rules="nameRules"
-                density="compact"
-                placeholder="비밀번호"
-                required
-              ></v-text-field>
-            </v-container>
-          </v-form>
-        </v-card-content>
+            <v-text-field
+              variant="outlined"
+              v-model="password"
+              type="password"
+              :rules="nameRules"
+              density="compact"
+              placeholder="비밀번호"
+              required
+            ></v-text-field>
+          </v-container>
+        </v-form>
         <v-card-actions class="pt-0">
           <v-btn
             color="primary"

@@ -2,9 +2,12 @@
   <main>
     <!-- <TheWelcome /> -->
     <HomeCarousel class="mb-8"></HomeCarousel>
-
     <SimplePostList
-      :category="{ name: popularCategory?.title, id: 1 }"
+      v-if="popularCategory && popularPosts"
+      :category="{
+        title: popularCategory.title + '(임시)',
+        id: popularCategory.id,
+      }"
       :posts="popularPosts"
       class="mx-0 px-0"
       :thumbnail="true"
@@ -14,7 +17,7 @@
         v-for="post in homePosts.posts"
         :key="post.category.id"
         :category="{
-          name: post.category.title,
+          title: post.category.title,
           id: post.category.id,
         }"
         :posts="post.posts"
@@ -25,7 +28,7 @@
         <v-col v-for="post in r" :key="post.category.id" cols="12" sm="6">
           <SimplePostList
             :category="{
-              name: post.category.title,
+              title: post.category.title,
               id: post.category.id,
             }"
             :posts="post.posts"
@@ -40,6 +43,7 @@
 import { useCategoryStore, type ICategory } from "@/stores/category";
 import { usePostStore, type IPost } from "@/stores/post";
 import { computed, onBeforeMount, reactive } from "vue";
+import { onBeforeRouteLeave } from "vue-router";
 import { useDisplay } from "vuetify";
 import HomeCarousel from "../components/HomeCarousel.vue";
 import SimplePostList from "../components/SimplePostList.vue";
@@ -63,5 +67,8 @@ const homePosts = computed(() => {
   const splited = [posts.slice(0, 2), posts.slice(2)];
 
   return { posts, splited };
+});
+onBeforeRouteLeave(() => {
+  usePostStore().resetPosts();
 });
 </script>

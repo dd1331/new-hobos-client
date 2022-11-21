@@ -12,7 +12,7 @@
             <v-container class="py-0 d-flex justify-space-between pr-0">
               <div>
                 <div class="d-flex align-center">
-                  <div class="mr-2">홍준표</div>
+                  <div class="mr-2">{{ post.poster.nickname }}</div>
 
                   <v-chip
                     class="mr-1"
@@ -45,7 +45,14 @@
                 <div class="text-caption">
                   {{ dayjs(post.createdAt).fromNow() }}
                 </div>
-                <div>
+                <div
+                  @click="
+                    $router.push({
+                      path: '/post/' + post.id,
+                      query: { categoryId },
+                    })
+                  "
+                >
                   <div class="text-h6">
                     {{ post.title }}
                   </div>
@@ -125,10 +132,12 @@
 
 <script lang="ts" setup>
 import type { IPost4List } from "@/stores/post";
-import { inject, ref } from "vue";
+import { inject, onBeforeMount, ref } from "vue";
+import { useRoute } from "vue-router";
 import { useDisplay } from "vuetify/lib/framework.mjs";
 const dayjs = inject("dayjs");
 const { xs } = useDisplay();
+const categoryId = ref(0);
 defineProps<{
   posts: IPost4List[];
 }>();
@@ -138,4 +147,8 @@ function clicked() {
   emit("onPageClicked", page.value);
   window.scrollTo(0, 0);
 }
+onBeforeMount(() => {
+  const route = useRoute();
+  categoryId.value = Number(route.query.category as string);
+});
 </script>
