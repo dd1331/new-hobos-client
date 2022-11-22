@@ -30,7 +30,6 @@
           <div>보리쌀</div>
           <div>
             {{ dayjs(post.createdAt).fromNow() }} ・ 조회 수 4664 ・ 추천 수 15
-            ・ 댓글 2
           </div>
         </v-card-subtitle>
       </v-card-item>
@@ -49,7 +48,11 @@
       :category="currentCategory"
       :posts="state.posts"
     ></SimplePostList>
-    <PostTable v-else :posts="state.posts"></PostTable>
+    <PostTable
+      v-else
+      :posts="state.posts"
+      :category="currentCategory"
+    ></PostTable>
   </div>
 </template>
 

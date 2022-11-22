@@ -2,15 +2,18 @@
   <v-card>
     <v-list>
       <v-list-item v-for="(post, index) in posts" :key="post.id" class="pa-1">
-        <v-container class="d-flex">
-          <v-avatar
-            class="border-solid"
-            image="../../src/assets/ship3.jpg"
-            size="40"
-          ></v-avatar>
-          <v-container class="pa-0">
-            <v-container class="py-0 d-flex justify-space-between pr-0">
-              <div>
+        <v-container class="py-2">
+          <v-row no-gutters>
+            <v-col cols="2" sm="1">
+              <v-avatar
+                class="border-solid"
+                image="../../src/assets/ship3.jpg"
+                size="40"
+              ></v-avatar>
+            </v-col>
+
+            <v-col cols="10" sm="7">
+              <div class="pa-0">
                 <div class="d-flex align-center">
                   <div class="mr-2">{{ post.poster.nickname }}</div>
 
@@ -59,64 +62,44 @@
                   <div class="text-body-1">
                     {{ post.content }}
                   </div>
-                  <v-img
-                    v-if="index % 2 === 0 && xs"
-                    class="mr-2 rounded-lg"
-                    max-height="300"
-                    max-width="300"
-                    src="../../src/assets/ship.jpg"
-                  ></v-img>
-                  <v-container class="pa-0">
-                    <v-chip-group>
-                      <v-chip
-                        variant="outlined"
-                        size="small"
-                        class="rounded-xl mr-2"
-                      >
-                        구직
-                      </v-chip>
-                      <v-chip
-                        variant="outlined"
-                        size="small"
-                        class="rounded-xl mr-2"
-                      >
-                        재태크
-                      </v-chip>
-                      <v-chip
-                        variant="outlined"
-                        size="small"
-                        class="rounded-xl mr-2"
-                      >
-                        주식
-                      </v-chip>
-                    </v-chip-group>
-                  </v-container>
-                </div>
-                <div v-if="xs">
-                  <v-btn size="small" rounded="lg" variant="text">좋아요</v-btn>
-                  <span class="text-overline">54</span>
-                  <v-btn size="small" rounded="lg" variant="text">댓글</v-btn>
-                  <span class="text-overline">232</span>
                 </div>
               </div>
-
+            </v-col>
+            <v-col cols="10" sm="4" offset="2" :offset-sm="0">
               <v-img
-                v-if="index % 2 === 0 && !xs"
-                class="mr-2 rounded-lg w-50 h-100"
+                v-if="index % 2 === 0"
+                class="rounded-lg"
                 max-height="300"
                 max-width="300"
                 src="../../src/assets/ship.jpg"
               ></v-img>
-            </v-container>
-            <div v-if="!xs">
-              <v-btn size="small" rounded="lg" variant="text">좋아요</v-btn>
-              <span class="text-overline">54</span>
-              <v-btn size="small" rounded="lg" variant="text">댓글</v-btn>
-              <span class="text-overline">232</span>
-            </div>
-          </v-container>
+            </v-col>
+          </v-row>
         </v-container>
-        <v-divider v-if="posts.length !== index + 1" class="my-5"></v-divider>
+        <v-row no-gutters>
+          <v-col cols="10" offset="2" :offset-sm="1">
+            <v-chip-group class="px-2 py-0">
+              <v-chip variant="outlined" size="small" class="rounded-xl mr-2">
+                구직
+              </v-chip>
+              <v-chip variant="outlined" size="small" class="rounded-xl mr-2">
+                재태크
+              </v-chip>
+              <v-chip variant="outlined" size="small" class="rounded-xl mr-2">
+                주식
+              </v-chip>
+            </v-chip-group>
+          </v-col>
+        </v-row>
+        <v-row no-gutters>
+          <v-col cols="10" offset="2" :offset-sm="1">
+            <v-btn size="small" rounded="lg" variant="text">좋아요</v-btn>
+            <span class="text-overline">54</span>
+            <v-btn size="small" rounded="lg" variant="text">댓글</v-btn>
+            <span class="text-overline">{{ post.totalComments }}</span>
+          </v-col>
+        </v-row>
+        <v-divider v-if="posts.length !== index + 1" class="my-3"></v-divider>
       </v-list-item>
     </v-list>
   </v-card>

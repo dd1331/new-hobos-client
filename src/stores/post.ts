@@ -14,6 +14,7 @@ export interface IPost4List {
   content?: string;
   createdAt: Date;
   poster: { nickname: string };
+  totalComments: number;
 }
 export interface IPost4HomeList {
   posts: IPost4List[];
@@ -54,8 +55,8 @@ export const usePostStore = defineStore("Post", () => {
     page: number = 1,
     size: number = 5
   ) {
-    const { data } = await goodAxios.get("post/category/" + categoryId, {
-      params: { page, size },
+    const { data } = await goodAxios.get("post", {
+      params: { categoryId, page, size },
     });
     state.posts = data;
     return data as IPost[];

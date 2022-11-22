@@ -16,7 +16,10 @@
         <!-- {{
         posts
       }} -->
-        <tr v-for="{ id, title, createdAt, poster } in posts" :key="id">
+        <tr
+          v-for="{ id, title, createdAt, poster, totalComments } in posts"
+          :key="id"
+        >
           <td>{{ id }}</td>
 
           <td
@@ -30,7 +33,9 @@
             style="cursor: pointer"
           >
             {{ title }}
-            <span style="color: #3493ff" class="font-weight-bold"> (2) </span>
+            <span style="color: #3493ff" class="font-weight-bold">
+              ({{ totalComments }})
+            </span>
           </td>
           <td>
             <v-avatar size="25px">

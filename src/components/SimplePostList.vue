@@ -19,7 +19,9 @@
 
       <v-list lines="one">
         <v-list-item
-          v-for="({ title, id, createdAt, poster }, index) in posts"
+          v-for="(
+            { title, id, createdAt, poster, totalComments }, index
+          ) in posts"
           :key="id"
         >
           <div style="cursor: pointer">
@@ -43,6 +45,7 @@
                   "
                 >
                   {{ title }}
+                  <span v-if="totalComments"> ({{ totalComments }}) </span>
                 </div>
                 <div class="d-flex align-center">
                   {{ poster.nickname }} {{ dayjs(createdAt).fromNow() }}
