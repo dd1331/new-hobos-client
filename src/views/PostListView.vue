@@ -8,7 +8,11 @@
       class="mr-2 bg-grey-lighten-2 mb-2"
       variant="flat"
       height="35"
-      @click="$router.push('/poster')"
+      @click="
+        $router.push({
+          name: 'Poster',
+        })
+      "
       color="primary"
       rounded="lg"
     >

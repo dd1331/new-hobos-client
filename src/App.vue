@@ -67,6 +67,7 @@ import {
 } from "vue";
 import { UNAUTHORIZED } from "./constants";
 import { useUserStore } from "./stores/user";
+import { useRoute } from "vue-router";
 const isLoginPopped = ref(false);
 
 function toggleLogin() {
@@ -76,7 +77,9 @@ const { mobile } = useDisplay();
 const icons = ["청문홍답", "홍문청답", "인기", "자유", "정치"];
 onBeforeMount(() => {
   useUserStore().fetchUser();
-  useCategoryStore().fetchCategories();
+  const categoryId = Number(useRoute().query.categoryId);
+
+  useCategoryStore().fetchCategories(categoryId);
 });
 dayjs.extend(relativeTime);
 provide("dayjs", dayjs);

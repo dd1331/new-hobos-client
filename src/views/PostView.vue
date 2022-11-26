@@ -5,7 +5,11 @@
         <div class="d-flex justify-space-between">
           <v-card-title>{{ post.title }}</v-card-title>
 
-          <Menu :items="items" @onEdit="onEdit" @onDelete="onDelete"></Menu>
+          <Menu
+            :items="items"
+            @onEdit="onEdit"
+            @onDelete="onDelete(post.id)"
+          ></Menu>
         </div>
         <v-card-subtitle>
           <div>보리쌀</div>
@@ -45,10 +49,12 @@ import PostTable from "../components/PostTable.vue";
 import SimplePostList from "../components/SimplePostList.vue";
 import { usePostStore, type IPost, type IPost4List } from "@/stores/post";
 import { computed, inject, onBeforeMount, reactive, ref } from "vue";
-import { onBeforeRouteUpdate, useRoute } from "vue-router";
+import { useRoute } from "vue-router";
 import type { Dayjs } from "dayjs";
 import { useCategoryStore, type ICategory } from "@/stores/category";
 import Menu from "@/components/Menu.vue";
+import router from "@/router";
+const store = usePostStore();
 const items = [
   { title: "수정", onclick: "onEdit" },
   { title: "삭제", onclick: "onDelete" },
@@ -56,7 +62,7 @@ const items = [
 
 const { mobile } = useDisplay();
 const dayjs = inject("dayjs") as Dayjs;
-const post = computed(() => usePostStore().getPost as IPost);
+const post = computed(() => store.getPost as IPost);
 const route = useRoute();
 const categoryId = ref(route.query.categoryId);
 const currentCategory = computed(
@@ -67,15 +73,18 @@ const currentCategory = computed(
 );
 const state: { posts: IPost4List[] } = reactive({ posts: [] });
 function onEdit() {}
-function onDelete() {}
+async function onDelete(id: number) {
+  await store.deletePost(id);
+  router.back();
+}
 
 onBeforeMount(async () => {
   const categoryId = route.query.categoryId;
   if (!state.posts.length) {
-    await usePostStore().fetchPostsByCategory(Number(categoryId));
+    await store.fetchPostsByCategory(Number(categoryId));
   }
-  state.posts = usePostStore().getPosts;
+  state.posts = store.getPosts;
   const postId = route.params.id as string;
-  usePostStore().fetchPost(Number(postId));
+  store.fetchPost(Number(postId));
 });
 </script>

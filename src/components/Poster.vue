@@ -2,7 +2,7 @@
   <v-card min-height="800">
     <v-container class="text-sm-h4 text-h6">글쓰기</v-container>
     <v-divider />
-    <v-container class="d-flex mb-3">
+    <v-container v-if="categories.length" class="d-flex mb-3">
       <select
         v-model="state.categoryId"
         class="pa-2 w-25"
@@ -12,7 +12,7 @@
           categories
         }}
         <option
-          v-for="category in categoryStore.categories"
+          v-for="category in categories"
           :value="category.id"
           :key="category.id"
         >
@@ -44,17 +44,26 @@
   </v-card>
 </template>
 <script setup lang="ts">
-import { reactive, ref } from "vue";
+import { computed, reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { usePostStore } from "../stores/post";
 import { useCategoryStore } from "@/stores/category";
 
 const postStore = usePostStore();
 const categoryStore = useCategoryStore();
-const categories = categoryStore.categories;
 
 const router = useRouter();
-const state = reactive({ categoryId: 1 });
+const categories = computed(() => categoryStore.categories);
+const categoryId = computed({
+  get: () => {
+    return categoryStore.currentCategory.id;
+  },
+  set(v) {
+    categoryStore.setCurrentCategory(v);
+    return v;
+  },
+});
+const state = reactive({ categoryId: categoryId });
 const title = ref("dd");
 const content = ref("dd");
 const post = async () => {
@@ -63,6 +72,6 @@ const post = async () => {
     content: content.value,
     categoryIds: [state.categoryId],
   });
-  router.back();
+  router.push({ name: "PostList", query: { category: state.categoryId } });
 };
 </script>

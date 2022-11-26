@@ -13,16 +13,29 @@ export interface ICategory {
   view: View;
 }
 export const useCategoryStore = defineStore("Category", () => {
-  const state: { categories: ICategory[] } = reactive({
-    categories: [],
-  });
+  const state: { categories: ICategory[]; currentCategory: ICategory } =
+    reactive({
+      categories: [],
+      currentCategory: {} as ICategory,
+    });
   const categories = computed(() => state.categories);
+  const currentCategory = computed(() => state.currentCategory);
 
-  async function fetchCategories() {
+  async function fetchCategories(currentCategoryId?: number) {
     const { data } = await goodAxios.get("category");
 
     state.categories = data;
+    state.currentCategory = getCurrentCategory(
+      currentCategoryId || state.categories[0].id
+    );
   }
-
-  return { categories, fetchCategories };
+  function getCurrentCategory(currentCategoryId: number) {
+    return categories.value.find(
+      (category) => category.id === currentCategoryId
+    ) as ICategory;
+  }
+  function setCurrentCategory(id: number) {
+    state.currentCategory = getCurrentCategory(id);
+  }
+  return { categories, fetchCategories, currentCategory, setCurrentCategory };
 });

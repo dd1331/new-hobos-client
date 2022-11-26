@@ -83,6 +83,10 @@ export const usePostStore = defineStore("Post", () => {
   function resetPosts() {
     state.post = null;
   }
+  async function deletePost(commentId: number) {
+    const { data } = await goodAxios.delete("post/" + commentId);
+  }
+
   return {
     post,
     fetchPosts,
@@ -95,5 +99,6 @@ export const usePostStore = defineStore("Post", () => {
     fetchHomePosts,
     getHomePosts,
     resetPosts,
+    deletePost,
   };
 });
