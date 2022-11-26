@@ -11,6 +11,7 @@
       @click="
         $router.push({
           name: 'Poster',
+          query: { category: currentCategory.id },
         })
       "
       color="primary"

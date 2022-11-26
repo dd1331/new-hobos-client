@@ -22,8 +22,12 @@
       <v-divider></v-divider>
       <v-card-text> {{ post.content }} </v-card-text>
       <div class="d-flex justify-center mb-5">
-        <v-btn class="mx-3" rounded="lg" color="primary"> 좋아요 </v-btn>
-        <v-btn class="mx-3" rounded="lg" color="primary"> 싫어요 </v-btn>
+        <v-btn class="mx-3" rounded="lg" color="primary" size="small">
+          좋아요
+        </v-btn>
+        <v-btn class="mx-3" rounded="lg" color="primary" size="small">
+          싫어요
+        </v-btn>
       </div>
     </v-card>
     <GoodComment v-if="post" :postId="post.id"></GoodComment>
@@ -50,7 +54,7 @@ import PostTable from "../components/PostTable.vue";
 import SimplePostList from "../components/SimplePostList.vue";
 import { usePostStore, type IPost, type IPost4List } from "@/stores/post";
 import { computed, inject, onBeforeMount, reactive, ref } from "vue";
-import { useRoute } from "vue-router";
+import { onBeforeRouteUpdate, useRoute } from "vue-router";
 import type { Dayjs } from "dayjs";
 import { useCategoryStore, type ICategory } from "@/stores/category";
 import Menu from "@/components/Menu.vue";
@@ -69,7 +73,7 @@ const categoryId = ref(route.query.category);
 const currentCategory = computed(
   () =>
     useCategoryStore().categories.find(
-      (category) => category.id === Number(categoryId)
+      (category) => category.id === Number(categoryId.value)
     ) as ICategory
 );
 const state: { posts: IPost4List[] } = reactive({ posts: store.getPosts });
@@ -93,5 +97,9 @@ onBeforeMount(async () => {
   state.posts = store.getPosts;
   const postId = route.params.id as string;
   store.fetchPost(Number(postId));
+});
+onBeforeRouteUpdate(async (to) => {
+  const postId = to.params.id;
+  if (postId) store.fetchPost(Number(postId));
 });
 </script>

@@ -50,16 +50,12 @@ const categoryStore = useCategoryStore();
 
 const router = useRouter();
 const categories = computed(() => categoryStore.categories);
-const categoryId = computed({
-  get: () => {
-    return categoryStore.currentCategory.id;
-  },
-  set(v) {
-    categoryStore.setCurrentCategory(v);
-    return v;
-  },
+
+const state = reactive({
+  categoryId: Number(useRoute().query.category),
+  title: "",
+  content: "",
 });
-const state = reactive({ categoryId: categoryId, title: "", content: "" });
 const registerPost = async () => {
   const post = await postStore.post({
     title: state.title,
@@ -74,14 +70,15 @@ const registerPost = async () => {
 };
 onBeforeMount(async () => {
   postStore.resetPosts();
-  await postStore.fetchPost(Number(useRoute().params.id));
+  const id = useRoute().params.id;
+  if (id) await postStore.fetchPost(Number(id));
   const post = postStore.getPost;
   if (!post) return;
   state.title = post.title;
   state.content = post.title;
 });
 onBeforeRouteLeave(async () => {
-  await postStore.fetchPostsByCategory(categoryId.value);
+  await postStore.fetchPostsByCategory(state.categoryId);
 });
 onMounted(() => {});
 </script>
