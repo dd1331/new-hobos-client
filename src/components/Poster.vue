@@ -8,20 +8,17 @@
         class="pa-2 w-25"
         style="border-radius: 12px; border: 1px solid"
       >
-        {{
-          categories
-        }}
         <option
           v-for="category in categories"
           :value="category.id"
           :key="category.id"
         >
-          title:{{ category.title }} id:{{ category.id }}
+          {{ category.title }}
         </option>
       </select>
       <div class="w-100 ml-1">
         <input
-          v-model="title"
+          v-model="state.title"
           placeholder="제목"
           class="w-100 pa-2 pl-4"
           style="border-radius: 12px; border: 1px solid"
@@ -31,21 +28,20 @@
 
     <v-container>
       <v-textarea
-        v-model="content"
-        label="내용"
+        v-model="state.content"
         variant="outlined"
         hide-details
       ></v-textarea>
     </v-container>
     <v-container class="d-flex justify-center">
-      <v-btn class="ma-2" rounded="lg" @click="post">확인</v-btn>
-      <v-btn class="ma-2" rounded="lg" @click="post">취소</v-btn>
+      <v-btn class="ma-2" rounded="lg" @click="registerPost">확인</v-btn>
+      <v-btn class="ma-2" rounded="lg" @click="$router.back()">취소</v-btn>
     </v-container>
   </v-card>
 </template>
 <script setup lang="ts">
-import { computed, reactive, ref } from "vue";
-import { useRouter } from "vue-router";
+import { computed, onBeforeMount, onMounted, reactive, ref } from "vue";
+import { onBeforeRouteLeave, useRoute, useRouter } from "vue-router";
 import { usePostStore } from "../stores/post";
 import { useCategoryStore } from "@/stores/category";
 
@@ -63,15 +59,29 @@ const categoryId = computed({
     return v;
   },
 });
-const state = reactive({ categoryId: categoryId });
-const title = ref("dd");
-const content = ref("dd");
-const post = async () => {
-  await postStore.post({
-    title: title.value,
-    content: content.value,
+const state = reactive({ categoryId: categoryId, title: "", content: "" });
+const registerPost = async () => {
+  const post = await postStore.post({
+    title: state.title,
+    content: state.content,
     categoryIds: [state.categoryId],
   });
-  router.push({ name: "PostList", query: { category: state.categoryId } });
+  router.push({
+    name: "Post",
+    params: { id: post.id },
+    query: { category: state.categoryId },
+  });
 };
+onBeforeMount(async () => {
+  postStore.resetPosts();
+  await postStore.fetchPost(Number(useRoute().params.id));
+  const post = postStore.getPost;
+  if (!post) return;
+  state.title = post.title;
+  state.content = post.title;
+});
+onBeforeRouteLeave(async () => {
+  await postStore.fetchPostsByCategory(categoryId.value);
+});
+onMounted(() => {});
 </script>

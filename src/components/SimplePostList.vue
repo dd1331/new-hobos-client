@@ -40,7 +40,7 @@
                     $router.push({
                       name: 'Post',
                       params: { id },
-                      query: { categoryId: category.id },
+                      query: { category: category.id },
                     })
                   "
                 >

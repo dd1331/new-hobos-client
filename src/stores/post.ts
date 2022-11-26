@@ -44,7 +44,8 @@ export const usePostStore = defineStore("Post", () => {
   const getPost = computed(() => state.post);
   const getHomePosts = computed(() => state.homePosts);
   async function post(payload: PostPayload) {
-    return goodAxios.post("post", payload);
+    const { data } = await goodAxios.post("post", payload);
+    return data;
   }
   async function fetchPosts() {
     const { data } = await goodAxios.get("post");

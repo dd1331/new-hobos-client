@@ -3,7 +3,6 @@
     <v-card-item>
       <div class="d-flex align-center">
         <v-card-title> 댓글 </v-card-title>
-        {{ content }}
         <div class="ml-3">총 {{ store.getComments.length }}개</div>
       </div>
       <div class="d-flex">
@@ -116,21 +115,22 @@ async function registerComment() {
 
   await store.regsiterComment(payload);
   store.fetchComments(props.postId);
+  clear();
 }
 function onEdit() {
   console.log("dd");
 }
 async function onDelete(id: number) {
-  console.log("🚀 ~ file: GoodComment.vue ~ line 124 ~ onDelete ~ id", id);
   await store.deleteComment(id);
   store.fetchComments(props.postId);
 }
+function clear() {
+  content.value = "";
+}
 onBeforeMount(() => {
-  console.log("onBeforeMount");
   store.fetchComments(props.postId);
 });
 onBeforeUpdate(() => {
-  console.log("onBeforeUpdate");
   store.fetchComments(props.postId);
 });
 </script>

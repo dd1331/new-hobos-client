@@ -13,6 +13,7 @@
         </div>
         <v-card-subtitle>
           <div>보리쌀</div>
+
           <div>
             {{ dayjs(post.createdAt).fromNow() }} ・ 조회 수 4664 ・ 추천 수 15
           </div>
@@ -64,24 +65,30 @@ const { mobile } = useDisplay();
 const dayjs = inject("dayjs") as Dayjs;
 const post = computed(() => store.getPost as IPost);
 const route = useRoute();
-const categoryId = ref(route.query.categoryId);
+const categoryId = ref(route.query.category);
 const currentCategory = computed(
   () =>
     useCategoryStore().categories.find(
       (category) => category.id === Number(categoryId)
     ) as ICategory
 );
-const state: { posts: IPost4List[] } = reactive({ posts: [] });
-function onEdit() {}
+const state: { posts: IPost4List[] } = reactive({ posts: store.getPosts });
+function onEdit() {
+  router.push({
+    name: "Poster",
+    params: { id: post.value.id },
+    query: { category: categoryId.value },
+  });
+}
 async function onDelete(id: number) {
   await store.deletePost(id);
   router.back();
 }
 
 onBeforeMount(async () => {
-  const categoryId = route.query.categoryId;
+  const categoryId = ref(route.query.category);
   if (!state.posts.length) {
-    await store.fetchPostsByCategory(Number(categoryId));
+    await store.fetchPostsByCategory(Number(categoryId.value));
   }
   state.posts = store.getPosts;
   const postId = route.params.id as string;

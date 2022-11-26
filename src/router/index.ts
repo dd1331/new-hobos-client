@@ -26,7 +26,7 @@ const router = createRouter({
       component: PostListView,
     },
     {
-      path: "/poster",
+      path: "/poster/:id?",
       name: "Poster",
       component: Poster,
       meta: { authRequired: true },

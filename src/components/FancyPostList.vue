@@ -52,7 +52,7 @@
                   @click="
                     $router.push({
                       path: '/post/' + post.id,
-                      query: { categoryId: category.id },
+                      query: { category: category.id },
                     })
                   "
                 >
