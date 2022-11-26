@@ -31,7 +31,8 @@ export type registerChildCommentPayload = registerCommentPayload & {
 export const useCommentStore = defineStore("Comment", () => {
   const state: {
     comments: IComment[];
-  } = reactive({ comments: [] });
+    total: number;
+  } = reactive({ comments: [], total: 0 });
 
   async function regsiterComment(payload: registerCommentPayload) {
     const { data } = await goodAxios.post("comment", payload);
@@ -45,7 +46,8 @@ export const useCommentStore = defineStore("Comment", () => {
 
   async function fetchComments(postId: number) {
     const { data } = await goodAxios.get("comment", { params: { postId } });
-    state.comments = data;
+    state.comments = data.comments;
+    state.total = data.total;
   }
   async function deleteComment(commentId: number) {
     const { data } = await goodAxios.delete("comment/" + commentId);
@@ -54,7 +56,10 @@ export const useCommentStore = defineStore("Comment", () => {
     state.comments = [];
   }
 
-  const getComments = computed(() => state.comments);
+  const getComments = computed(() => ({
+    comments: state.comments,
+    total: state.total,
+  }));
 
   return {
     regsiterComment,

@@ -54,6 +54,7 @@ import GoodFooter from "./components/GoodFooter.vue";
 import GoodHeader from "./components/GoodHeader.vue";
 import GoodLogin from "./components/GoodLogin.vue";
 import * as dayjs from "dayjs";
+import "dayjs/locale/ko";
 import relativeTime from "dayjs/plugin/relativeTime";
 
 import { useCategoryStore } from "@/stores/category";
@@ -81,6 +82,7 @@ onBeforeMount(() => {
 
   useCategoryStore().fetchCategories(categoryId);
 });
+dayjs.locale("ko");
 dayjs.extend(relativeTime);
 provide("dayjs", dayjs);
 onErrorCaptured(

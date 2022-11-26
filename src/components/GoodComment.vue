@@ -4,7 +4,7 @@
     <v-card-item>
       <div class="d-flex align-center">
         <v-card-title> 댓글 </v-card-title>
-        <div class="ml-3">총 {{ store.getComments.length }}개</div>
+        <div class="ml-3">총 {{ store.getComments.total }}개</div>
       </div>
 
       <CommentInput @register-comment="registerComment"></CommentInput>
@@ -13,7 +13,7 @@
 
     <v-list>
       <v-list-item
-        v-for="(comment, index) in store.getComments"
+        v-for="(comment, index) in store.getComments.comments"
         :key="comment.id"
         :class="mobile ? 'px-1' : ''"
       >
