@@ -5,26 +5,7 @@
         <div class="d-flex justify-space-between">
           <v-card-title>{{ post.title }}</v-card-title>
 
-          <v-menu>
-            <template v-slot:activator="{ props }">
-              <v-btn
-                icon="mdi-dots-vertical"
-                v-bind="props"
-                style="cursor: pointer"
-              ></v-btn>
-            </template>
-
-            <v-list
-              density="compact"
-              class="pa-0"
-              elevation="2"
-              style="cursor: pointer"
-            >
-              <v-list-item v-for="(item, i) in items" :key="i" class="py-0">
-                <v-list-item-title>{{ item.title }}</v-list-item-title>
-              </v-list-item>
-            </v-list>
-          </v-menu>
+          <Menu :items="items" @onEdit="onEdit" @onDelete="onDelete"></Menu>
         </div>
         <v-card-subtitle>
           <div>보리쌀</div>
@@ -67,11 +48,14 @@ import { computed, inject, onBeforeMount, reactive, ref } from "vue";
 import { onBeforeRouteUpdate, useRoute } from "vue-router";
 import type { Dayjs } from "dayjs";
 import { useCategoryStore, type ICategory } from "@/stores/category";
-import router from "@/router";
+import Menu from "@/components/Menu.vue";
+const items = [
+  { title: "수정", onclick: "onEdit" },
+  { title: "삭제", onclick: "onDelete" },
+];
 
 const { mobile } = useDisplay();
 const dayjs = inject("dayjs") as Dayjs;
-const items = [{ title: "수정" }, { title: "삭제" }];
 const post = computed(() => usePostStore().getPost as IPost);
 const route = useRoute();
 const categoryId = ref(route.query.categoryId);
@@ -82,6 +66,8 @@ const currentCategory = computed(
     ) as ICategory
 );
 const state: { posts: IPost4List[] } = reactive({ posts: [] });
+function onEdit() {}
+function onDelete() {}
 
 onBeforeMount(async () => {
   const categoryId = route.query.categoryId;

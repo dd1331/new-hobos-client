@@ -3,7 +3,7 @@
     <v-list>
       <v-list-item v-for="(post, index) in posts" :key="post.id" class="pa-1">
         <v-container class="py-2">
-          <v-row no-gutters>
+          <v-row>
             <v-col cols="2" sm="1">
               <v-avatar
                 class="border-solid"
@@ -64,11 +64,22 @@
                   </div>
                 </div>
               </div>
+              <v-chip-group v-if="!xs">
+                <v-chip variant="outlined" size="small" class="rounded-xl mr-2">
+                  구직
+                </v-chip>
+                <v-chip variant="outlined" size="small" class="rounded-xl mr-2">
+                  재태크
+                </v-chip>
+                <v-chip variant="outlined" size="small" class="rounded-xl mr-2">
+                  주식
+                </v-chip>
+              </v-chip-group>
             </v-col>
             <v-col cols="10" sm="4" offset="2" :offset-sm="0">
               <v-img
                 v-if="index % 2 === 0"
-                class="rounded-lg"
+                class="rounded-lg mr-0 ml-auto"
                 max-height="300"
                 max-width="300"
                 src="../../src/assets/ship.jpg"
@@ -76,7 +87,7 @@
             </v-col>
           </v-row>
         </v-container>
-        <v-row no-gutters>
+        <v-row v-if="xs">
           <v-col cols="10" offset="2" :offset-sm="1">
             <v-chip-group class="px-2 py-0">
               <v-chip variant="outlined" size="small" class="rounded-xl mr-2">

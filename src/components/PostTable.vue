@@ -3,24 +3,21 @@
     <v-table>
       <thead>
         <tr>
-          <th class="text-left">번호</th>
-          <th class="text-left w-50">제목</th>
-          <th class="text-left">글쓴이</th>
-          <th class="text-left">추천</th>
-          <th class="text-left">비추천</th>
-          <th class="text-left">날짜</th>
-          <th class="text-left">조회</th>
+          <th class="text-left px-3" style="width: 10%">번호</th>
+          <th class="text-left px-3" style="width: 50%">제목</th>
+          <th class="text-left px-3" style="width: 20%">글쓴이</th>
+          <th class="text-left px-3">추천</th>
+          <th class="text-left px-3">비추천</th>
+          <th class="text-left px-3">날짜</th>
+          <th class="text-left px-3">조회</th>
         </tr>
       </thead>
       <tbody>
-        <!-- {{
-        posts
-      }} -->
         <tr
           v-for="{ id, title, createdAt, poster, totalComments } in posts"
           :key="id"
         >
-          <td>{{ id }}</td>
+          <td class="px-3">{{ id }}</td>
 
           <td
             @click="
@@ -30,14 +27,19 @@
                 query: { categoryId: category.id },
               })
             "
+            class="px-3"
             style="cursor: pointer"
           >
             {{ title }}
-            <span style="color: #3493ff" class="font-weight-bold">
+            <span
+              v-if="totalComments"
+              style="color: #3493ff"
+              class="font-weight-bold"
+            >
               ({{ totalComments }})
             </span>
           </td>
-          <td>
+          <td class="px-3">
             <v-avatar size="25px">
               <v-img
                 alt="Avatar"
@@ -46,10 +48,10 @@
             </v-avatar>
             {{ poster.nickname }}
           </td>
-          <td style="color: #ff4a57">98</td>
-          <td>30</td>
-          <td>{{ dayjs(createdAt).fromNow() }}</td>
-          <td>2295</td>
+          <td class="px-3" style="color: #ff4a57">98</td>
+          <td class="px-3">30</td>
+          <td class="px-3">{{ dayjs(createdAt).fromNow() }}</td>
+          <td class="px-3">2295</td>
         </tr>
       </tbody>
     </v-table>

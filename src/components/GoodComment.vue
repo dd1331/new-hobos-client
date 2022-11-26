@@ -18,10 +18,13 @@
       </div>
     </v-card-item>
     <v-divider></v-divider>
-    <v-list>
+    <v-list class="border-solid">
       <v-list-item
-        v-for="({ content, createdAt, commenter }, index) in store.getComments"
+        v-for="(
+          { id, content, createdAt, commenter }, index
+        ) in store.getComments"
         :key="index"
+        :class="mobile ? 'px-1' : ''"
       >
         <div class="d-flex">
           <v-avatar size="36px" class="ma-2">
@@ -30,7 +33,7 @@
               src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
             ></v-img>
           </v-avatar>
-          <div class="">
+          <div class="mr-auto">
             <div class="d-flex align-center">
               <div class="mr-2">
                 {{ commenter.nickname }}
@@ -51,7 +54,7 @@
                 density="comfortable"
                 color="primary"
               >
-                John Leider
+                Leider
               </v-chip>
 
               <v-chip
@@ -60,14 +63,14 @@
                 density="comfortable"
                 color="cyan"
               >
-                New Tweets
+                Tweets
               </v-chip>
             </div>
             <div class="ma-0">
               {{ dayjs(createdAt).fromNow() }}
             </div>
           </div>
-          <!-- <div v-html="content" class="pb-2"></div> -->
+          <Menu :items="items" @onEdit="onEdit" @onDelete="onDelete(id)"></Menu>
         </div>
         <v-container class="py-2">
           {{ content }}
@@ -88,8 +91,14 @@
 
 <script lang="ts" setup>
 import { useCommentStore, type registerCommentPayload } from "@/stores/comment";
-import { inject, onBeforeMount, ref } from "vue";
-
+import { inject, onBeforeMount, onBeforeUpdate, ref } from "vue";
+import { useDisplay } from "vuetify/lib/framework.mjs";
+import Menu from "./Menu.vue";
+const { mobile } = useDisplay();
+const items = [
+  { title: "수정", onclick: "onEdit" },
+  { title: "삭제", onclick: "onDelete" },
+];
 const dayjs = inject("dayjs");
 
 const props = defineProps<{
@@ -108,7 +117,20 @@ async function registerComment() {
   await store.regsiterComment(payload);
   store.fetchComments(props.postId);
 }
+function onEdit() {
+  console.log("dd");
+}
+async function onDelete(id: number) {
+  console.log("🚀 ~ file: GoodComment.vue ~ line 124 ~ onDelete ~ id", id);
+  await store.deleteComment(id);
+  store.fetchComments(props.postId);
+}
 onBeforeMount(() => {
+  console.log("onBeforeMount");
+  store.fetchComments(props.postId);
+});
+onBeforeUpdate(() => {
+  console.log("onBeforeUpdate");
   store.fetchComments(props.postId);
 });
 </script>

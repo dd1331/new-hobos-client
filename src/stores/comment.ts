@@ -26,8 +26,11 @@ export const useCommentStore = defineStore("Comment", () => {
     const { data } = await goodAxios.get("comment", { params: { postId } });
     state.comments = data;
   }
+  async function deleteComment(commentId: number) {
+    const { data } = await goodAxios.delete("comment/" + commentId);
+  }
 
   const getComments = computed(() => state.comments);
 
-  return { regsiterComment, fetchComments, getComments };
+  return { regsiterComment, fetchComments, getComments, deleteComment };
 });
