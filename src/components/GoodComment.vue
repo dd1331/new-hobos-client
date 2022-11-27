@@ -15,7 +15,6 @@
       <v-list-item
         v-for="(comment, index) in store.getComments.comments"
         :key="comment.id"
-        :class="mobile ? 'px-1' : ''"
       >
         <CommentList
           :comment="comment"
@@ -23,14 +22,14 @@
           :postId="postId"
           @toggle-comment-input="toggleCommentInput"
         ></CommentList>
-        <div v-if="comment.id === activeId">
+
+        <div class="mx-1" v-if="comment.id === activeId">
           <CommentInput @register-comment="registerChildComment"></CommentInput>
         </div>
-        <v-list class="ml-12 border-solid">
+        <v-list :class="mobile ? '' : 'ml-12'">
           <v-list-item
             v-for="(childComment, index2) in comment.childComments"
             :key="childComment.id"
-            class="px-0"
           >
             <CommentList
               :comment="childComment"

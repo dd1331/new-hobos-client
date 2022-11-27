@@ -1,8 +1,7 @@
 <template>
-  <div class="d-flex justify-center align-center mb-5">
+  <div class="d-flex justify-center align-center">
     <v-btn
       :icon="liked ? 'mdi-heart' : 'mdi-heart-outline'"
-      rounded="lg"
       size="small"
       variant="text"
       @click="$emit('onLike')"

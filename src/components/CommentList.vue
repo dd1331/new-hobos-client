@@ -7,35 +7,56 @@
       ></v-img>
     </v-avatar>
     <div class="mr-auto">
-      <div class="d-flex align-center">
-        <div class="mr-2">
-          {{ comment.commenter.nickname }}
+      <v-container class="py-0 px-1">
+        <div class="d-flex align-center">
+          <div class="mr-2">
+            {{ comment.commenter.nickname }}
+          </div>
+          <v-chip
+            class="mr-1"
+            size="x-small"
+            color="pink"
+            density="comfortable"
+            text-color="white"
+          >
+            Tags
+          </v-chip>
+
+          <v-chip
+            class="mr-1"
+            size="x-small"
+            density="comfortable"
+            color="primary"
+          >
+            Leider
+          </v-chip>
+
+          <v-chip
+            class="mr-1"
+            size="x-small"
+            density="comfortable"
+            color="cyan"
+          >
+            Tweets
+          </v-chip>
         </div>
-        <v-chip
-          class="mr-1"
-          size="x-small"
-          color="pink"
-          density="comfortable"
-          text-color="white"
+        <div class="ma-0">
+          {{ dayjs(comment.createdAt).fromNow() }}
+        </div>
+        <div>
+          {{ comment.content }}
+        </div>
+      </v-container>
+      <div class="d-flex justify-start ml-n2">
+        <Like @on-like="like" :liked="liked" :totalLikes="totalLikes"></Like>
+        <v-btn
+          v-if="'childComments' in comment"
+          icon="mdi-comment-outline"
+          variant="text"
+          size="small"
+          @click="$emit('toggleCommentInput', comment.id)"
         >
-          Tags
-        </v-chip>
-
-        <v-chip
-          class="mr-1"
-          size="x-small"
-          density="comfortable"
-          color="primary"
-        >
-          Leider
-        </v-chip>
-
-        <v-chip class="mr-1" size="x-small" density="comfortable" color="cyan">
-          Tweets
-        </v-chip>
-      </div>
-      <div class="ma-0">
-        {{ dayjs(comment.createdAt).fromNow() }}
+        </v-btn>
       </div>
     </div>
     <Menu
@@ -44,22 +65,6 @@
       @onEdit="onEdit"
       @onDelete="onDelete(comment.id)"
     ></Menu>
-  </div>
-  <v-container class="py-2">
-    {{ comment.content }}
-  </v-container>
-  <div class="d-flex py-2 justify-start">
-    <Like @on-like="like" :liked="liked" :totalLikes="totalLikes"></Like>
-    <v-btn
-      v-if="'childComments' in comment"
-      class="mx-3"
-      color="primary"
-      rounded="lg"
-      size="small"
-      @click="$emit('toggleCommentInput', comment.id)"
-    >
-      댓글
-    </v-btn>
   </div>
   <v-divider class="my-2"></v-divider>
 </template>
