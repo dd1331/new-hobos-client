@@ -69,6 +69,7 @@ export const useUserStore = defineStore("User", () => {
     state.tokens = null;
     state.user = null;
     localStorage.clear();
+    goodAxios.interceptors.request.clear();
   }
   return {
     count,

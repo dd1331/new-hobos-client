@@ -6,13 +6,14 @@
           <v-card-title>{{ post.title }}</v-card-title>
 
           <Menu
+            v-if="post.poster.id === useUserStore().getUser?.id"
             :items="items"
             @onEdit="onEdit"
             @onDelete="onDelete(post.id)"
           ></Menu>
         </div>
         <v-card-subtitle>
-          <div>보리쌀</div>
+          <div>{{ post.poster.nickname }}</div>
 
           <div>
             {{ dayjs(post.createdAt).fromNow() }} ・ 조회 수 4664 ・ 추천 수 15
@@ -59,7 +60,9 @@ import type { Dayjs } from "dayjs";
 import { useCategoryStore, type ICategory } from "@/stores/category";
 import Menu from "@/components/Menu.vue";
 import router from "@/router";
+import { useUserStore } from "@/stores/user";
 const store = usePostStore();
+
 const items = [
   { title: "수정", onclick: "onEdit" },
   { title: "삭제", onclick: "onDelete" },

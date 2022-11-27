@@ -8,12 +8,17 @@ type PostPayload = {
   content: string;
   categoryIds: [number];
 };
+interface IPoster {
+  nickname: string;
+  id: number;
+}
+
 export interface IPost4List {
   id: number;
   title: string;
   content?: string;
   createdAt: Date;
-  poster: { nickname: string };
+  poster: IPoster;
   totalComments: number;
 }
 export interface IPost4HomeList {
@@ -25,7 +30,7 @@ export interface IPost {
   title: string;
   content: string;
   createdAt: Date;
-  updatedAt: Date;
+  poster: IPoster;
 }
 export const usePostStore = defineStore("Post", () => {
   const state: {

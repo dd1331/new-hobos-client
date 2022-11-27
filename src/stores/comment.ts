@@ -4,6 +4,7 @@ import goodAxios from "../common/good-axios";
 
 interface ICommenter {
   nickname: string;
+  id: number;
 }
 
 export interface IChildComment {

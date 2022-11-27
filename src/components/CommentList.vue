@@ -39,6 +39,7 @@
       </div>
     </div>
     <Menu
+      v-if="comment.commenter.id === useUserStore().getUser?.id"
       :items="items"
       @onEdit="onEdit"
       @onDelete="onDelete(comment.id)"
@@ -74,9 +75,9 @@ import {
   type IChildComment,
   type IComment,
 } from "@/stores/comment";
+import { useUserStore } from "@/stores/user";
 import { inject } from "vue";
 import Menu from "./Menu.vue";
-
 const store = useCommentStore();
 const dayjs = inject("dayjs");
 defineEmits(["toggleCommentInput"]);
