@@ -12,6 +12,8 @@ export interface IChildComment {
   createdAt: Date;
   content: string;
   commenter: ICommenter;
+  liked: number;
+  totalLikes: number;
 }
 
 export interface IComment {
@@ -20,6 +22,8 @@ export interface IComment {
   content: string;
   commenter: ICommenter;
   childComments: IChildComment[];
+  liked: number;
+  totalLikes: number;
 }
 
 export type registerCommentPayload = {

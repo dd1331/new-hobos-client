@@ -48,13 +48,8 @@
   <v-container class="py-2">
     {{ comment.content }}
   </v-container>
-  <div class="d-flex py-2 justify-center">
-    <v-btn class="mx-3" color="primary" rounded="lg" size="small">
-      좋아요
-    </v-btn>
-    <v-btn class="mx-3" color="primary" rounded="lg" size="small">
-      싫어요
-    </v-btn>
+  <div class="d-flex py-2 justify-start">
+    <Like @on-like="like" :liked="liked" :totalLikes="totalLikes"></Like>
     <v-btn
       v-if="'childComments' in comment"
       class="mx-3"
@@ -75,12 +70,21 @@ import {
   type IChildComment,
   type IComment,
 } from "@/stores/comment";
+import Like from "@/components/Like.vue";
+import { useLikeStore } from "@/stores/like";
 import { useUserStore } from "@/stores/user";
-import { inject } from "vue";
+import { inject, ref } from "vue";
 import Menu from "./Menu.vue";
 const store = useCommentStore();
 const dayjs = inject("dayjs");
 defineEmits(["toggleCommentInput"]);
+function like() {
+  const id = props.comment.id;
+  useLikeStore().likeComment(id);
+  if (liked.value) totalLikes.value -= 1;
+  if (!liked.value) totalLikes.value += 1;
+  liked.value = !liked.value;
+}
 
 function onEdit() {
   console.log("dd");
@@ -90,6 +94,8 @@ const props = defineProps<{
   index: number;
   postId: number;
 }>();
+const totalLikes = ref(props.comment.totalLikes);
+const liked = ref(!!props.comment.liked);
 
 async function onDelete(id: number) {
   await store.deleteComment(id);
