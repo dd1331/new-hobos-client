@@ -20,6 +20,7 @@
             poster,
             totalComments,
             totalLikes,
+            views,
           } in posts"
           :key="id"
         >
@@ -56,7 +57,7 @@
           </td>
           <td class="px-3" style="color: #ff4a57">{{ totalLikes }}</td>
           <td class="px-3">{{ dayjs(createdAt).fromNow() }}</td>
-          <td class="px-3">2295</td>
+          <td class="px-3">{{ views }}</td>
         </tr>
       </tbody>
     </v-table>

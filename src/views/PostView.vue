@@ -16,7 +16,9 @@
           <div>{{ post.poster.nickname }}</div>
 
           <div>
-            {{ dayjs(post.createdAt).fromNow() }} ・ 조회 수 4664 ・ 추천 수 15
+            {{ dayjs(post.createdAt).fromNow() }} ・ 조회 수 {{ post.views }} ・
+            추천 수
+            {{ post.totalLikes }}
           </div>
         </v-card-subtitle>
       </v-card-item>

@@ -21,6 +21,7 @@ export interface IPost4List {
   poster: IPoster;
   totalLikes: number;
   totalComments: number;
+  views: number;
 }
 export interface IPost4HomeList {
   posts: IPost4List[];
@@ -34,6 +35,7 @@ export interface IPost {
   poster: IPoster;
   totalLikes: number;
   liked: boolean;
+  views: number;
 }
 export const usePostStore = defineStore("Post", () => {
   const state: {

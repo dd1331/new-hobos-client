@@ -4,7 +4,7 @@
       hide-details
       variant="outlined"
       auto-grow
-      rows="1"
+      :rows="2"
       color="primary"
       density="compact"
       v-model="content"

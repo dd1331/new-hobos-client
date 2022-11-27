@@ -2,7 +2,7 @@
   <v-card>
     <v-list>
       <v-list-item v-for="(post, index) in posts" :key="post.id" class="pa-1">
-        <v-container class="py-2">
+        <v-container :class="mobile ? 'py-2' : ''">
           <v-row>
             <v-col cols="2" sm="1">
               <v-avatar
@@ -104,10 +104,22 @@
         </v-row>
         <v-row no-gutters>
           <v-col cols="10" offset="2" :offset-sm="1">
-            <v-btn size="small" rounded="lg" variant="text">좋아요</v-btn>
-            <span class="text-overline">{{ post.totalLikes }}</span>
-            <v-btn size="small" rounded="lg" variant="text">댓글</v-btn>
-            <span class="text-overline">{{ post.totalComments }}</span>
+            <div class="d-flex align-center">
+              <v-btn
+                size="small"
+                rounded="lg"
+                variant="text"
+                icon="mdi-heart"
+              ></v-btn>
+              <span class="text-overline">{{ post.totalLikes }}</span>
+              <v-btn
+                size="small"
+                rounded="lg"
+                variant="text"
+                icon="mdi-comment-outline"
+              ></v-btn>
+              <span class="text-overline">{{ post.totalComments }}</span>
+            </div>
           </v-col>
         </v-row>
         <v-divider v-if="posts.length !== index + 1" class="my-3"></v-divider>
@@ -130,7 +142,7 @@ import type { IPost4List } from "@/stores/post";
 import { inject, ref } from "vue";
 import { useDisplay } from "vuetify/lib/framework.mjs";
 const dayjs = inject("dayjs");
-const { xs } = useDisplay();
+const { xs, mobile } = useDisplay();
 defineProps<{
   posts: IPost4List[];
   category: ICategory;
