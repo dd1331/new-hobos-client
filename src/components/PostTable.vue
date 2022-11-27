@@ -7,14 +7,20 @@
           <th class="text-left px-3" style="width: 50%">제목</th>
           <th class="text-left px-3" style="width: 20%">글쓴이</th>
           <th class="text-left px-3">추천</th>
-          <th class="text-left px-3">비추천</th>
           <th class="text-left px-3">날짜</th>
           <th class="text-left px-3">조회</th>
         </tr>
       </thead>
       <tbody>
         <tr
-          v-for="{ id, title, createdAt, poster, totalComments } in posts"
+          v-for="{
+            id,
+            title,
+            createdAt,
+            poster,
+            totalComments,
+            totalLikes,
+          } in posts"
           :key="id"
         >
           <td class="px-3">{{ id }}</td>
@@ -48,8 +54,7 @@
             </v-avatar>
             {{ poster.nickname }}
           </td>
-          <td class="px-3" style="color: #ff4a57">98</td>
-          <td class="px-3">30</td>
+          <td class="px-3" style="color: #ff4a57">{{ totalLikes }}</td>
           <td class="px-3">{{ dayjs(createdAt).fromNow() }}</td>
           <td class="px-3">2295</td>
         </tr>

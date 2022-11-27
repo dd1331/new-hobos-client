@@ -19,6 +19,7 @@ export interface IPost4List {
   content?: string;
   createdAt: Date;
   poster: IPoster;
+  totalLikes: number;
   totalComments: number;
 }
 export interface IPost4HomeList {

@@ -35,12 +35,13 @@
       v-if="mobile"
       :pagination="true"
       :category="currentCategory"
-      :posts="state.posts"
+      :posts="posts"
     ></SimplePostList>
     <PostTable
       v-else
-      :posts="state.posts"
+      :posts="posts"
       :category="currentCategory"
+      @on-page-clicked="onPageClicked"
     ></PostTable>
   </div>
 </template>
@@ -51,8 +52,8 @@ import GoodCategory from "../components/GoodCategory.vue";
 import GoodComment from "../components/GoodComment.vue";
 import PostTable from "../components/PostTable.vue";
 import SimplePostList from "../components/SimplePostList.vue";
-import { usePostStore, type IPost, type IPost4List } from "@/stores/post";
-import { computed, inject, onBeforeMount, reactive, ref } from "vue";
+import { usePostStore, type IPost } from "@/stores/post";
+import { computed, inject, onBeforeMount, ref } from "vue";
 import { onBeforeRouteUpdate, useRoute } from "vue-router";
 import type { Dayjs } from "dayjs";
 import { useCategoryStore, type ICategory } from "@/stores/category";
@@ -62,6 +63,9 @@ import Like from "@/components/Like.vue";
 import { useUserStore } from "@/stores/user";
 import { useLikeStore } from "@/stores/like";
 const store = usePostStore();
+function onPageClicked(page: number) {
+  store.fetchPostsByCategory(currentCategory.value.id, page);
+}
 
 const items = [
   { title: "수정", onclick: "onEdit" },
@@ -79,7 +83,7 @@ const currentCategory = computed(
       (category) => category.id === Number(categoryId.value)
     ) as ICategory
 );
-const state: { posts: IPost4List[] } = reactive({ posts: store.getPosts });
+const posts = computed(() => store.getPosts);
 function onEdit() {
   router.push({
     name: "Poster",
@@ -102,10 +106,9 @@ function like() {
 
 onBeforeMount(async () => {
   const categoryId = ref(route.query.category);
-  if (!state.posts.length) {
+  if (!posts.value.length) {
     await store.fetchPostsByCategory(Number(categoryId.value));
   }
-  state.posts = store.getPosts;
   const postId = route.params.id as string;
   store.fetchPost(Number(postId));
 });

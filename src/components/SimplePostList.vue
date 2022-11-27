@@ -20,7 +20,7 @@
       <v-list lines="one">
         <v-list-item
           v-for="(
-            { title, id, createdAt, poster, totalComments }, index
+            { title, id, createdAt, poster, totalComments, totalLikes }, index
           ) in posts"
           :key="id"
         >
@@ -50,7 +50,7 @@
                 <div class="d-flex align-center">
                   {{ poster.nickname }} {{ dayjs(createdAt).fromNow() }}
                   <v-icon size="13" color="red">mdi-heart</v-icon>
-                  11
+                  {{ totalLikes }}
                 </div>
               </div>
             </div>

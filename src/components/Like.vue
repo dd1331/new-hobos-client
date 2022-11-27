@@ -4,6 +4,7 @@
       :icon="liked ? 'mdi-heart' : 'mdi-heart-outline'"
       size="small"
       variant="text"
+      color="red"
       @click="$emit('onLike')"
     >
     </v-btn>

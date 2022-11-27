@@ -105,7 +105,7 @@
         <v-row no-gutters>
           <v-col cols="10" offset="2" :offset-sm="1">
             <v-btn size="small" rounded="lg" variant="text">좋아요</v-btn>
-            <span class="text-overline">54</span>
+            <span class="text-overline">{{ post.totalLikes }}</span>
             <v-btn size="small" rounded="lg" variant="text">댓글</v-btn>
             <span class="text-overline">{{ post.totalComments }}</span>
           </v-col>
