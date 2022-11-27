@@ -31,6 +31,8 @@ export interface IPost {
   content: string;
   createdAt: Date;
   poster: IPoster;
+  totalLikes: number;
+  liked: boolean;
 }
 export const usePostStore = defineStore("Post", () => {
   const state: {

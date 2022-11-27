@@ -22,14 +22,12 @@
       </v-card-item>
       <v-divider></v-divider>
       <v-card-text> {{ post.content }} </v-card-text>
-      <div class="d-flex justify-center mb-5">
-        <v-btn class="mx-3" rounded="lg" color="primary" size="small">
-          좋아요
-        </v-btn>
-        <v-btn class="mx-3" rounded="lg" color="primary" size="small">
-          싫어요
-        </v-btn>
-      </div>
+
+      <Like
+        :liked="post.liked"
+        @on-like="like"
+        :totalLikes="post.totalLikes"
+      ></Like>
     </v-card>
     <GoodComment v-if="post" :postId="post.id"></GoodComment>
     <GoodCategory class="mt-5"></GoodCategory>
@@ -60,7 +58,9 @@ import type { Dayjs } from "dayjs";
 import { useCategoryStore, type ICategory } from "@/stores/category";
 import Menu from "@/components/Menu.vue";
 import router from "@/router";
+import Like from "@/components/Like.vue";
 import { useUserStore } from "@/stores/user";
+import { useLikeStore } from "@/stores/like";
 const store = usePostStore();
 
 const items = [
@@ -90,6 +90,14 @@ function onEdit() {
 async function onDelete(id: number) {
   await store.deletePost(id);
   router.back();
+}
+function like() {
+  const id = post.value.id;
+  useLikeStore().likePost(id);
+  const liked = post.value.liked;
+  if (liked) post.value.totalLikes -= 1;
+  if (!liked) post.value.totalLikes += 1;
+  post.value.liked = !liked;
 }
 
 onBeforeMount(async () => {
