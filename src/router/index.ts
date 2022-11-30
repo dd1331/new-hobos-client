@@ -7,6 +7,7 @@ import PostView from "../views/PostView.vue";
 
 import { useUserStore } from "../stores/user";
 import { UNAUTHORIZED } from "../constants";
+import Profile from "../components/Profile.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -36,6 +37,7 @@ const router = createRouter({
       name: "Signup",
       component: Signup,
     },
+    { path: "/profile", name: "Profile", component: Profile },
     {
       path: "/about",
       name: "about",

@@ -55,7 +55,13 @@
                 {{ userStore.getUser.email }}
               </p>
               <v-divider></v-divider>
-              <v-btn rounded variant="text"> 내정보 </v-btn>
+              <v-btn
+                rounded
+                variant="text"
+                @click="$router.push({ name: 'Profile' })"
+              >
+                내정보
+              </v-btn>
               <v-divider></v-divider>
               <v-btn rounded variant="text" @click="logout"> 로그아웃 </v-btn>
             </div>
