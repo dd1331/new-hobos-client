@@ -20,6 +20,7 @@ type User = {
   id: number;
   nickname: string;
   email: string;
+  career: { job: { title: string }; year: number };
 };
 export const useUserStore = defineStore("User", () => {
   const count = ref(0);

@@ -4,20 +4,26 @@
       <v-container>
         <v-row>
           <v-col :cols="mobile ? 12 : 8" :order="mobile ? 2 : ''">
-            이메일
+            이메일{{ email }}
             <v-text-field
-              v-model="firstname"
+              v-model="email"
               :rules="nameRules"
               :counter="10"
               required
             ></v-text-field>
             닉네임
             <v-text-field
-              v-model="lastname"
+              v-model="nickname"
               :rules="nameRules"
               :counter="10"
               required
             ></v-text-field>
+            <v-select
+              label="Select"
+              v-model="job"
+              :items="store.getJobs.map((j) => j.title)"
+              variant="solo"
+            ></v-select>
           </v-col>
 
           <v-col :cols="mobile ? 12 : 4" order="1" class="text-center">
@@ -43,8 +49,10 @@
   </v-card>
 </template>
 <script lang="ts" setup>
-import { ref } from "vue";
+import { onBeforeMount, ref } from "vue";
 import { useDisplay } from "vuetify/lib/framework.mjs";
+import { useJobStore } from "@/stores/job";
+import { useUserStore } from "@/stores/user";
 
 function onchange() {
   const [imageFile] = image.value.files;
@@ -52,11 +60,14 @@ function onchange() {
 }
 
 const image = ref();
+const store = useJobStore();
+const job = ref("");
+const userStore = useUserStore();
 
 const valid = false;
 const firstname = "";
-const lastname = "";
-const email = "";
+const nickname = ref();
+const email = ref();
 const nameRules = [
   (v) => !!v || "Name is required",
   (v) => v.length <= 10 || "Name must be less than 10 characters",
@@ -66,4 +77,11 @@ const emailRules = [
   (v) => /.+@.+/.test(v) || "E-mail must be valid",
 ];
 const { mobile } = useDisplay();
+
+onBeforeMount(async () => {
+  await store.fetchJobs();
+  job.value = userStore.getUser?.career.job.title as string;
+  email.value = userStore.getUser?.email as string;
+  nickname.value = userStore.getUser?.nickname as string;
+});
 </script>
