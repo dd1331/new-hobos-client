@@ -2,23 +2,20 @@ import * as qs from "qs";
 import { defineStore } from "pinia";
 import { computed, reactive } from "vue";
 import goodAxios from "../common/good-axios";
+import type { User } from "./user";
 
 type PostPayload = {
   title: string;
   content: string;
   categoryIds: [number];
 };
-interface IPoster {
-  nickname: string;
-  id: number;
-}
 
 export interface IPost4List {
   id: number;
   title: string;
   content?: string;
   createdAt: Date;
-  poster: IPoster;
+  poster: User;
   totalLikes: number;
   totalComments: number;
   views: number;
@@ -32,7 +29,7 @@ export interface IPost {
   title: string;
   content: string;
   createdAt: Date;
-  poster: IPoster;
+  poster: User;
   totalLikes: number;
   liked: boolean;
   views: number;

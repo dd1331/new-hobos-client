@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card variant="flat">
     <v-list>
       <v-list-item v-for="(post, index) in posts" :key="post.id" class="pa-1">
         <v-container :class="mobile ? 'py-2' : ''">
@@ -12,47 +12,36 @@
               ></v-avatar>
             </v-col>
 
-            <v-col cols="10" sm="7">
-              <div class="pa-0">
+            <v-col cols="10" sm="7" style="cursor: pointer">
+              <div class="pa-0" @click="push(post.id, category.id)">
                 <div class="d-flex align-center">
                   <div class="mr-2">{{ post.poster.nickname }}</div>
 
                   <div v-if="post.poster.career">
-                    <v-chip
+                    <GoodChip
                       class="mr-1"
-                      size="x-small"
                       color="pink"
-                      density="comfortable"
-                      text-color="white"
+                      :content="post.poster.career.job.title"
                     >
                       {{ post.poster.career.job.title }}
-                    </v-chip>
+                    </GoodChip>
 
-                    <v-chip
+                    <GoodChip
                       class="mr-1"
-                      size="x-small"
-                      density="comfortable"
                       color="primary"
+                      :content="post.poster.career.year + '년차'"
                     >
-                      {{ post.poster.career.year }}년차
-                    </v-chip>
+                    </GoodChip>
                   </div>
                 </div>
                 <div class="text-caption">
                   {{ dayjs(post.createdAt).fromNow() }}
                 </div>
-                <div
-                  @click="
-                    $router.push({
-                      path: '/post/' + post.id,
-                      query: { category: category.id },
-                    })
-                  "
-                >
-                  <div class="text-h6">
+                <div @click="push(post.id, category.id)">
+                  <div class="font-weight-bold text-truncate">
                     {{ post.title }}
                   </div>
-                  <div class="text-body-1">
+                  <div class="text-body-1 two-lines">
                     {{ post.content }}
                   </div>
                 </div>
@@ -71,11 +60,13 @@
             </v-col>
             <v-col cols="10" sm="4" offset="2" :offset-sm="0">
               <v-img
+                @click="push(post.id, category.id)"
                 v-if="index % 2 === 0"
                 class="rounded-lg mr-0 ml-auto"
                 max-height="300"
                 max-width="300"
                 src="../../src/assets/ship.jpg"
+                style="cursor: pointer"
               ></v-img>
             </v-col>
           </v-row>
@@ -98,20 +89,24 @@
         <v-row no-gutters>
           <v-col cols="10" offset="2" :offset-sm="1">
             <div class="d-flex align-center">
-              <v-btn
-                size="small"
-                rounded="lg"
-                variant="text"
-                icon="mdi-heart"
-              ></v-btn>
-              <span class="text-overline">{{ post.totalLikes }}</span>
-              <v-btn
-                size="small"
-                rounded="lg"
-                variant="text"
-                icon="mdi-comment-outline"
-              ></v-btn>
-              <span class="text-overline">{{ post.totalComments }}</span>
+              <div style="cursor: pointer" @click="push(post.id, category.id)">
+                <v-btn
+                  size="small"
+                  rounded="lg"
+                  variant="text"
+                  icon="mdi-heart"
+                ></v-btn>
+                <span class="text-overline">{{ post.totalLikes }}</span>
+              </div>
+              <div style="cursor: pointer" @click="push(post.id, category.id)">
+                <v-btn
+                  size="small"
+                  rounded="lg"
+                  variant="text"
+                  icon="mdi-comment-outline"
+                ></v-btn>
+                <span class="text-overline">{{ post.totalComments }}</span>
+              </div>
             </div>
           </v-col>
         </v-row>
@@ -133,7 +128,9 @@
 import type { ICategory } from "@/stores/category";
 import type { IPost4List } from "@/stores/post";
 import { inject, ref } from "vue";
+import { useRouter } from "vue-router";
 import { useDisplay } from "vuetify/lib/framework.mjs";
+import GoodChip from "./GoodChip.vue";
 const dayjs = inject("dayjs");
 const { xs, mobile } = useDisplay();
 defineProps<{
@@ -146,4 +143,21 @@ function clicked() {
   emit("onPageClicked", page.value);
   window.scrollTo(0, 0);
 }
+const router = useRouter();
+function push(postId: number, categoryId: number) {
+  router.push({
+    path: "/post/" + postId,
+    query: { category: categoryId },
+  });
+}
 </script>
+<style>
+.two-lines {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  white-space: normal;
+}
+</style>

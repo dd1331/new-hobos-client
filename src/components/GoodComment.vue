@@ -1,6 +1,6 @@
 })
 <template>
-  <v-card class="my-1">
+  <v-card class="my-1" variant="flat">
     <v-card-item>
       <div class="d-flex align-center">
         <v-card-title> 댓글 </v-card-title>

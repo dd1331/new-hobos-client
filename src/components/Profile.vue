@@ -1,17 +1,21 @@
 <template>
-  <v-card>
+  <v-card variant="flat">
     <v-form v-model="valid">
       <v-container>
         <v-row>
           <v-col :cols="mobile ? 12 : 8" :order="mobile ? 2 : ''">
             이메일
             <v-text-field
+              variant="outlined"
+              density="compact"
               v-model="email"
               :rules="nameRules"
               readonly
             ></v-text-field>
             닉네임
             <v-text-field
+              variant="outlined"
+              density="compact"
               v-model="nickname"
               :rules="nameRules"
               :counter="10"
@@ -21,11 +25,17 @@
             <v-select
               v-model="job"
               :items="jobStore.getJobs.map((j) => j.title)"
-              variant="solo"
+              variant="outlined"
+              density="compact"
             ></v-select>
             경력
-            <v-select v-model="year" :items="years" variant="solo"></v-select>
-            <v-btn rounded="lg" @click="edit">수정</v-btn>
+            <v-select
+              v-model="year"
+              :items="years"
+              variant="outlined"
+              density="compact"
+            ></v-select>
+            <v-btn rounded="lg" @click="edit" variant="flat">수정</v-btn>
           </v-col>
 
           <v-col :cols="mobile ? 12 : 4" order="1" class="text-center">

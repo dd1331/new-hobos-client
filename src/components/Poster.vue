@@ -1,5 +1,5 @@
 <template>
-  <v-card min-height="800">
+  <v-card min-height="800" variant="flat">
     <v-container class="text-sm-h4 text-h6">글쓰기</v-container>
     <v-divider />
     <v-container v-if="categories.length" class="d-flex mb-3">
@@ -34,8 +34,12 @@
       ></v-textarea>
     </v-container>
     <v-container class="d-flex justify-center">
-      <v-btn class="ma-2" rounded="lg" @click="registerPost">확인</v-btn>
-      <v-btn class="ma-2" rounded="lg" @click="$router.back()">취소</v-btn>
+      <v-btn variant="flat" class="ma-2" rounded="lg" @click="registerPost"
+        >확인</v-btn
+      >
+      <v-btn variant="flat" class="ma-2" rounded="lg" @click="$router.back()"
+        >취소</v-btn
+      >
     </v-container>
   </v-card>
 </template>

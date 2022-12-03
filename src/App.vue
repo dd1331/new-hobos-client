@@ -95,7 +95,7 @@ onErrorCaptured(
 <style>
 @font-face {
   font-family: "NanumSquare";
-  src: url(../fonts/NaverNanumSquare/NanumFontSetup_TTF_SQUARE/NanumSquare_acB.ttf)
+  src: url(../fonts/NaverNanumSquareNeo/TTF/NanumSquareNeo-cBd.ttf)
     format("woff");
   font-weight: normal;
   font-style: normal;

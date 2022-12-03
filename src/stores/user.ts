@@ -16,7 +16,7 @@ type Tokens = {
   accessToken: string;
   refreshToken: string;
 };
-type User = {
+export type User = {
   id: number;
   nickname: string;
   email: string;

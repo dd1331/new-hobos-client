@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card v-if="category" class="rounded-lg">
+    <v-card v-if="category" variant="flat">
       <div class="d-flex justify-space-between align-center">
         <div class="text-h6 mx-4 my-1 pa-1">{{ category.title }}</div>
         <v-btn
@@ -26,7 +26,7 @@
           :key="id"
         >
           <div style="cursor: pointer">
-            <div class="" :class="thumbnail ? 'd-flex align-center' : ''">
+            <div :class="thumbnail ? 'd-flex align-center' : ''">
               <v-img
                 v-if="thumbnail"
                 class="mr-2 rounded-lg"
@@ -36,7 +36,7 @@
               ></v-img>
               <div>
                 <div
-                  class="mr-2"
+                  class="mr-2 text-truncate"
                   @click="
                     $router.push({
                       name: 'Post',

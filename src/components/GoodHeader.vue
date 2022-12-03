@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar :elevation="2" class="px-4 py-0">
+  <v-app-bar class="px-4" elevation="1">
     <v-navigation-drawer v-if="false" app> </v-navigation-drawer>
     <div @click="$router.push('/')" class="w-25">
       <img

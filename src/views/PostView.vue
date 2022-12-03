@@ -1,48 +1,43 @@
 <template>
   <div>
-    <v-card v-if="post" class="my-1">
+    <v-card v-if="post" class="my-1" variant="flat">
       <v-card-item>
-        <div class="d-flex justify-space-between">
-          <v-card-title>{{ post.title }}</v-card-title>
+        <!-- <div class="d-flex justify-space-between border-solid"> -->
+        <v-row>
+          <v-col cols="11" sm="11">
+            <v-card-title class="">{{ post.title }}</v-card-title>
+            <v-card-subtitle>
+              <div class="d-flex">
+                {{ post.poster.nickname }}
+                <div v-if="post.poster.career">
+                  <GoodChip
+                    :content="post.poster.career.job.title"
+                    color="pink"
+                  ></GoodChip>
+                  <GoodChip
+                    :content="post.poster.career.year + '년차'"
+                    color="primary"
+                  ></GoodChip>
+                </div>
+              </div>
 
-          <Menu
-            v-if="post.poster.id === useUserStore().getUser?.id"
-            :items="items"
-            @onEdit="onEdit"
-            @onDelete="onDelete(post.id)"
-          ></Menu>
-        </div>
-        <v-card-subtitle>
-          <div class="d-flex">
-            {{ post.poster.nickname }}
-            <div v-if="post.poster.career">
-              <v-chip
-                class="mr-1"
-                size="x-small"
-                color="pink"
-                density="comfortable"
-                text-color="white"
-              >
-                {{ post.poster.career.job.title }}
-              </v-chip>
-
-              <v-chip
-                class="mr-1"
-                size="x-small"
-                density="comfortable"
-                color="primary"
-              >
-                {{ post.poster.career.year }}년차
-              </v-chip>
-            </div>
-          </div>
-
-          <div>
-            {{ dayjs(post.createdAt).fromNow() }} ・ 조회 수 {{ post.views }} ・
-            추천 수
-            {{ post.totalLikes }}
-          </div>
-        </v-card-subtitle>
+              <div>
+                {{ dayjs(post.createdAt).fromNow() }} ・ 조회 수
+                {{ post.views }} ・ 추천 수
+                {{ post.totalLikes }}
+              </div>
+            </v-card-subtitle>
+          </v-col>
+          <v-col cols="1" sm="1">
+            <Menu
+              v-if="post.poster.id === useUserStore().getUser?.id"
+              :items="items"
+              @onEdit="onEdit"
+              @onDelete="onDelete(post.id)"
+            ></Menu>
+          </v-col>
+        </v-row>
+        <!-- </div> -->
       </v-card-item>
       <v-divider></v-divider>
       <v-card-text> {{ post.content }} </v-card-text>
@@ -75,6 +70,7 @@ import { useDisplay } from "vuetify";
 import GoodCategory from "../components/GoodCategory.vue";
 import GoodComment from "../components/GoodComment.vue";
 import PostTable from "../components/PostTable.vue";
+import GoodChip from "@/components/GoodChip.vue";
 import SimplePostList from "../components/SimplePostList.vue";
 import { usePostStore, type IPost } from "@/stores/post";
 import { computed, inject, onBeforeMount, ref } from "vue";
