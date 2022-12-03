@@ -13,26 +13,28 @@
           ></Menu>
         </div>
         <v-card-subtitle>
-          <div>
+          <div class="d-flex">
             {{ post.poster.nickname }}
-            <v-chip
-              class="mr-1"
-              size="x-small"
-              color="pink"
-              density="comfortable"
-              text-color="white"
-            >
-              {{ post.poster.career.job.title }}
-            </v-chip>
+            <div v-if="post.poster.career">
+              <v-chip
+                class="mr-1"
+                size="x-small"
+                color="pink"
+                density="comfortable"
+                text-color="white"
+              >
+                {{ post.poster.career.job.title }}
+              </v-chip>
 
-            <v-chip
-              class="mr-1"
-              size="x-small"
-              density="comfortable"
-              color="primary"
-            >
-              {{ post.poster.career.year }}년차
-            </v-chip>
+              <v-chip
+                class="mr-1"
+                size="x-small"
+                density="comfortable"
+                color="primary"
+              >
+                {{ post.poster.career.year }}년차
+              </v-chip>
+            </div>
           </div>
 
           <div>

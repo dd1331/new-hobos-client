@@ -12,24 +12,26 @@
           <div class="mr-2">
             {{ comment.commenter.nickname }}
           </div>
-          <v-chip
-            class="mr-1"
-            size="x-small"
-            color="pink"
-            density="comfortable"
-            text-color="white"
-          >
-            {{ comment.commenter.career.job.title }}
-          </v-chip>
+          <div v-if="comment.commenter.career">
+            <v-chip
+              class="mr-1"
+              size="x-small"
+              color="pink"
+              density="comfortable"
+              text-color="white"
+            >
+              {{ comment.commenter.career.job.title }}
+            </v-chip>
 
-          <v-chip
-            class="mr-1"
-            size="x-small"
-            density="comfortable"
-            color="primary"
-          >
-            {{ comment.commenter.career.year }}년차
-          </v-chip>
+            <v-chip
+              class="mr-1"
+              size="x-small"
+              density="comfortable"
+              color="primary"
+            >
+              {{ comment.commenter.career.year }}년차
+            </v-chip>
+          </div>
         </div>
         <div class="ma-0">
           {{ dayjs(comment.createdAt).fromNow() }}

@@ -1,5 +1,5 @@
 <template>
-  <v-app class="bg-grey-lighten-4">
+  <v-app class="bg-grey-lighten-4 App">
     <GoodHeader @hide-login="toggleLogin"></GoodHeader>
     <v-layout v-if="mobile" style="z-index: 0" class="mt-6">
       <!-- Sizes your content based upon application components -->
@@ -92,6 +92,18 @@ onErrorCaptured(
   }
 );
 </script>
+<style>
+@font-face {
+  font-family: "NanumSquare";
+  src: url(../fonts/NaverNanumSquare/NanumFontSetup_TTF_SQUARE/NanumSquare_acB.ttf)
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+.App {
+  font-family: NanumSquare;
+}
+</style>
 
 <!-- <style scoped>
 headerBar {
