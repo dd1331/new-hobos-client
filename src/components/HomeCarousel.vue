@@ -4,7 +4,7 @@
     height="312"
     hide-delimiter-background
     show-arrows="hover"
-    class="rounded-lg"
+    class="rounded-xl"
   >
     <v-carousel-item src="../../src/assets/ship3.jpg" cover></v-carousel-item>
 

@@ -1,5 +1,5 @@
 <template>
-  <v-card variant="flat">
+  <v-card variant="flat" class="rounded-xl">
     <v-list>
       <v-list-item v-for="(post, index) in posts" :key="post.id" class="pa-1">
         <v-container :class="mobile ? 'py-2' : ''">

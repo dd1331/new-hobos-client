@@ -1,11 +1,11 @@
 <template>
   <v-app-bar class="px-4" elevation="1">
     <v-navigation-drawer v-if="false" app> </v-navigation-drawer>
-    <div @click="$router.push('/')" class="w-25">
+    <div @click="$router.push('/')" class="w-25 pt-3 align-bottom">
       <img
-        :class="logo"
+        height="70"
         style="cursor: pointer"
-        src="../../src/assets/ship2.jpg"
+        src="../../src/assets/hobo-logo.png"
         alt=""
       />
     </div>
@@ -34,7 +34,7 @@
         icon="mdi-dots-vertical"
         @click="toggleLogin"
       ></v-btn>
-      <v-menu v-else min-width="200px" rounded>
+      <v-menu v-else min-width="200px">
         <template v-slot:activator="{ props }">
           <v-btn icon v-bind="props">
             <v-avatar
@@ -82,8 +82,6 @@ import { useRouter } from "vue-router";
 
 const userStore = useUserStore();
 const { mobile } = useDisplay();
-
-const logo = mobile ? "w-50" : "";
 
 // expose the state to the template
 const postStore = usePostStore();

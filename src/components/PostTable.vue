@@ -1,5 +1,5 @@
 <template>
-  <v-card v-if="posts" variant="flat">
+  <v-card v-if="posts" variant="flat" class="rounded-xl">
     <v-table>
       <thead>
         <tr>

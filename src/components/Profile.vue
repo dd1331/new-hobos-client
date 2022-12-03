@@ -1,5 +1,5 @@
 <template>
-  <v-card variant="flat">
+  <v-card variant="flat" class="rounded-xl">
     <v-form v-model="valid">
       <v-container>
         <v-row>

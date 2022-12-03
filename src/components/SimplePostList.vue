@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card v-if="category" variant="flat">
+    <v-card v-if="category" variant="flat" class="rounded-xl">
       <div class="d-flex justify-space-between align-center">
         <div class="text-h6 mx-4 my-1 pa-1">{{ category.title }}</div>
         <v-btn

@@ -1,5 +1,5 @@
 <template>
-  <v-card min-height="800" variant="flat">
+  <v-card min-height="800" variant="flat" class="rounded-xl">
     <v-container class="text-sm-h4 text-h6">글쓰기</v-container>
     <v-divider />
     <v-container v-if="categories.length" class="d-flex mb-3">
