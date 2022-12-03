@@ -13,7 +13,27 @@
           ></Menu>
         </div>
         <v-card-subtitle>
-          <div>{{ post.poster.nickname }}</div>
+          <div>
+            {{ post.poster.nickname }}
+            <v-chip
+              class="mr-1"
+              size="x-small"
+              color="pink"
+              density="comfortable"
+              text-color="white"
+            >
+              {{ post.poster.career.job.title }}
+            </v-chip>
+
+            <v-chip
+              class="mr-1"
+              size="x-small"
+              density="comfortable"
+              color="primary"
+            >
+              {{ post.poster.career.year }}년차
+            </v-chip>
+          </div>
 
           <div>
             {{ dayjs(post.createdAt).fromNow() }} ・ 조회 수 {{ post.views }} ・
@@ -56,7 +76,7 @@ import PostTable from "../components/PostTable.vue";
 import SimplePostList from "../components/SimplePostList.vue";
 import { usePostStore, type IPost } from "@/stores/post";
 import { computed, inject, onBeforeMount, ref } from "vue";
-import { onBeforeRouteUpdate, useRoute } from "vue-router";
+import { onBeforeRouteLeave, onBeforeRouteUpdate, useRoute } from "vue-router";
 import type { Dayjs } from "dayjs";
 import { useCategoryStore, type ICategory } from "@/stores/category";
 import Menu from "@/components/Menu.vue";
@@ -117,5 +137,8 @@ onBeforeMount(async () => {
 onBeforeRouteUpdate(async (to) => {
   const postId = to.params.id;
   if (postId) store.fetchPost(Number(postId));
+});
+onBeforeRouteLeave(() => {
+  store.resetPost();
 });
 </script>

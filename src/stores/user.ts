@@ -72,6 +72,14 @@ export const useUserStore = defineStore("User", () => {
     localStorage.clear();
     goodAxios.interceptors.request.clear();
   }
+  async function editProfile(payload: {
+    nickname: string;
+    jobId: number;
+    year: number;
+  }) {
+    const { data } = await goodAxios.put(API_URL + "user/profile", payload);
+    fetchUser();
+  }
   return {
     count,
     accessToken,
@@ -80,5 +88,6 @@ export const useUserStore = defineStore("User", () => {
     fetchUser,
     getUser,
     logout,
+    editProfile,
   };
 });

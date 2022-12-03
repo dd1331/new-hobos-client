@@ -92,6 +92,9 @@ export const usePostStore = defineStore("Post", () => {
     state.post = data;
   }
   function resetPosts() {
+    state.posts = [];
+  }
+  function resetPost() {
     state.post = null;
   }
   async function deletePost(commentId: number) {
@@ -111,5 +114,6 @@ export const usePostStore = defineStore("Post", () => {
     getHomePosts,
     resetPosts,
     deletePost,
+    resetPost,
   };
 });

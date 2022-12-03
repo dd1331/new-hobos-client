@@ -24,7 +24,7 @@
                     density="comfortable"
                     text-color="white"
                   >
-                    Tags
+                    {{ post.poster.career.job.title }}
                   </v-chip>
 
                   <v-chip
@@ -33,16 +33,7 @@
                     density="comfortable"
                     color="primary"
                   >
-                    John Leider
-                  </v-chip>
-
-                  <v-chip
-                    class="mr-1"
-                    size="x-small"
-                    density="comfortable"
-                    color="cyan"
-                  >
-                    New Tweets
+                    {{ post.poster.career.year }}년차
                   </v-chip>
                 </div>
                 <div class="text-caption">
@@ -66,13 +57,13 @@
               </div>
               <v-chip-group v-if="!xs">
                 <v-chip variant="outlined" size="small" class="rounded-xl mr-2">
-                  구직
+                  #구직
                 </v-chip>
                 <v-chip variant="outlined" size="small" class="rounded-xl mr-2">
-                  재태크
+                  #재태크
                 </v-chip>
                 <v-chip variant="outlined" size="small" class="rounded-xl mr-2">
-                  주식
+                  #주식
                 </v-chip>
               </v-chip-group>
             </v-col>

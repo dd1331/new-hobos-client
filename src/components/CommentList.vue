@@ -19,7 +19,7 @@
             density="comfortable"
             text-color="white"
           >
-            Tags
+            {{ comment.commenter.career.job.title }}
           </v-chip>
 
           <v-chip
@@ -28,16 +28,7 @@
             density="comfortable"
             color="primary"
           >
-            Leider
-          </v-chip>
-
-          <v-chip
-            class="mr-1"
-            size="x-small"
-            density="comfortable"
-            color="cyan"
-          >
-            Tweets
+            {{ comment.commenter.career.year }}년차
           </v-chip>
         </div>
         <div class="ma-0">

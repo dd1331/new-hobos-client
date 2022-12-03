@@ -4,12 +4,11 @@
       <v-container>
         <v-row>
           <v-col :cols="mobile ? 12 : 8" :order="mobile ? 2 : ''">
-            이메일{{ email }}
+            이메일
             <v-text-field
               v-model="email"
               :rules="nameRules"
-              :counter="10"
-              required
+              readonly
             ></v-text-field>
             닉네임
             <v-text-field
@@ -18,12 +17,15 @@
               :counter="10"
               required
             ></v-text-field>
+            분야
             <v-select
-              label="Select"
               v-model="job"
-              :items="store.getJobs.map((j) => j.title)"
+              :items="jobStore.getJobs.map((j) => j.title)"
               variant="solo"
             ></v-select>
+            경력
+            <v-select v-model="year" :items="years" variant="solo"></v-select>
+            <v-btn rounded="lg" @click="edit">수정</v-btn>
           </v-col>
 
           <v-col :cols="mobile ? 12 : 4" order="1" class="text-center">
@@ -46,6 +48,15 @@
         </v-row>
       </v-container>
     </v-form>
+    <v-snackbar v-model="snackbar" timeout="2000">
+      {{ text }}
+
+      <template v-slot:actions>
+        <v-btn color="pink" variant="text" @click="snackbar = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-card>
 </template>
 <script lang="ts" setup>
@@ -60,9 +71,14 @@ function onchange() {
 }
 
 const image = ref();
-const store = useJobStore();
-const job = ref("");
+const jobStore = useJobStore();
 const userStore = useUserStore();
+const job = ref("");
+
+const year = ref(0);
+const snackbar = ref(false);
+const text = "수정완료";
+const years = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
 const valid = false;
 const firstname = "";
@@ -78,9 +94,20 @@ const emailRules = [
 ];
 const { mobile } = useDisplay();
 
+async function edit() {
+  const payload = {
+    nickname: nickname.value,
+    jobId: jobStore.getJobs.find((j) => j.title === job.value)!.id,
+    year: year.value,
+  };
+  await userStore.editProfile(payload);
+  snackbar.value = true;
+}
+
 onBeforeMount(async () => {
-  await store.fetchJobs();
-  job.value = userStore.getUser?.career.job.title as string;
+  await jobStore.fetchJobs();
+  job.value = userStore.getUser?.career?.job.title as string;
+  year.value = userStore.getUser?.career?.year as number;
   email.value = userStore.getUser?.email as string;
   nickname.value = userStore.getUser?.nickname as string;
 });
