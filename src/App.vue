@@ -6,7 +6,7 @@
       <v-main class="mt-10">
         <!-- <v-main class="mt-10 bg-grey-lighten-4"> -->
         <!-- Provides the application the proper gutter -->
-        <v-container fluid>
+        <v-container fluid class="pb-0">
           <!-- If using vue-router -->
           <router-view></router-view>
         </v-container>
@@ -25,7 +25,7 @@
       <v-main class="mt-10">
         <!-- <v-main class="mt-10 bg-grey-lighten-4"> -->
         <!-- Provides the application the proper gutter -->
-        <v-container fluid style="width: 1200px">
+        <v-container fluid style="width: 800px" class="pb-0">
           <!-- If using vue-router -->
           <router-view></router-view>
         </v-container>
@@ -33,17 +33,17 @@
       </v-main>
     </v-layout>
     <v-footer v-if="mobile" app class="bg-grey-lighten-4">
-      <div class="d-flex w-100 justify-center">
-        <div>
-          <v-btn
-            v-for="icon in icons"
-            :key="icon"
-            class="mx-0 px-0"
-            variant="text"
-          >
-            {{ icon }}
-          </v-btn>
-        </div>
+      <div class="d-flex w-100 justify-space-around">
+        <v-btn
+          v-for="category in useCategoryStore().categories"
+          :key="category.id"
+          class="mx-0 px-0"
+          variant="text"
+          size="small"
+          @click="toCategoryPostList(category.id)"
+        >
+          {{ category.title }}
+        </v-btn>
       </div>
     </v-footer>
     <GoodLogin :hidden="isLoginPopped" @hide-login="toggleLogin"></GoodLogin>
@@ -68,20 +68,21 @@ import {
 } from "vue";
 import { UNAUTHORIZED } from "./constants";
 import { useUserStore } from "./stores/user";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
+import { usePostStore } from "./stores/post";
 const isLoginPopped = ref(false);
 
 function toggleLogin() {
   isLoginPopped.value = !isLoginPopped.value;
 }
 const { mobile } = useDisplay();
-const icons = ["청문홍답", "홍문청답", "인기", "자유", "정치"];
 onBeforeMount(() => {
   useUserStore().fetchUser();
   const categoryId = Number(useRoute().query.categoryId);
 
   useCategoryStore().fetchCategories(categoryId);
 });
+const router = useRouter();
 dayjs.locale("ko");
 dayjs.extend(relativeTime);
 provide("dayjs", dayjs);
@@ -91,6 +92,10 @@ onErrorCaptured(
       toggleLogin();
   }
 );
+async function toCategoryPostList(categoryId: number) {
+  await usePostStore().fetchPostsByCategory(categoryId);
+  router.push({ path: "/post", query: { category: categoryId } });
+}
 </script>
 <style>
 @font-face {

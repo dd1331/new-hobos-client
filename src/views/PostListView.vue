@@ -4,21 +4,18 @@
     <div>
       {{ currentCategory?.title }}
     </div>
-    <v-btn
-      class="mr-2 bg-grey-lighten-2 mb-2"
-      variant="flat"
-      height="35"
+    <GoodButton
+      class="mr-2 mb-2"
       @click="
         $router.push({
           name: 'Poster',
           query: { category: currentCategory.id },
         })
       "
-      color="primary"
-      rounded="lg"
+      text="✏️"
+      size="small"
     >
-      ✏️
-    </v-btn>
+    </GoodButton>
   </div>
   <FancyPostList
     v-if="mobile || currentCategory?.view === View.FANCY"
@@ -43,6 +40,7 @@ import { usePostStore } from "@/stores/post";
 import { useCategoryStore, type ICategory, View } from "@/stores/category";
 import { useDisplay } from "vuetify/lib/framework.mjs";
 import FancyPostList from "@/components/FancyPostList.vue";
+import GoodButton from "@/components/GoodButton.vue";
 
 const route = useRoute();
 const { mobile } = useDisplay();

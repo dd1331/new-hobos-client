@@ -96,5 +96,6 @@ async function toCategoryPostList(categoryId: number) {
 }
 function logout() {
   userStore.logout();
+  router.push("/");
 }
 </script>

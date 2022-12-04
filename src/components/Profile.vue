@@ -24,7 +24,7 @@
             분야
             <v-select
               v-model="job"
-              :items="jobStore.getJobs.map((j) => j.title)"
+              :items="['선택해주세요', ...jobStore.getJobs.map((j) => j.title)]"
               variant="outlined"
               density="compact"
             ></v-select>
@@ -35,18 +35,17 @@
               variant="outlined"
               density="compact"
             ></v-select>
-            <v-btn rounded="lg" @click="edit" variant="flat">수정</v-btn>
+            <GoodButton size="small" @click="edit" text="수정"></GoodButton>
           </v-col>
 
           <v-col :cols="mobile ? 12 : 4" order="1" class="text-center">
             <div @click="$refs.image.click">
-              <v-avatar size="250" class="border-solid">
+              <v-avatar :size="mobile ? '150' : '250'" class="border-solid">
                 <v-img
                   cover
                   src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"
                 ></v-img>
               </v-avatar>
-              <v-btn>dd</v-btn>
             </div>
             <v-file-input
               class="d-none"
@@ -70,10 +69,11 @@
   </v-card>
 </template>
 <script lang="ts" setup>
-import { onBeforeMount, ref } from "vue";
+import { onBeforeMount, ref, type Ref } from "vue";
 import { useDisplay } from "vuetify/lib/framework.mjs";
 import { useJobStore } from "@/stores/job";
 import { useUserStore } from "@/stores/user";
+import GoodButton from "./GoodButton.vue";
 
 function onchange() {
   const [imageFile] = image.value.files;
@@ -85,7 +85,7 @@ const jobStore = useJobStore();
 const userStore = useUserStore();
 const job = ref("");
 
-const year = ref(0);
+const year: Ref<"선택해주세요" | number> = ref(0);
 const snackbar = ref(false);
 const text = "수정완료";
 const years = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
@@ -116,8 +116,9 @@ async function edit() {
 
 onBeforeMount(async () => {
   await jobStore.fetchJobs();
-  job.value = userStore.getUser?.career?.job.title as string;
-  year.value = userStore.getUser?.career?.year as number;
+  job.value =
+    (userStore.getUser?.career?.job.title as string) || "선택해주세요";
+  year.value = (userStore.getUser?.career?.year as number) || "선택해주세요";
   email.value = userStore.getUser?.email as string;
   nickname.value = userStore.getUser?.nickname as string;
 });

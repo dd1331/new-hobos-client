@@ -34,12 +34,20 @@
       ></v-textarea>
     </v-container>
     <v-container class="d-flex justify-center">
-      <v-btn variant="flat" class="ma-2" rounded="lg" @click="registerPost"
-        >확인</v-btn
-      >
-      <v-btn variant="flat" class="ma-2" rounded="lg" @click="$router.back()"
-        >취소</v-btn
-      >
+      <GoodButton
+        variant="flat"
+        class="ma-2"
+        @click="registerPost"
+        size="small"
+        text="확인"
+      ></GoodButton>
+      <GoodButton
+        variant="flat"
+        class="ma-2"
+        @click="$router.back()"
+        size="small"
+        text="취소"
+      ></GoodButton>
     </v-container>
   </v-card>
 </template>
@@ -48,6 +56,7 @@ import { computed, onBeforeMount, onMounted, reactive, ref } from "vue";
 import { onBeforeRouteLeave, useRoute, useRouter } from "vue-router";
 import { usePostStore } from "../stores/post";
 import { useCategoryStore } from "@/stores/category";
+import GoodButton from "./GoodButton.vue";
 
 const postStore = usePostStore();
 const categoryStore = useCategoryStore();

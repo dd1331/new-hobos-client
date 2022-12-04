@@ -74,14 +74,14 @@
         <v-row v-if="xs">
           <v-col cols="10" offset="2" :offset-sm="1">
             <v-chip-group class="px-2 py-0">
-              <v-chip variant="outlined" size="small" class="rounded-xl mr-2">
-                구직
+              <v-chip variant="outlined" size="x-small" class="rounded-xl mr-2">
+                #구직
               </v-chip>
-              <v-chip variant="outlined" size="small" class="rounded-xl mr-2">
-                재태크
+              <v-chip variant="outlined" size="x-small" class="rounded-xl mr-2">
+                #재태크
               </v-chip>
-              <v-chip variant="outlined" size="small" class="rounded-xl mr-2">
-                주식
+              <v-chip variant="outlined" size="x-small" class="rounded-xl mr-2">
+                #주식
               </v-chip>
             </v-chip-group>
           </v-col>
@@ -114,12 +114,13 @@
       </v-list-item>
     </v-list>
   </v-card>
-  <div class="text-center mt-10">
+  <div class="text-center mt-5">
     <v-pagination
       density="compact"
       @click="clicked"
       v-model="page"
       :length="5"
+      size="small"
     ></v-pagination>
   </div>
 </template>

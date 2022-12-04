@@ -43,7 +43,7 @@
             "
             style="cursor: pointer"
           >
-            <div class="text-truncate" style="max-width: 30rem">
+            <div class="text-truncate" style="max-width: 25rem">
               {{ title }}
               <span
                 v-if="totalComments"
@@ -76,12 +76,13 @@
       </tbody>
     </v-table>
   </v-card>
-  <div class="text-center mt-10">
+  <div class="text-center mt-5">
     <v-pagination
       density="compact"
       @click="clicked"
       v-model="page"
       :length="5"
+      :size="mobile ? 'small' : 'small'"
     ></v-pagination>
   </div>
 </template>
@@ -90,11 +91,13 @@
 import type { ICategory } from "@/stores/category";
 import type { IPost4List } from "@/stores/post";
 import { inject, ref } from "vue";
+import { useDisplay } from "vuetify/lib/framework.mjs";
 
 defineProps<{
   posts: IPost4List[];
   category: ICategory;
 }>();
+const { mobile } = useDisplay();
 const dayjs = inject("dayjs");
 const page = ref(1);
 const emit = defineEmits(["onPageClicked"]);

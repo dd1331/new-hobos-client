@@ -2,7 +2,7 @@
   <div class="d-flex justify-center align-center">
     <v-btn
       :icon="liked ? 'mdi-heart' : 'mdi-heart-outline'"
-      size="small"
+      :size="mobile ? 'small' : 'large'"
       variant="text"
       color="red"
       @click="$emit('onLike')"
@@ -14,6 +14,10 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { useDisplay } from "vuetify/lib/framework.mjs";
+
+const { mobile } = useDisplay();
+
 defineProps<{ liked: boolean; totalLikes: number }>();
 defineEmits(["onLike"]);
 </script>

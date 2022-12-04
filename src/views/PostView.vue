@@ -55,6 +55,7 @@
       :pagination="true"
       :category="currentCategory"
       :posts="posts"
+      @on-page-clicked="onPageClicked"
     ></SimplePostList>
     <PostTable
       v-else

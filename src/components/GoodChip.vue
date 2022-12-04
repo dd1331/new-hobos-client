@@ -2,7 +2,6 @@
   <v-chip
     :size="mobile ? 'x-small' : 'small'"
     :color="color"
-    density="comfortable"
     class="rounded-xl"
   >
     {{ content }}

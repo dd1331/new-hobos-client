@@ -41,12 +41,17 @@
         </div>
       </v-container>
       <div class="d-flex justify-start ml-n2">
-        <Like @on-like="like" :liked="liked" :totalLikes="totalLikes"></Like>
+        <Like
+          @on-like="like"
+          :liked="liked"
+          :totalLikes="totalLikes"
+          :size="mobile ? 'small' : 'large'"
+        ></Like>
         <v-btn
           v-if="'childComments' in comment"
           icon="mdi-comment-outline"
           variant="text"
-          size="small"
+          :size="mobile ? 'small' : 'large'"
           @click="$emit('toggleCommentInput', comment.id)"
         >
         </v-btn>
@@ -73,6 +78,8 @@ import { useLikeStore } from "@/stores/like";
 import { useUserStore } from "@/stores/user";
 import { inject, ref } from "vue";
 import Menu from "./Menu.vue";
+import { useDisplay } from "vuetify/lib/framework.mjs";
+const { mobile } = useDisplay();
 const store = useCommentStore();
 const dayjs = inject("dayjs");
 defineEmits(["toggleCommentInput"]);

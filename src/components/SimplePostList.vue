@@ -3,17 +3,15 @@
     <v-card v-if="category" variant="flat" class="rounded-xl">
       <div class="d-flex justify-space-between align-center">
         <div class="text-h6 mx-4 my-1 pa-1">{{ category.title }}</div>
-        <v-btn
+        <GoodButton
           style="opacity: 90%"
           class="mx-4"
-          size="small"
-          rounded="lg"
           @click="
             $router.push({ path: '/post', query: { category: category.id } })
           "
           color="primary"
-          >more</v-btn
-        >
+          text="more"
+        ></GoodButton>
       </div>
       <v-divider></v-divider>
 
@@ -48,9 +46,9 @@
                   {{ title }}
                   <span v-if="totalComments"> ({{ totalComments }}) </span>
                 </div>
-                <div class="d-flex align-center">
+                <div class="d-flex align-center text-body-2">
                   {{ poster.nickname }} {{ dayjs(createdAt).fromNow() }}
-                  <v-icon size="13" color="red">mdi-heart</v-icon>
+                  <v-icon size="13" class="mx-1" color="red">mdi-heart</v-icon>
                   {{ totalLikes }}
                   조회 {{ views }}
                 </div>
@@ -61,20 +59,23 @@
         </v-list-item>
       </v-list>
     </v-card>
-    <div class="text-center mt-10">
-      {{ pagination }}
+    <div class="text-center mt-5">
       <v-pagination
         v-if="pagination"
         density="compact"
         v-model="page"
         :length="5"
+        @click="clicked"
+        :size="mobile ? 'small' : 'small'"
       ></v-pagination>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
 import type { IPost4List } from "@/stores/post";
-import { inject } from "vue";
+import { inject, ref } from "vue";
+import { useDisplay } from "vuetify/lib/framework.mjs";
+import GoodButton from "./GoodButton.vue";
 const dayjs = inject("dayjs");
 
 defineProps<{
@@ -83,5 +84,13 @@ defineProps<{
   posts: IPost4List[];
   thumbnail?: boolean;
 }>();
-const page = 1;
+const emit = defineEmits(["onPageClicked"]);
+const { mobile } = useDisplay();
+
+const page = ref(1);
+
+function clicked() {
+  console.log("🚀 ~ file: SimplePostList.vue:92 ~ clicked ~ onPageClicked");
+  emit("onPageClicked", page.value);
+}
 </script>

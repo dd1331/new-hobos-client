@@ -32,7 +32,12 @@
           style="border-radius: 12px; border: 1px solid"
           class="w-100 pa-2 pl-4"
         />
-        <v-btn rounded="lg" color="primary">인증</v-btn>
+        <GoodButton
+          size="small"
+          rounded="lg"
+          color="primary"
+          text="인증"
+        ></GoodButton>
       </div>
     </v-container>
     <v-container>
@@ -68,16 +73,22 @@
       </div>
     </v-container>
     <v-container class="d-flex justify-center">
-      <v-btn rounded="lg" color="primary" class="ma-2" @click="signupLocal"
-        >확인</v-btn
-      >
-      <v-btn
+      <GoodButton
+        size="small"
+        rounded="lg"
+        color="primary"
+        class="ma-2"
+        @click="signupLocal"
+        text="확인"
+      ></GoodButton>
+      <GoodButton
+        size="small"
         rounded="lg"
         color="primary"
         class="ma-2"
         @click="$router.push('/')"
-        >취소</v-btn
-      >
+        text="취소"
+      ></GoodButton>
     </v-container>
   </v-card>
 </template>
@@ -85,6 +96,7 @@
 import { useUserStore, type SignupPayload } from "@/stores/user";
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
+import GoodButton from "./GoodButton.vue";
 
 const router = useRouter();
 
