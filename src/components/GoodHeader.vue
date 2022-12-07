@@ -12,14 +12,16 @@
     <div class="d-flex w-75">
       <div class="w-100">
         <div class="d-md-flex d-none justify-center">
-          <v-btn
+          <div
+            style="cursor: pointer"
+            class="px-4"
             v-for="category in useCategoryStore().categories"
             :key="category.id"
             variant="plain"
             @click="toCategoryPostList(category.id)"
           >
             {{ category.title }}
-          </v-btn>
+          </div>
         </div>
       </div>
     </div>

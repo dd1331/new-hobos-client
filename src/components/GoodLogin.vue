@@ -61,12 +61,14 @@ import { useRouter } from "vue-router";
 import { ref } from "vue";
 
 import { useUserStore, type LoginLocalPayload } from "@/stores/user";
+import { AxiosError } from "axios";
 
 const props = defineProps({ hidden: Boolean });
-const emit = defineEmits(["hideLogin"]);
+const emit = defineEmits(["hideLogin", "popSnackbar"]);
 const dialog = computed(() => props.hidden);
 const router = useRouter();
 const userStore = useUserStore();
+
 const email = ref("");
 const password = ref("");
 const accessToken = computed(() => userStore.accessToken);
@@ -84,7 +86,17 @@ async function loginLocal() {
     email: email.value,
     password: password.value,
   };
-  await userStore.loginLocal(payload);
-  emit("hideLogin");
+  try {
+    await userStore.loginLocal(payload);
+    emit("hideLogin");
+  } catch (error) {
+    if (
+      error instanceof AxiosError &&
+      error.code === AxiosError.ERR_BAD_REQUEST
+    ) {
+      emit("popSnackbar", "아이디/비밀번호가 일치하지 않습니다");
+      return;
+    }
+  }
 }
 </script>

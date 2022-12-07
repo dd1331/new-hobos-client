@@ -8,7 +8,7 @@
         <!-- Provides the application the proper gutter -->
         <v-container fluid class="pb-0">
           <!-- If using vue-router -->
-          <router-view></router-view>
+          <router-view @pop-snackbar="popSnackbar"></router-view>
         </v-container>
         <GoodFooter></GoodFooter>
       </v-main>
@@ -27,7 +27,8 @@
         <!-- Provides the application the proper gutter -->
         <v-container fluid style="width: 800px" class="pb-0">
           <!-- If using vue-router -->
-          <router-view></router-view>
+
+          <router-view @pop-snackbar="popSnackbar"></router-view>
         </v-container>
         <GoodFooter></GoodFooter>
       </v-main>
@@ -46,7 +47,20 @@
         </v-btn>
       </div>
     </v-footer>
-    <GoodLogin :hidden="isLoginPopped" @hide-login="toggleLogin"></GoodLogin>
+    <GoodLogin
+      :hidden="isLoginPopped"
+      @hide-login="toggleLogin"
+      @pop-snackbar="popSnackbar"
+    ></GoodLogin>
+    <v-snackbar v-model="snackbar" timeout="2000">
+      {{ snackbarText }}
+
+      <template v-slot:actions>
+        <v-btn color="pink" variant="text" @click="snackbar = false">
+          닫기
+        </v-btn>
+      </template>
+    </v-snackbar>
   </v-app>
 </template>
 <script lang="ts" setup>
@@ -72,6 +86,11 @@ import { useRoute, useRouter } from "vue-router";
 import { usePostStore } from "./stores/post";
 const isLoginPopped = ref(false);
 
+function popSnackbar(text: string) {
+  snackbar.value = !snackbar.value;
+  snackbarText.value = text;
+}
+
 function toggleLogin() {
   isLoginPopped.value = !isLoginPopped.value;
 }
@@ -92,6 +111,8 @@ onErrorCaptured(
       toggleLogin();
   }
 );
+const snackbar = ref(false);
+const snackbarText = ref("");
 async function toCategoryPostList(categoryId: number) {
   await usePostStore().fetchPostsByCategory(categoryId);
   router.push({ path: "/post", query: { category: categoryId } });

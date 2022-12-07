@@ -78,8 +78,8 @@
         rounded="lg"
         color="primary"
         class="ma-2"
-        @click="signupLocal"
         text="확인"
+        @click="signupLocal"
       ></GoodButton>
       <GoodButton
         size="small"
@@ -101,7 +101,6 @@ import GoodButton from "./GoodButton.vue";
 const router = useRouter();
 
 const userStore = useUserStore();
-
 const signupState: SignupPayload & { password2: string } = reactive({
   email: "",
   nickname: "",
@@ -109,11 +108,14 @@ const signupState: SignupPayload & { password2: string } = reactive({
   password2: "",
 });
 
+const emit = defineEmits(["popSnackbar"]);
 async function signupLocal() {
   if (signupState.password !== signupState.password2)
     throw new Error("비밀번호 일치하지 않음");
 
   await userStore.signupLocal(signupState);
+
+  emit("popSnackbar", "가입완료");
   router.push("/");
 }
 </script>

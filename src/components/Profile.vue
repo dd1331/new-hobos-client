@@ -57,15 +57,6 @@
         </v-row>
       </v-container>
     </v-form>
-    <v-snackbar v-model="snackbar" timeout="2000">
-      {{ text }}
-
-      <template v-slot:actions>
-        <v-btn color="pink" variant="text" @click="snackbar = false">
-          Close
-        </v-btn>
-      </template>
-    </v-snackbar>
   </v-card>
 </template>
 <script lang="ts" setup>
@@ -86,8 +77,6 @@ const userStore = useUserStore();
 const job = ref("");
 
 const year: Ref<"선택해주세요" | number> = ref(0);
-const snackbar = ref(false);
-const text = "수정완료";
 const years = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
 const valid = false;
@@ -103,6 +92,7 @@ const emailRules = [
   (v) => /.+@.+/.test(v) || "E-mail must be valid",
 ];
 const { mobile } = useDisplay();
+const emit = defineEmits(["popSnackbar"]);
 
 async function edit() {
   const payload = {
@@ -111,7 +101,7 @@ async function edit() {
     year: year.value,
   };
   await userStore.editProfile(payload);
-  snackbar.value = true;
+  emit("popSnackbar", "수정완료");
 }
 
 onBeforeMount(async () => {
