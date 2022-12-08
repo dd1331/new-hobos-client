@@ -5,9 +5,9 @@
         <!-- <div class="d-flex justify-space-between border-solid"> -->
         <v-row>
           <v-col cols="11" sm="11">
-            <v-card-title class="">{{ post.title }}</v-card-title>
-            <v-card-subtitle>
-              <div class="d-flex">
+            <v-card-title class="text-h6">{{ post.title }}</v-card-title>
+            <div class="text-subtitle-2">
+              <div class="d-flex align-center">
                 {{ post.poster.nickname }}
                 <div v-if="post.poster.career">
                   <GoodChip
@@ -21,12 +21,12 @@
                 </div>
               </div>
 
-              <div>
+              <div class="text-caption">
                 {{ dayjs(post.createdAt).fromNow() }} ・ 조회 수
                 {{ post.views }} ・ 추천 수
                 {{ post.totalLikes }}
               </div>
-            </v-card-subtitle>
+            </div>
           </v-col>
           <v-col cols="1" sm="1">
             <Menu
@@ -40,7 +40,7 @@
         <!-- </div> -->
       </v-card-item>
       <v-divider></v-divider>
-      <v-card-text> {{ post.content }} </v-card-text>
+      <v-card-text class="text-body-1"> {{ post.content }} </v-card-text>
 
       <Like
         :liked="post.liked"

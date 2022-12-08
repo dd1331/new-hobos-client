@@ -1,12 +1,13 @@
 <template>
   <v-card variant="flat" class="rounded-xl">
     <v-form v-model="valid">
-      <v-container>
+      <v-container class="text-subtitle-2">
         <v-row>
           <v-col :cols="mobile ? 12 : 8" :order="mobile ? 2 : ''">
             이메일
             <v-text-field
               variant="outlined"
+              color="primary"
               density="compact"
               v-model="email"
               :rules="nameRules"
@@ -15,6 +16,7 @@
             닉네임
             <v-text-field
               variant="outlined"
+              color="primary"
               density="compact"
               v-model="nickname"
               :rules="nameRules"
@@ -24,6 +26,7 @@
             분야
             <v-select
               v-model="job"
+              color="primary"
               :items="['선택해주세요', ...jobStore.getJobs.map((j) => j.title)]"
               variant="outlined"
               density="compact"
@@ -31,6 +34,7 @@
             경력
             <v-select
               v-model="year"
+              color="primary"
               :items="years"
               variant="outlined"
               density="compact"
@@ -40,7 +44,7 @@
 
           <v-col :cols="mobile ? 12 : 4" order="1" class="text-center">
             <div @click="$refs.image.click">
-              <v-avatar :size="mobile ? '150' : '250'" class="border-solid">
+              <v-avatar :size="mobile ? '150' : '200'" class="border-solid">
                 <v-img
                   cover
                   src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"

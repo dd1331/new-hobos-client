@@ -1,8 +1,8 @@
 <template>
   <div>
     <v-card v-if="category" variant="flat" class="rounded-xl">
-      <div class="d-flex justify-space-between align-center">
-        <div class="text-h6 mx-4 my-1 pa-1">{{ category.title }}</div>
+      <div class="d-flex justify-space-between align-center text-subtitle-1">
+        <div class="mx-4 my-1 pa-1">{{ category.title }}</div>
         <GoodButton
           style="opacity: 90%"
           class="mx-4"
@@ -34,7 +34,7 @@
               ></v-img>
               <div>
                 <div
-                  class="mr-2 text-truncate"
+                  class="mr-2 text-truncate text-subtitle-1"
                   @click="
                     $router.push({
                       name: 'Post',

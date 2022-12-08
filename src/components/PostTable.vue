@@ -43,7 +43,7 @@
             "
             style="cursor: pointer"
           >
-            <div class="text-truncate" style="max-width: 25rem">
+            <div class="text-truncate text-body-2" style="max-width: 25rem">
               {{ title }}
               <span
                 v-if="totalComments"
@@ -54,7 +54,7 @@
               </span>
             </div>
           </td>
-          <td class="d-flex align-center">
+          <td class="d-flex align-center text-body-2">
             <v-avatar size="25px" class="mr-2">
               <v-img
                 alt="Avatar"
@@ -65,13 +65,13 @@
               {{ poster.nickname }}
             </div>
           </td>
-          <td class="text-center" style="color: #ff4a57">
+          <td class="text-center text-body-2" style="color: #ff4a57">
             {{ totalLikes }}
           </td>
-          <td class="text-center text-truncate">
+          <td class="text-center text-truncate text-body-2">
             {{ dayjs(createdAt).fromNow() }}
           </td>
-          <td class="text-center">{{ views }}</td>
+          <td class="text-center text-body-2">{{ views }}</td>
         </tr>
       </tbody>
     </v-table>

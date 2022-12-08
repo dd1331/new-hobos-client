@@ -15,7 +15,9 @@
             <v-col cols="10" sm="7" style="cursor: pointer">
               <div class="pa-0" @click="push(post.id, category.id)">
                 <div class="d-flex align-center">
-                  <div class="mr-2">{{ post.poster.nickname }}</div>
+                  <div class="mr-2 text-subtitle-1">
+                    {{ post.poster.nickname }}
+                  </div>
 
                   <div v-if="post.poster.career">
                     <GoodChip
@@ -34,29 +36,69 @@
                     </GoodChip>
                   </div>
                 </div>
-                <div class="text-caption">
+                <div class="text-body-2">
                   {{ dayjs(post.createdAt).fromNow() }}
                 </div>
                 <div @click="push(post.id, category.id)">
-                  <div class="font-weight-bold text-truncate">
+                  <div class="text-truncate text-subtitle-1">
                     {{ post.title }}
                   </div>
-                  <div class="text-body-1 two-lines">
+                  <div class="text-body-2 two-lines">
                     {{ post.content }}
                   </div>
                 </div>
               </div>
-              <v-chip-group v-if="!xs">
-                <v-chip variant="outlined" size="small" class="rounded-xl mr-2">
-                  #구직
-                </v-chip>
-                <v-chip variant="outlined" size="small" class="rounded-xl mr-2">
-                  #재태크
-                </v-chip>
-                <v-chip variant="outlined" size="small" class="rounded-xl mr-2">
-                  #주식
-                </v-chip>
-              </v-chip-group>
+              <div v-if="!xs">
+                <v-chip-group>
+                  <v-chip
+                    variant="outlined"
+                    size="small"
+                    class="rounded-xl mr-2"
+                  >
+                    #구직
+                  </v-chip>
+                  <v-chip
+                    variant="outlined"
+                    size="small"
+                    class="rounded-xl mr-2"
+                  >
+                    #재태크
+                  </v-chip>
+                  <v-chip
+                    variant="outlined"
+                    size="small"
+                    class="rounded-xl mr-2"
+                  >
+                    #주식
+                  </v-chip>
+                </v-chip-group>
+                <div class="d-flex align-center">
+                  <div
+                    style="cursor: pointer"
+                    @click="push(post.id, category.id)"
+                  >
+                    <v-btn
+                      size="small"
+                      rounded="lg"
+                      variant="text"
+                      icon="mdi-heart"
+                    ></v-btn>
+                    <span class="text-overline">{{ post.totalLikes }}</span>
+                  </div>
+                  <div
+                    style="cursor: pointer"
+                    @click="push(post.id, category.id)"
+                  >
+                    <v-btn
+                      size="small"
+                      rounded="lg"
+                      variant="text"
+                      icon="mdi-comment-outline"
+                    ></v-btn>
+                    <span class="text-overline">{{ post.totalComments }}</span>
+                  </div>
+                </div>
+              </div>
             </v-col>
             <v-col cols="10" sm="4" offset="2" :offset-sm="0">
               <v-img
@@ -71,45 +113,64 @@
             </v-col>
           </v-row>
         </v-container>
-        <v-row v-if="xs">
-          <v-col cols="10" offset="2" :offset-sm="1">
-            <v-chip-group class="px-2 py-0">
-              <v-chip variant="outlined" size="x-small" class="rounded-xl mr-2">
-                #구직
-              </v-chip>
-              <v-chip variant="outlined" size="x-small" class="rounded-xl mr-2">
-                #재태크
-              </v-chip>
-              <v-chip variant="outlined" size="x-small" class="rounded-xl mr-2">
-                #주식
-              </v-chip>
-            </v-chip-group>
-          </v-col>
-        </v-row>
-        <v-row no-gutters>
-          <v-col cols="10" offset="2" :offset-sm="1">
-            <div class="d-flex align-center">
-              <div style="cursor: pointer" @click="push(post.id, category.id)">
-                <v-btn
-                  size="small"
-                  rounded="lg"
-                  variant="text"
-                  icon="mdi-heart"
-                ></v-btn>
-                <span class="text-overline">{{ post.totalLikes }}</span>
+        <div v-if="xs">
+          <v-row no-gutters>
+            <v-col cols="10" offset="2" :offset-sm="1">
+              <v-chip-group class="px-2 py-0">
+                <v-chip
+                  variant="outlined"
+                  size="x-small"
+                  class="rounded-xl mr-2"
+                >
+                  #구직
+                </v-chip>
+                <v-chip
+                  variant="outlined"
+                  size="x-small"
+                  class="rounded-xl mr-2"
+                >
+                  #재태크
+                </v-chip>
+                <v-chip
+                  variant="outlined"
+                  size="x-small"
+                  class="rounded-xl mr-2"
+                >
+                  #주식
+                </v-chip>
+              </v-chip-group>
+            </v-col>
+
+            <v-col cols="10" offset="2" :offset-sm="1">
+              <div class="d-flex align-center">
+                <div
+                  style="cursor: pointer"
+                  @click="push(post.id, category.id)"
+                >
+                  <v-btn
+                    size="small"
+                    rounded="lg"
+                    variant="text"
+                    icon="mdi-heart"
+                  ></v-btn>
+                  <span class="text-overline">{{ post.totalLikes }}</span>
+                </div>
+                <div
+                  style="cursor: pointer"
+                  @click="push(post.id, category.id)"
+                >
+                  <v-btn
+                    size="small"
+                    rounded="lg"
+                    variant="text"
+                    icon="mdi-comment-outline"
+                  ></v-btn>
+                  <span class="text-overline">{{ post.totalComments }}</span>
+                </div>
               </div>
-              <div style="cursor: pointer" @click="push(post.id, category.id)">
-                <v-btn
-                  size="small"
-                  rounded="lg"
-                  variant="text"
-                  icon="mdi-comment-outline"
-                ></v-btn>
-                <span class="text-overline">{{ post.totalComments }}</span>
-              </div>
-            </div>
-          </v-col>
-        </v-row>
+            </v-col>
+          </v-row>
+        </div>
         <v-divider v-if="posts.length !== index + 1" class="my-3"></v-divider>
       </v-list-item>
     </v-list>

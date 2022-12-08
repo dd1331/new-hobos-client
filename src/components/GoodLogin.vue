@@ -11,13 +11,14 @@
       </template> -->
 
       <v-card class="py-3">
-        <v-card-title> 로그인 </v-card-title>
+        <v-card-title class="text-body-1"> 로그인 </v-card-title>
         <v-form v-model="valid">
-          <v-container>
+          <v-container class="py-0">
             <v-text-field
               variant="outlined"
               v-model="email"
               type="email"
+              color="primary"
               :rules="nameRules"
               density="compact"
               :counter="10"
@@ -29,6 +30,7 @@
               variant="outlined"
               v-model="password"
               type="password"
+              color="primary"
               :rules="nameRules"
               density="compact"
               placeholder="비밀번호"
@@ -36,17 +38,15 @@
             ></v-text-field>
           </v-container>
         </v-form>
-        <v-card-actions class="pt-0">
-          <v-btn
-            color="primary"
-            block
-            @click="loginLocal"
-            variant="text"
-            rounded="lg"
-          >
-            로그인
-          </v-btn>
-        </v-card-actions>
+        <v-btn
+          color="primary"
+          block
+          @click="loginLocal"
+          variant="text"
+          rounded="lg"
+        >
+          로그인
+        </v-btn>
         <v-btn color="primary" @click="signupLocal" variant="text" rounded="lg">
           회원가입
         </v-btn>

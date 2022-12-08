@@ -2,7 +2,7 @@
   <div class="d-flex justify-center align-center">
     <v-btn
       :icon="liked ? 'mdi-heart' : 'mdi-heart-outline'"
-      :size="mobile ? 'small' : 'large'"
+      :size="mobile ? 'small' : 'small'"
       variant="text"
       color="red"
       @click="$emit('onLike')"

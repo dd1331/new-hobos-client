@@ -2,9 +2,9 @@
 <template>
   <v-card class="my-1 rounded-xl" variant="flat">
     <v-card-item>
-      <div class="d-flex align-center">
-        <v-card-title> 댓글 </v-card-title>
-        <div class="ml-3">총 {{ store.getComments.total }}개</div>
+      <div class="d-flex align-center text-title-1">
+        <div>댓글</div>
+        <div class="ml-3 text-body-2">총 {{ store.getComments.total }}개</div>
       </div>
 
       <CommentInput @register-comment="registerComment"></CommentInput>
@@ -26,7 +26,7 @@
         <div class="mx-1" v-if="comment.id === activeId">
           <CommentInput @register-comment="registerChildComment"></CommentInput>
         </div>
-        <v-list :class="mobile ? '' : 'ml-12'">
+        <v-list class="pa-0" :class="mobile ? '' : 'ml-12'">
           <v-list-item
             v-for="(childComment, index2) in comment.childComments"
             :key="childComment.id"

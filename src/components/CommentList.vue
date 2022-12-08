@@ -9,7 +9,7 @@
     <div class="mr-auto">
       <v-container class="py-0 px-1">
         <div class="d-flex align-center">
-          <div class="mr-2">
+          <div class="mr-2 text-subtitle-2">
             {{ comment.commenter.nickname }}
           </div>
           <div v-if="comment.commenter.career">
@@ -33,25 +33,18 @@
             </v-chip>
           </div>
         </div>
-        <div class="ma-0">
+        <div class="ma-0 text-caption">
           {{ dayjs(comment.createdAt).fromNow() }}
         </div>
-        <div>
-          {{ comment.content }}
-        </div>
+        <div class="text-body-2">{{ comment.content }}</div>
       </v-container>
       <div class="d-flex justify-start ml-n2">
-        <Like
-          @on-like="like"
-          :liked="liked"
-          :totalLikes="totalLikes"
-          :size="mobile ? 'small' : 'large'"
-        ></Like>
+        <Like @on-like="like" :liked="liked" :totalLikes="totalLikes"></Like>
         <v-btn
           v-if="'childComments' in comment"
           icon="mdi-comment-outline"
           variant="text"
-          :size="mobile ? 'small' : 'large'"
+          :size="mobile ? 'small' : 'small'"
           @click="$emit('toggleCommentInput', comment.id)"
         >
         </v-btn>
@@ -64,7 +57,7 @@
       @onDelete="onDelete(comment.id)"
     ></Menu>
   </div>
-  <v-divider class="my-2"></v-divider>
+  <v-divider class="my-1"></v-divider>
 </template>
 
 <script setup lang="ts">
