@@ -15,20 +15,15 @@
 
 <script lang="ts" setup>
 import { useCategoryStore } from "@/stores/category";
-import { onMounted, reactive } from "vue";
-import { onBeforeRouteUpdate, useRoute, useRouter } from "vue-router";
+import { computed, reactive } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import GoodButton from "./GoodButton.vue";
 const router = useRouter();
 const route = useRoute();
-const state = reactive({ categoryId: 0 });
+const state: { categoryId: number } = reactive({
+  categoryId: computed(() => Number(route.query.category) as number),
+});
 async function toCategoryPostList(categoryId: number) {
   router.push({ path: "/post", query: { category: categoryId } });
 }
-
-onMounted(async () => {
-  state.categoryId = Number(route.query.category);
-});
-onBeforeRouteUpdate(async (to) => {
-  state.categoryId = Number(to.query.category);
-});
 </script>

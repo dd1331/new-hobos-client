@@ -9,15 +9,20 @@
         alt=""
       />
     </div>
-    <div class="d-flex w-75">
-      <div class="w-100">
-        <div class="d-md-flex d-none justify-center">
+    <div class="d-flex w-75 h-100">
+      <div class="w-100 h-100">
+        <div class="d-md-flex d-none justify-center h-100">
           <div
             style="cursor: pointer"
-            class="px-4"
+            :style="
+              category.id === state.categoryId
+                ? 'border-bottom :solid #3493FF'
+                : ''
+            "
+            class="px-4 d-flex h-100 align-center"
+            :ripple="false"
             v-for="category in useCategoryStore().categories"
             :key="category.id"
-            variant="plain"
             @click="toCategoryPostList(category.id)"
           >
             {{ category.title }}
@@ -76,16 +81,14 @@
 </template>
 
 <script lang="ts" setup>
-import { useDisplay } from "vuetify";
 import { useUserStore } from "@/stores/user";
 import { useCategoryStore } from "@/stores/category";
 import { usePostStore } from "@/stores/post";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
+import { reactive } from "vue";
+import { computed } from "vue";
 
 const userStore = useUserStore();
-const { mobile } = useDisplay();
-
-// expose the state to the template
 const postStore = usePostStore();
 const router = useRouter();
 const emit = defineEmits(["hideLogin"]);
@@ -93,6 +96,7 @@ function toggleLogin() {
   emit("hideLogin");
 }
 async function toCategoryPostList(categoryId: number) {
+  // FIXME: 여러곳에서 호출되는중
   await postStore.fetchPostsByCategory(categoryId);
   router.push({ path: "/post", query: { category: categoryId } });
 }
@@ -100,4 +104,14 @@ function logout() {
   userStore.logout();
   router.push("/");
 }
+const route = useRoute();
+const state: { categoryId: number } = reactive({
+  categoryId: computed(() => Number(route.query.category) as number),
+});
 </script>
+<style>
+.hover:hover {
+  background-color: white;
+  box-shadow: none;
+}
+</style>
