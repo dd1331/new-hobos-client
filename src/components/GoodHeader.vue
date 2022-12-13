@@ -35,7 +35,6 @@
       <!-- <v-btn icon="mdi-heart" @click="toggleLogin"></v-btn>
 
       <v-btn icon="mdi-magnify" @click="toggleLogin"></v-btn> -->
-
       <v-btn
         v-if="!userStore.getUser"
         icon="mdi-dots-vertical"

@@ -28,16 +28,23 @@ export const useUserStore = defineStore("User", () => {
   const state: {
     tokens: Tokens | null;
     user: User | null;
-  } = reactive({ tokens: {} as Tokens, user: {} as User });
+  } = reactive({ tokens: {} as Tokens, user: null });
   const accessToken = computed(() => state.tokens?.accessToken);
   async function signupLocal(payload: SignupPayload) {
-    return goodAxios.post(API_URL + "user/signup/local", payload);
+    const { data } = await goodAxios.post(
+      API_URL + "user/signup/local",
+      payload
+    );
+    return setUserData(data);
   }
   async function loginLocal(payload: LoginLocalPayload) {
     const { data } = await goodAxios.post(
       API_URL + "auth/login/local",
       payload
     );
+    return setUserData(data);
+  }
+  function setUserData(data: { tokens: Tokens; user: User }) {
     goodAxios.interceptors.request.use((config: AxiosRequestConfig<any>) => {
       if (accessToken.value && config.headers) {
         config.headers["Authorization"] = "Bearer " + accessToken.value;
@@ -50,6 +57,7 @@ export const useUserStore = defineStore("User", () => {
     localStorage.setItem("refreshToken", state.tokens.refreshToken);
     return state.tokens;
   }
+
   async function fetchUser() {
     const accessToken = localStorage.getItem("accessToken");
     const refreshToken = localStorage.getItem("refreshToken");
