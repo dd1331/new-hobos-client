@@ -1,5 +1,5 @@
 <template>
-  <v-card variant="flat" class="rounded-xl">
+  <v-card variant="flat" :class="mobile ? 'rounded-0' : 'rounded-xl'">
     <v-form v-model="valid">
       <v-container class="text-subtitle-2">
         <v-row>

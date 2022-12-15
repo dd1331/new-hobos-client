@@ -6,7 +6,7 @@
       <v-main class="mt-10">
         <!-- <v-main class="mt-10 bg-grey-lighten-4"> -->
         <!-- Provides the application the proper gutter -->
-        <v-container fluid class="pb-0">
+        <v-container fluid class="pa-0">
           <!-- If using vue-router -->
           <router-view @pop-snackbar="popSnackbar"></router-view>
         </v-container>
@@ -33,19 +33,18 @@
         <GoodFooter></GoodFooter>
       </v-main>
     </v-layout>
-    <v-footer v-if="mobile" app class="bg-grey-lighten-4">
-      <div class="d-flex w-100 justify-space-around">
-        <v-btn
+    <v-footer v-if="mobile" app color="primary" style="opacity: 90%">
+      <v-container class="d-flex w-100 justify-space-between pa-1">
+        <text
           v-for="category in useCategoryStore().categories"
           :key="category.id"
           class="mx-0 px-0"
-          variant="text"
           size="small"
           @click="toCategoryPostList(category.id)"
         >
           {{ category.title }}
-        </v-btn>
-      </div>
+        </text>
+      </v-container>
     </v-footer>
     <GoodLogin
       :hidden="isLoginPopped"

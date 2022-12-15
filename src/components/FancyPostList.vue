@@ -1,10 +1,10 @@
 <template>
-  <v-card variant="flat" class="rounded-xl">
+  <v-card variant="flat" :class="mobile ? 'rounded-0' : 'rounded-xl '">
     <v-list>
-      <v-list-item v-for="(post, index) in posts" :key="post.id" class="pa-1">
-        <v-container :class="mobile ? 'py-2' : ''">
-          <v-row>
-            <v-col cols="2" sm="1">
+      <v-list-item v-for="(post, index) in posts" :key="post.id" class="pa-0">
+        <v-container :class="mobile ? 'py-0' : 'py-0'">
+          <v-row class="my-1">
+            <v-col cols="2" sm="1" class="py-0">
               <v-avatar
                 class="border-solid"
                 image="../../src/assets/ship3.jpg"
@@ -12,8 +12,8 @@
               ></v-avatar>
             </v-col>
 
-            <v-col cols="10" sm="7" style="cursor: pointer">
-              <div class="pa-0" @click="push(post.id, category.id)">
+            <v-col class="py-0" cols="10" sm="8" style="cursor: pointer">
+              <div @click="push(post.id, category.id)">
                 <div class="d-flex align-center">
                   <div class="mr-2 text-subtitle-1">
                     {{ post.poster.nickname }}
@@ -100,13 +100,19 @@
                 </div>
               </div>
             </v-col>
-            <v-col cols="10" sm="4" offset="2" :offset-sm="0">
+            <v-col
+              cols="10"
+              sm="3"
+              offset="2"
+              :offset-sm="0"
+              class="py-0"
+              v-if="index % 2 === 0"
+            >
               <v-img
                 @click="push(post.id, category.id)"
-                v-if="index % 2 === 0"
-                class="rounded-lg mr-0 ml-auto"
-                max-height="300"
-                max-width="300"
+                class="rounded-lg"
+                max-height="150"
+                cover
                 src="../../src/assets/ship.jpg"
                 style="cursor: pointer"
               ></v-img>

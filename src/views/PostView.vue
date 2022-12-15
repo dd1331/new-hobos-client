@@ -1,6 +1,11 @@
 <template>
   <div>
-    <v-card v-if="post" class="my-1 rounded-xl" variant="flat">
+    <v-card
+      v-if="post"
+      class="my-1"
+      :class="mobile ? 'rounded-0' : 'rounded-xl'"
+      variant="flat"
+    >
       <v-card-item>
         <!-- <div class="d-flex justify-space-between border-solid"> -->
         <v-row>

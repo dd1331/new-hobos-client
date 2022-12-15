@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-3">
+  <div class="ma-3 d-flex justify-space-around">
     <GoodButton
       v-for="category in useCategoryStore().categories"
       :key="category.id"

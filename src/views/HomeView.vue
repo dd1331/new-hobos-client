@@ -5,10 +5,12 @@
     <SimplePostList
       v-if="popularCategory && popularPosts"
       :category="{
-        title: popularCategory.title + '(임시)',
+        title: '인기',
         id: popularCategory.id,
       }"
+      :title="true"
       :posts="popularPosts"
+      :highlight="true"
       class="mx-0 px-0"
       :thumbnail="true"
     ></SimplePostList>
@@ -16,6 +18,7 @@
       <SimplePostList
         v-for="post in homePosts.posts"
         :key="post.category.id"
+        :title="true"
         :category="{
           title: post.category.title,
           id: post.category.id,
@@ -32,6 +35,7 @@
               id: post.category.id,
             }"
             :posts="post.posts"
+            :title="true"
           ></SimplePostList>
         </v-col>
       </v-row>

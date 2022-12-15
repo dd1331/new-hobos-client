@@ -1,57 +1,67 @@
 <template>
   <div>
-    <v-card v-if="category" variant="flat" class="rounded-xl">
-      <div class="d-flex justify-space-between align-center text-subtitle-1">
-        <div class="mx-4 my-1 pa-1">{{ category.title }}</div>
-        <GoodButton
-          style="opacity: 90%"
-          class="mx-4"
-          @click="
-            $router.push({ path: '/post', query: { category: category.id } })
-          "
-          color="primary"
-          text="more"
-        ></GoodButton>
+    <v-card
+      v-if="category"
+      variant="flat"
+      :class="mobile ? 'rounded-0' : 'rounded-xl'"
+    >
+      <div v-if="title">
+        <div
+          class="d-flex justify-space-between align-center text-subtitle-1 mx-3"
+        >
+          <div class="my-1 pa-1">{{ category.title }}</div>
+          <GoodButton
+            style="opacity: 90%"
+            @click="
+              $router.push({ path: '/post', query: { category: category.id } })
+            "
+            color="primary"
+            text="more"
+          ></GoodButton>
+        </div>
+        <v-divider></v-divider>
       </div>
-      <v-divider></v-divider>
 
-      <v-list lines="one">
+      <v-list lines="one" class="pa-0">
         <v-list-item
+          class="px-3"
           v-for="(
             { title, id, createdAt, poster, totalComments, totalLikes, views },
             index
           ) in posts"
           :key="id"
         >
-          <div style="cursor: pointer">
-            <div :class="thumbnail ? 'd-flex align-center' : ''">
-              <v-img
-                v-if="thumbnail"
-                class="mr-2 rounded-lg"
-                max-height="50"
-                max-width="50"
-                src="../../src/assets/ship.jpg"
-              ></v-img>
-              <div>
-                <div
-                  class="mr-2 text-truncate text-subtitle-1"
-                  @click="
-                    $router.push({
-                      name: 'Post',
-                      params: { id },
-                      query: { category: category.id },
-                    })
-                  "
+          <div class="d-flex align-center" style="cursor: pointer">
+            <img
+              class="mr-2 rounded-lg"
+              style="width: 50px; height: 40px"
+              src="../../src/assets/ship.jpg"
+            />
+            <div class="text-truncate">
+              <div
+                class="mr-2 text-subtitle-1 text-truncate"
+                @click="
+                  $router.push({
+                    name: 'Post',
+                    params: { id },
+                    query: { category: category.id },
+                  })
+                "
+              >
+                <span
+                  v-if="highlight"
+                  class="font-weight-bold text-blue lighten-2"
                 >
-                  {{ title }}
-                  <span v-if="totalComments"> ({{ totalComments }}) </span>
-                </div>
-                <div class="d-flex align-center text-body-2">
-                  {{ poster.nickname }} {{ dayjs(createdAt).fromNow() }}
-                  <v-icon size="13" class="mx-1" color="red">mdi-heart</v-icon>
-                  {{ totalLikes }}
-                  조회 {{ views }}
-                </div>
+                  자유
+                </span>
+                {{ title }}
+                <span v-if="totalComments"> ({{ totalComments }}) </span>
+              </div>
+              <div class="d-flex align-center text-body-2">
+                {{ poster.nickname }} {{ dayjs(createdAt).fromNow() }}
+                <v-icon size="13" class="mx-1" color="red">mdi-heart</v-icon>
+                {{ totalLikes }}
+                조회 {{ views }}
               </div>
             </div>
           </div>
@@ -83,6 +93,8 @@ defineProps<{
   category: { title: string; id: number };
   posts: IPost4List[];
   thumbnail?: boolean;
+  title?: boolean;
+  highlight?: boolean;
 }>();
 const emit = defineEmits(["onPageClicked"]);
 const { mobile } = useDisplay();
@@ -94,3 +106,13 @@ function clicked() {
   emit("onPageClicked", page.value);
 }
 </script>
+<style>
+.two-lines {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  white-space: normal;
+}
+</style>

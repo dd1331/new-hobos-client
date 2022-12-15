@@ -68,9 +68,10 @@ const emit = defineEmits(["hideLogin", "popSnackbar"]);
 const dialog = computed(() => props.hidden);
 const router = useRouter();
 const userStore = useUserStore();
+const IS_DEV = process.env.NODE_ENV === "development";
 
-const email = ref("");
-const password = ref("");
+const email = ref(IS_DEV ? "test@test.com" : "");
+const password = ref(IS_DEV ? "11111111" : "");
 const accessToken = computed(() => userStore.accessToken);
 const valid = true;
 const nameRules = [

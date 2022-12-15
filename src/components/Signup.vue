@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card :class="mobile ? 'rounded-0' : 'rounded-xl'">
     <v-container class="text-sm-h4 text-h6">회원가입</v-container>
     <v-divider></v-divider>
     <v-container>
@@ -96,16 +96,18 @@
 import { useUserStore, type SignupPayload } from "@/stores/user";
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
+import { useDisplay } from "vuetify/lib/framework.mjs";
 import GoodButton from "./GoodButton.vue";
-
+const { mobile } = useDisplay();
 const router = useRouter();
+const IS_DEV = process.env.NODE_ENV === "development";
 
 const userStore = useUserStore();
 const signupState: SignupPayload & { password2: string } = reactive({
-  email: "",
-  nickname: "",
-  password: "",
-  password2: "",
+  email: IS_DEV ? "test@test.com" : "",
+  nickname: IS_DEV ? "123" : "",
+  password: IS_DEV ? "11111111" : "",
+  password2: IS_DEV ? "11111111" : "",
 });
 
 const emit = defineEmits(["popSnackbar"]);

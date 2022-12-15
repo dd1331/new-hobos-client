@@ -1,11 +1,10 @@
 <template>
-  <GoodCategory></GoodCategory>
-  <div class="d-flex justify-space-between">
-    <div>
+  <!-- <GoodCategory v-if="!mobile"></GoodCategory> -->
+  <div class="d-flex justify-space-between ma-3">
+    <div class="d-flex align-center">
       {{ currentCategory?.title }}
     </div>
     <GoodButton
-      class="mr-2 mb-2"
       @click="
         $router.push({
           name: 'Poster',
@@ -17,8 +16,14 @@
     >
     </GoodButton>
   </div>
+  <SimplePostList
+    v-if="mobile && currentCategory?.view === View.SIMPLE"
+    :category="currentCategory"
+    :posts="postStore.getPosts"
+    :title="false"
+  ></SimplePostList>
   <FancyPostList
-    v-if="mobile || currentCategory?.view === View.FANCY"
+    v-else-if="mobile || currentCategory?.view === View.FANCY"
     :posts="postStore.getPosts"
     :category="currentCategory"
     @on-page-clicked="onPageClicked"
@@ -34,12 +39,12 @@
 <script lang="ts" setup>
 import { computed, onMounted, reactive } from "vue";
 import { onBeforeRouteUpdate, useRoute } from "vue-router";
-import GoodCategory from "../components/GoodCategory.vue";
 import PostTable from "../components/PostTable.vue";
 import { usePostStore } from "@/stores/post";
 import { useCategoryStore, type ICategory, View } from "@/stores/category";
 import { useDisplay } from "vuetify/lib/framework.mjs";
 import FancyPostList from "@/components/FancyPostList.vue";
+import SimplePostList from "@/components/SimplePostList.vue";
 import GoodButton from "@/components/GoodButton.vue";
 
 const route = useRoute();

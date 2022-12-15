@@ -1,6 +1,10 @@
 })
 <template>
-  <v-card class="my-1 rounded-xl" variant="flat">
+  <v-card
+    class="my-1"
+    :class="mobile ? 'rounded-0' : 'rounded-xl'"
+    variant="flat"
+  >
     <v-card-item>
       <div class="d-flex align-center text-title-1">
         <div>댓글</div>
@@ -13,6 +17,7 @@
 
     <v-list>
       <v-list-item
+        class="px-2"
         v-for="(comment, index) in store.getComments.comments"
         :key="comment.id"
       >
@@ -26,7 +31,7 @@
         <div class="mx-1" v-if="comment.id === activeId">
           <CommentInput @register-comment="registerChildComment"></CommentInput>
         </div>
-        <v-list class="pa-0" :class="mobile ? '' : 'ml-12'">
+        <v-list class="pa-0" :class="mobile ? 'ml-5' : 'ml-5'">
           <v-list-item
             v-for="(childComment, index2) in comment.childComments"
             :key="childComment.id"
