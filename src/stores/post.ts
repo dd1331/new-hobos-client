@@ -3,6 +3,7 @@ import { defineStore } from "pinia";
 import { computed, reactive } from "vue";
 import goodAxios from "../common/good-axios";
 import type { User } from "./user";
+import { API_URL } from "../constants";
 
 type PostPayload = {
   title: string;
@@ -50,8 +51,17 @@ export const usePostStore = defineStore("Post", () => {
   const getPopularPosts = computed(() => state.popularPosts);
   const getPost = computed(() => state.post);
   const getHomePosts = computed(() => state.homePosts);
-  async function post(payload: PostPayload) {
-    const { data } = await goodAxios.post("post", payload);
+  async function post(payload: PostPayload, images: File[]) {
+    const formData = new FormData();
+    images.forEach((image) => {
+      formData.append("files", image);
+    });
+
+    formData.append("title", payload.title);
+    formData.append("content", payload.content);
+    formData.append("categoryIds", JSON.stringify(payload.categoryIds));
+
+    const { data } = await goodAxios.post("post", formData, {});
     return data;
   }
   async function fetchPosts() {
@@ -97,7 +107,6 @@ export const usePostStore = defineStore("Post", () => {
   async function deletePost(commentId: number) {
     const { data } = await goodAxios.delete("post/" + commentId);
   }
-
   return {
     post,
     fetchPosts,

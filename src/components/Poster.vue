@@ -32,6 +32,13 @@
         variant="outlined"
         hide-details
       ></v-textarea>
+      <div @click="$refs.image.click">test</div>
+      <v-file-input
+        class="d-none"
+        label="File input"
+        ref="image"
+        @change="onchange"
+      ></v-file-input>
     </v-container>
     <v-container class="d-flex justify-center">
       <GoodButton
@@ -69,12 +76,23 @@ const state = reactive({
   title: "",
   content: "",
 });
+const image = ref();
+const images: File[] = [];
+
+function onchange() {
+  const [imageFiles] = image.value.files;
+  images.push(imageFiles);
+}
+
 const registerPost = async () => {
-  const post = await postStore.post({
-    title: state.title,
-    content: state.content,
-    categoryIds: [state.categoryId],
-  });
+  const post = await postStore.post(
+    {
+      title: state.title,
+      content: state.content,
+      categoryIds: [state.categoryId],
+    },
+    images
+  );
   router.push({
     name: "Post",
     params: { id: post.id },

@@ -79,7 +79,6 @@ import GoodButton from "./GoodButton.vue";
 
 function onchange() {
   const [imageFile] = image.value.files;
-  console.log(imageFile);
   userStore.updateProfileImage(imageFile);
 }
 
@@ -92,7 +91,7 @@ const year: Ref<"선택해주세요" | number> = ref(0);
 const years = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
 const valid = false;
-const firstname = "";
+
 const nickname = ref();
 const email = ref();
 const nameRules = [
