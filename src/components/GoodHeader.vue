@@ -44,8 +44,8 @@
         <template v-slot:activator="{ props }">
           <v-btn icon v-bind="props">
             <v-avatar
-              color="brown"
-              image="../../src/assets/ship2.jpg"
+              class="border-solid"
+              :image="userStore.getUser.image ?? '../../src/assets/ship2.jpg'"
             ></v-avatar>
           </v-btn>
         </template>
@@ -53,8 +53,8 @@
           <v-card-text>
             <div class="mx-auto text-center">
               <v-avatar
-                color="brown"
-                image="../../src/assets/ship2.jpg"
+                class="border-solid"
+                :image="userStore.getUser.image ?? '../../src/assets/ship2.jpg'"
               ></v-avatar>
               <h3>{{ userStore.getUser.nickname }}</h3>
               <p class="text-caption mt-1">

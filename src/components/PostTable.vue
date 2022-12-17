@@ -58,7 +58,8 @@
             <v-avatar size="25px" class="mr-2">
               <v-img
                 alt="Avatar"
-                src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
+                :src="poster.image ?? '../../src/assets/ship2.jpg'"
+                class="border-solid"
               ></v-img>
             </v-avatar>
             <div class="text-truncate" style="max-width: 5rem">

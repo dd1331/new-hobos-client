@@ -37,6 +37,15 @@ export const useUserStore = defineStore("User", () => {
     );
     return setUserData(data);
   }
+
+  async function updateProfileImage(image: File) {
+    const formData = new FormData();
+    formData.append("file", image);
+    const { data } = await goodAxios.post(
+      API_URL + "user/profile/image",
+      formData
+    );
+  }
   async function loginLocal(payload: LoginLocalPayload) {
     const { data } = await goodAxios.post(
       API_URL + "auth/login/local",
@@ -97,5 +106,6 @@ export const useUserStore = defineStore("User", () => {
     getUser,
     logout,
     editProfile,
+    updateProfileImage,
   };
 });

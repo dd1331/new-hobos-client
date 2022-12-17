@@ -3,7 +3,7 @@
     <v-avatar size="36px" class="ma-2">
       <v-img
         alt="Avatar"
-        src="https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
+        :src="comment.commenter.image ?? '../../src/assets/ship2.jpg'"
       ></v-img>
     </v-avatar>
     <div class="mr-auto">

@@ -7,7 +7,7 @@
             <v-col cols="2" sm="1" class="py-0">
               <v-avatar
                 class="border-solid"
-                image="../../src/assets/ship3.jpg"
+                :image="post.poster.image ?? '../../src/assets/ship2.jpg'"
                 size="40"
               ></v-avatar>
             </v-col>

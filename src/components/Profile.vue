@@ -1,5 +1,9 @@
 <template>
-  <v-card variant="flat" :class="mobile ? 'rounded-0' : 'rounded-xl'">
+  <v-card
+    v-if="userStore.getUser"
+    variant="flat"
+    :class="mobile ? 'rounded-0' : 'rounded-xl'"
+  >
     <v-form v-model="valid">
       <v-container class="text-subtitle-2">
         <v-row>
@@ -47,7 +51,10 @@
               <v-avatar :size="mobile ? '150' : '200'" class="border-solid">
                 <v-img
                   cover
-                  src="https://cdn.vuetifyjs.com/images/profiles/marcus.jpg"
+                  :src="
+                    userStore.getUser.image ??
+                    'https://cdn.vuetifyjs.com/images/profiles/marcus.jpg'
+                  "
                 ></v-img>
               </v-avatar>
             </div>
@@ -73,6 +80,7 @@ import GoodButton from "./GoodButton.vue";
 function onchange() {
   const [imageFile] = image.value.files;
   console.log(imageFile);
+  userStore.updateProfileImage(imageFile);
 }
 
 const image = ref();
