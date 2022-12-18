@@ -23,7 +23,7 @@
           title: post.category.title,
           id: post.category.id,
         }"
-        :posts="post.posts"
+        :posts="post.list"
       ></SimplePostList>
     </div>
     <div v-else class="">
@@ -34,7 +34,7 @@
               title: post.category.title,
               id: post.category.id,
             }"
-            :posts="post.posts"
+            :posts="post.list"
             :title="true"
           ></SimplePostList>
         </v-col>
@@ -44,6 +44,7 @@
 </template>
 
 <script lang="ts" setup>
+// TODO: add new posts
 import { useCategoryStore, type ICategory } from "@/stores/category";
 import { usePostStore, type IPost } from "@/stores/post";
 import { computed, onBeforeMount, reactive } from "vue";

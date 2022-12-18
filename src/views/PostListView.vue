@@ -49,6 +49,7 @@ import GoodButton from "@/components/GoodButton.vue";
 
 const route = useRoute();
 const { mobile } = useDisplay();
+const emit = defineEmits(["popSnackbar"]);
 
 const state = reactive({ categoryId: 0 });
 const postStore = usePostStore();

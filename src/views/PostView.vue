@@ -45,7 +45,27 @@
         <!-- </div> -->
       </v-card-item>
       <v-divider></v-divider>
-      <v-card-text class="text-body-1"> {{ post.content }} </v-card-text>
+
+      <v-container v-for="(file, index) in post.files" :key="index">
+        <v-img
+          class="rounded-lg"
+          cover
+          :src="file"
+          style="cursor: pointer"
+        ></v-img>
+      </v-container>
+      <v-container v-for="(file, index) in post.files" :key="index">
+        <v-img
+          class="rounded-lg"
+          cover
+          :src="file"
+          style="cursor: pointer"
+        ></v-img>
+      </v-container>
+
+      <v-card-text class="text-body-1">
+        {{ post.content }}
+      </v-card-text>
 
       <Like
         :liked="post.liked"
@@ -55,19 +75,21 @@
     </v-card>
     <GoodComment v-if="post" :postId="post.id"></GoodComment>
     <GoodCategory class="mt-5"></GoodCategory>
-    <SimplePostList
-      v-if="mobile"
-      :pagination="true"
-      :category="currentCategory"
-      :posts="posts"
-      @on-page-clicked="onPageClicked"
-    ></SimplePostList>
-    <PostTable
-      v-else
-      :posts="posts"
-      :category="currentCategory"
-      @on-page-clicked="onPageClicked"
-    ></PostTable>
+    <div v-if="currentCategory">
+      <SimplePostList
+        v-if="mobile"
+        :pagination="true"
+        :category="currentCategory"
+        :posts="posts"
+        @on-page-clicked="onPageClicked"
+      ></SimplePostList>
+      <PostTable
+        v-else
+        :posts="posts"
+        :category="currentCategory"
+        @on-page-clicked="onPageClicked"
+      ></PostTable>
+    </div>
   </div>
 </template>
 

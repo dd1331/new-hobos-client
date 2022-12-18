@@ -22,20 +22,30 @@
         <v-divider></v-divider>
       </div>
 
-      <v-list lines="one" class="pa-0">
+      <v-list lines="one" class="px-1 py-0">
         <v-list-item
           class="px-3"
           v-for="(
-            { title, id, createdAt, poster, totalComments, totalLikes, views },
+            {
+              title,
+              id,
+              createdAt,
+              poster,
+              totalComments,
+              totalLikes,
+              views,
+              thumbnail,
+            },
             index
           ) in posts"
           :key="id"
         >
           <div class="d-flex align-center" style="cursor: pointer">
-            <img
+            <v-img
+              v-if="thumbnail"
               class="mr-2 rounded-lg"
-              style="width: 50px; height: 40px"
-              src="../../src/assets/ship.jpg"
+              max-width="50px"
+              :src="thumbnail"
             />
             <div class="text-truncate">
               <div

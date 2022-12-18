@@ -20,9 +20,10 @@ export interface IPost4List {
   totalLikes: number;
   totalComments: number;
   views: number;
+  thumbnail: string;
 }
 export interface IPost4HomeList {
-  posts: IPost4List[];
+  list: IPost4List[];
   category: { title: string; id: number };
 }
 export interface IPost {
@@ -34,6 +35,7 @@ export interface IPost {
   totalLikes: number;
   liked: boolean;
   views: number;
+  files: string[];
 }
 export const usePostStore = defineStore("Post", () => {
   const state: {
@@ -76,7 +78,7 @@ export const usePostStore = defineStore("Post", () => {
     const { data } = await goodAxios.get("post", {
       params: { categoryId, page, size },
     });
-    state.posts = data;
+    state.posts = data.posts;
     return data as IPost[];
   }
   // TODO: merge into fetchHomePosts?
@@ -84,14 +86,14 @@ export const usePostStore = defineStore("Post", () => {
     const { data } = await goodAxios.get("post", {
       params: { page: 1, size: 5, categoryId: 1 },
     });
-    state.popularPosts = data;
+    state.popularPosts = data.posts;
   }
   async function fetchHomePosts() {
     const { data } = await goodAxios.get("post/home", {
       params: { categoryIds: [3, 4, 5] },
       paramsSerializer: { serialize: (params) => qs.stringify(params) },
     });
-    state.homePosts = data;
+    state.homePosts = data.posts;
   }
 
   async function fetchPost(id: number) {

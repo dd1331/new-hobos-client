@@ -106,14 +106,12 @@
               offset="2"
               :offset-sm="0"
               class="py-0"
-              v-if="index % 2 === 0"
+              v-if="post.thumbnail"
             >
               <v-img
                 @click="push(post.id, category.id)"
                 class="rounded-lg"
-                max-height="150"
-                cover
-                src="../../src/assets/ship.jpg"
+                :src="post.thumbnail"
                 style="cursor: pointer"
               ></v-img>
             </v-col>
