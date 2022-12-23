@@ -3,7 +3,6 @@ import { defineStore } from "pinia";
 import { computed, reactive } from "vue";
 import goodAxios from "../common/good-axios";
 import type { User } from "./user";
-import { API_URL } from "../constants";
 
 type PostPayload = {
   title: string;

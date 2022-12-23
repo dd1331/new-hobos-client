@@ -1,6 +1,5 @@
 import { ref, computed, reactive } from "vue";
 import { defineStore } from "pinia";
-import { API_URL } from "../constants";
 import goodAxios from "../common/good-axios";
 import type { AxiosRequestConfig } from "axios";
 export type SignupPayload = {
@@ -21,6 +20,7 @@ export type User = {
   nickname: string;
   email: string;
   career: { job: { title: string }; year: number };
+  image: string;
 };
 export const useUserStore = defineStore("User", () => {
   const count = ref(0);
@@ -31,26 +31,17 @@ export const useUserStore = defineStore("User", () => {
   } = reactive({ tokens: {} as Tokens, user: null });
   const accessToken = computed(() => state.tokens?.accessToken);
   async function signupLocal(payload: SignupPayload) {
-    const { data } = await goodAxios.post(
-      API_URL + "user/signup/local",
-      payload
-    );
+    const { data } = await goodAxios.post("user/signup/local", payload);
     return setUserData(data);
   }
 
   async function updateProfileImage(image: File) {
     const formData = new FormData();
     formData.append("file", image);
-    const { data } = await goodAxios.post(
-      API_URL + "user/profile/image",
-      formData
-    );
+    const { data } = await goodAxios.post("user/profile/image", formData);
   }
   async function loginLocal(payload: LoginLocalPayload) {
-    const { data } = await goodAxios.post(
-      API_URL + "auth/login/local",
-      payload
-    );
+    const { data } = await goodAxios.post("auth/login/local", payload);
     return setUserData(data);
   }
   function setUserData(data: { tokens: Tokens; user: User }) {
@@ -79,7 +70,7 @@ export const useUserStore = defineStore("User", () => {
     });
     state.tokens = { accessToken, refreshToken };
 
-    const { data } = await goodAxios.get(API_URL + "user");
+    const { data } = await goodAxios.get("user");
     state.user = data;
   }
   const getUser = computed(() => state.user);
@@ -94,7 +85,7 @@ export const useUserStore = defineStore("User", () => {
     jobId: number;
     year: number;
   }) {
-    const { data } = await goodAxios.put(API_URL + "user/profile", payload);
+    const { data } = await goodAxios.put("user/profile", payload);
     fetchUser();
   }
   return {

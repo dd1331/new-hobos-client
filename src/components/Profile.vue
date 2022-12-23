@@ -47,7 +47,7 @@
           </v-col>
 
           <v-col :cols="mobile ? 12 : 4" order="1" class="text-center">
-            <div @click="$refs.image.click">
+            <div @click="($refs.image as HTMLInputElement).click">
               <v-avatar :size="mobile ? '150' : '200'" class="border-solid">
                 <v-img
                   cover
@@ -88,19 +88,36 @@ const userStore = useUserStore();
 const job = ref("");
 
 const year: Ref<"선택해주세요" | number> = ref(0);
-const years = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+const years = [
+  "선택해주세요",
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  12,
+  13,
+  14,
+  15,
+];
 
 const valid = false;
 
-const nickname = ref();
-const email = ref();
+const nickname = ref("");
+const email = ref("");
 const nameRules = [
-  (v) => !!v || "Name is required",
-  (v) => v.length <= 10 || "Name must be less than 10 characters",
+  (v: string) => !!v || "Name is required",
+  (v: string) => v.length <= 10 || "Name must be less than 10 characters",
 ];
 const emailRules = [
-  (v) => !!v || "E-mail is required",
-  (v) => /.+@.+/.test(v) || "E-mail must be valid",
+  (v: string) => !!v || "E-mail is required",
+  (v: string) => /.+@.+/.test(v) || "E-mail must be valid",
 ];
 const { mobile } = useDisplay();
 const emit = defineEmits(["popSnackbar"]);
@@ -109,7 +126,7 @@ async function edit() {
   const payload = {
     nickname: nickname.value,
     jobId: jobStore.getJobs.find((j) => j.title === job.value)!.id,
-    year: year.value,
+    year: year.value as number,
   };
   await userStore.editProfile(payload);
   emit("popSnackbar", "수정완료");

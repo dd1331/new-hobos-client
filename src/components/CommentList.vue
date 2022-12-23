@@ -69,12 +69,12 @@ import {
 import Like from "@/components/Like.vue";
 import { useLikeStore } from "@/stores/like";
 import { useUserStore } from "@/stores/user";
-import { inject, ref } from "vue";
+import { ref } from "vue";
+import dayjs from "dayjs";
 import Menu from "./Menu.vue";
 import { useDisplay } from "vuetify/lib/framework.mjs";
 const { mobile } = useDisplay();
 const store = useCommentStore();
-const dayjs = inject("dayjs");
 defineEmits(["toggleCommentInput"]);
 function like() {
   const id = props.comment.id;

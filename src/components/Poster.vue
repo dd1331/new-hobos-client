@@ -32,7 +32,7 @@
         variant="outlined"
         hide-details
       ></v-textarea>
-      <div @click="$refs.image.click">test</div>
+      <div @click="($refs.image as HTMLInputElement).click">test</div>
       <v-file-input
         class="d-none"
         label="File input"

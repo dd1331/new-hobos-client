@@ -93,10 +93,10 @@
 </template>
 <script lang="ts" setup>
 import type { IPost4List } from "@/stores/post";
-import { inject, ref } from "vue";
+import { ref } from "vue";
 import { useDisplay } from "vuetify/lib/framework.mjs";
 import GoodButton from "./GoodButton.vue";
-const dayjs = inject("dayjs");
+import dayjs from "dayjs";
 
 defineProps<{
   pagination?: Boolean;

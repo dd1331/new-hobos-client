@@ -27,7 +27,6 @@
         <!-- Provides the application the proper gutter -->
         <v-container fluid style="width: 800px" class="pb-0">
           <!-- If using vue-router -->
-
           <router-view @pop-snackbar="popSnackbar"></router-view>
         </v-container>
         <GoodFooter></GoodFooter>
@@ -66,7 +65,8 @@
 import GoodFooter from "./components/GoodFooter.vue";
 import GoodHeader from "./components/GoodHeader.vue";
 import GoodLogin from "./components/GoodLogin.vue";
-import * as dayjs from "dayjs";
+import dayjs from "dayjs";
+
 import "dayjs/locale/ko";
 import relativeTime from "dayjs/plugin/relativeTime";
 
@@ -105,7 +105,7 @@ dayjs.locale("ko");
 dayjs.extend(relativeTime);
 provide("dayjs", dayjs);
 onErrorCaptured(
-  (err: unknown, instance: ComponentPublicInstance | null, info: string) => {
+  (err: any, instance: ComponentPublicInstance | null, info: string) => {
     if (err.response?.status === 401 || err.message === UNAUTHORIZED)
       toggleLogin();
   }

@@ -75,8 +75,8 @@ const password = ref(IS_DEV ? "11111111" : "");
 const accessToken = computed(() => userStore.accessToken);
 const valid = true;
 const nameRules = [
-  (v) => !!v || "Name is required",
-  (v) => v.length <= 10 || "Name must be less than 10 characters",
+  (v: string) => !!v || "Name is required",
+  (v: string) => v.length <= 10 || "Name must be less than 10 characters",
 ];
 function signupLocal() {
   emit("hideLogin");

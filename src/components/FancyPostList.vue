@@ -7,7 +7,7 @@
             <v-col cols="2" sm="1" class="py-0">
               <v-avatar
                 class="border-solid"
-                :image="post.poster.image ?? '../../src/assets/ship2.jpg'"
+                :image="post.poster.image ?? '../../ship2.jpg'"
                 size="40"
               ></v-avatar>
             </v-col>
@@ -193,11 +193,12 @@
 <script lang="ts" setup>
 import type { ICategory } from "@/stores/category";
 import type { IPost4List } from "@/stores/post";
-import { inject, ref } from "vue";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
+import dayjs from "dayjs";
 import { useDisplay } from "vuetify/lib/framework.mjs";
 import GoodChip from "./GoodChip.vue";
-const dayjs = inject("dayjs");
+
 const { xs, mobile } = useDisplay();
 defineProps<{
   posts: IPost4List[];

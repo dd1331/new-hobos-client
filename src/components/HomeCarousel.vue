@@ -6,11 +6,20 @@
     show-arrows="hover"
     :class="mobile ? 'rounded-0' : 'rounded-xl'"
   >
-    <v-carousel-item src="../../src/assets/ship3.jpg" cover></v-carousel-item>
+    <v-carousel-item
+      src="https://hobos.s3.ap-northeast-2.amazonaws.com/assets/ship3.jpg"
+      cover
+    ></v-carousel-item>
 
-    <v-carousel-item src="../../src/assets/ship2.jpg" cover></v-carousel-item>
+    <v-carousel-item
+      src="https://hobos.s3.ap-northeast-2.amazonaws.com/assets/ship2.jpg"
+      cover
+    ></v-carousel-item>
 
-    <v-carousel-item src="../../src/assets/ship.jpg" cover></v-carousel-item>
+    <v-carousel-item
+      src="https://hobos.s3.ap-northeast-2.amazonaws.com/assets/ship.jpg"
+      cover
+    ></v-carousel-item>
   </v-carousel>
 </template>
 <script lang="ts" setup>

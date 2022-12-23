@@ -91,7 +91,8 @@
 <script lang="ts" setup>
 import type { ICategory } from "@/stores/category";
 import type { IPost4List } from "@/stores/post";
-import { inject, ref } from "vue";
+import { ref } from "vue";
+import dayjs from "dayjs";
 import { useDisplay } from "vuetify/lib/framework.mjs";
 
 defineProps<{
@@ -99,7 +100,7 @@ defineProps<{
   category: ICategory;
 }>();
 const { mobile } = useDisplay();
-const dayjs = inject("dayjs");
+
 const page = ref(1);
 const emit = defineEmits(["onPageClicked"]);
 function clicked() {

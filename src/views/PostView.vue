@@ -101,10 +101,10 @@ import PostTable from "../components/PostTable.vue";
 import GoodChip from "@/components/GoodChip.vue";
 import SimplePostList from "../components/SimplePostList.vue";
 import { usePostStore, type IPost } from "@/stores/post";
-import { computed, inject, onBeforeMount, ref } from "vue";
+import { computed, onBeforeMount, ref } from "vue";
 import { onBeforeRouteLeave, onBeforeRouteUpdate, useRoute } from "vue-router";
-import type { Dayjs } from "dayjs";
 import { useCategoryStore, type ICategory } from "@/stores/category";
+import dayjs from "dayjs";
 import Menu from "@/components/Menu.vue";
 import router from "@/router";
 import Like from "@/components/Like.vue";
@@ -121,7 +121,6 @@ const items = [
 ];
 
 const { mobile } = useDisplay();
-const dayjs = inject("dayjs") as Dayjs;
 const post = computed(() => store.getPost as IPost);
 const route = useRoute();
 const categoryId = ref(route.query.category);

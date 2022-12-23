@@ -2,12 +2,7 @@
   <v-app-bar class="px-4" elevation="1">
     <v-navigation-drawer v-if="false" app> </v-navigation-drawer>
     <div @click="$router.push('/')" class="w-25 pt-3 align-bottom">
-      <img
-        height="70"
-        style="cursor: pointer"
-        src="../../src/assets/hobo-logo.png"
-        alt=""
-      />
+      <img height="70" style="cursor: pointer" src="/hobo-logo.png" alt="" />
     </div>
     <div class="d-flex w-75 h-100">
       <div class="w-100 h-100">
