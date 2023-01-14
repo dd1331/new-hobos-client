@@ -2,13 +2,11 @@
   <div>
     <v-card
       v-if="category"
-      variant="flat"
+      :elevation="elevation"
       :class="mobile ? 'rounded-0' : 'rounded-xl'"
     >
       <div v-if="title">
-        <div
-          class="d-flex justify-space-between align-center text-subtitle-1 mx-3"
-        >
+        <div class="d-flex justify-space-between align-center 1 mx-3">
           <div class="my-1 pa-1">{{ category.title }}</div>
           <GoodButton
             style="opacity: 90%"
@@ -49,7 +47,7 @@
             />
             <div class="text-truncate">
               <div
-                class="mr-2 text-subtitle-1 text-truncate"
+                class="mr-2 text-truncate"
                 @click="
                   $router.push({
                     name: 'Post',
@@ -97,6 +95,7 @@ import { ref } from "vue";
 import { useDisplay } from "vuetify/lib/framework.mjs";
 import GoodButton from "./GoodButton.vue";
 import dayjs from "dayjs";
+import { ELEVATION } from "@/constants";
 
 defineProps<{
   pagination?: Boolean;
@@ -109,6 +108,7 @@ defineProps<{
 const emit = defineEmits(["onPageClicked"]);
 const { mobile } = useDisplay();
 
+const elevation = ELEVATION;
 const page = ref(1);
 
 function clicked() {

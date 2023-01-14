@@ -3,7 +3,7 @@
   <v-card
     class="my-1"
     :class="mobile ? 'rounded-0' : 'rounded-xl'"
-    variant="flat"
+    :elevation="elevation"
   >
     <v-card-item>
       <div class="d-flex align-center text-title-1">
@@ -15,7 +15,7 @@
     </v-card-item>
     <v-divider></v-divider>
 
-    <v-list>
+    <v-list v-if="store.getComments.comments.length">
       <v-list-item
         class="px-2"
         v-for="(comment, index) in store.getComments.comments"
@@ -50,6 +50,7 @@
 </template>
 
 <script lang="ts" setup>
+import { ELEVATION } from "@/constants";
 import { useCommentStore, type registerCommentPayload } from "@/stores/comment";
 import { onBeforeMount, onBeforeUpdate, ref } from "vue";
 import { onBeforeRouteLeave, onBeforeRouteUpdate } from "vue-router";
@@ -61,6 +62,7 @@ const { mobile } = useDisplay();
 const props = defineProps<{
   postId: number;
 }>();
+const elevation = ELEVATION;
 
 const store = useCommentStore();
 async function registerChildComment(content: string) {

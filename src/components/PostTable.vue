@@ -1,5 +1,5 @@
 <template>
-  <v-card v-if="posts" variant="flat" class="rounded-xl">
+  <v-card v-if="posts" :elevation="elevation" class="rounded-xl">
     <v-table>
       <thead>
         <tr>
@@ -43,7 +43,7 @@
             "
             style="cursor: pointer"
           >
-            <div class="text-truncate text-body-2" style="max-width: 25rem">
+            <div class="text-truncate" style="max-width: 25rem">
               {{ title }}
               <span
                 v-if="totalComments"
@@ -94,12 +94,15 @@ import type { IPost4List } from "@/stores/post";
 import { ref } from "vue";
 import dayjs from "dayjs";
 import { useDisplay } from "vuetify/lib/framework.mjs";
+import { ELEVATION } from "@/constants";
 
 defineProps<{
   posts: IPost4List[];
   category: ICategory;
 }>();
 const { mobile } = useDisplay();
+
+const elevation = ELEVATION;
 
 const page = ref(1);
 const emit = defineEmits(["onPageClicked"]);

@@ -1,5 +1,5 @@
 <template>
-  <v-card variant="flat" :class="mobile ? 'rounded-0' : 'rounded-xl '">
+  <v-card :elevation="elevation" :class="mobile ? 'rounded-0' : 'rounded-xl '">
     <v-list>
       <v-list-item v-for="(post, index) in posts" :key="post.id" class="pa-0">
         <v-container :class="mobile ? 'py-0' : 'py-0'">
@@ -40,7 +40,7 @@
                   {{ dayjs(post.createdAt).fromNow() }}
                 </div>
                 <div @click="push(post.id, category.id)">
-                  <div class="text-truncate text-subtitle-1">
+                  <div class="text-truncate">
                     {{ post.title }}
                   </div>
                   <div class="text-body-2 two-lines">
@@ -198,12 +198,14 @@ import { useRouter } from "vue-router";
 import dayjs from "dayjs";
 import { useDisplay } from "vuetify/lib/framework.mjs";
 import GoodChip from "./GoodChip.vue";
+import { ELEVATION } from "@/constants";
 
 const { xs, mobile } = useDisplay();
 defineProps<{
   posts: IPost4List[];
   category: ICategory;
 }>();
+const elevation = ELEVATION;
 const page = ref(1);
 const emit = defineEmits(["onPageClicked"]);
 function clicked() {

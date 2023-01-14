@@ -1,5 +1,5 @@
 <template>
-  <v-card min-height="800" variant="flat" class="rounded-xl">
+  <v-card min-height="800" :elevation="elevation" class="rounded-xl">
     <v-container class="text-sm-h4 text-h6">글쓰기</v-container>
     <v-divider />
     <v-container v-if="categories.length" class="d-flex mb-3">
@@ -64,9 +64,11 @@ import { onBeforeRouteLeave, useRoute, useRouter } from "vue-router";
 import { usePostStore } from "../stores/post";
 import { useCategoryStore } from "@/stores/category";
 import GoodButton from "./GoodButton.vue";
+import { ELEVATION } from "@/constants";
 
 const postStore = usePostStore();
 const categoryStore = useCategoryStore();
+const elevation = ELEVATION;
 
 const router = useRouter();
 const categories = computed(() => categoryStore.categories);

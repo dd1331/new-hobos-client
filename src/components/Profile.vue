@@ -1,7 +1,7 @@
 <template>
   <v-card
     v-if="userStore.getUser"
-    variant="flat"
+    :elevation="elevation"
     :class="mobile ? 'rounded-0' : 'rounded-xl'"
   >
     <v-form v-model="valid">
@@ -76,6 +76,7 @@ import { useDisplay } from "vuetify/lib/framework.mjs";
 import { useJobStore } from "@/stores/job";
 import { useUserStore } from "@/stores/user";
 import GoodButton from "./GoodButton.vue";
+import { ELEVATION } from "@/constants";
 
 function onchange() {
   const [imageFile] = image.value.files;
@@ -86,6 +87,7 @@ const image = ref();
 const jobStore = useJobStore();
 const userStore = useUserStore();
 const job = ref("");
+const elevation = ELEVATION;
 
 const year: Ref<"선택해주세요" | number> = ref(0);
 const years = [

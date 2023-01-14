@@ -4,13 +4,13 @@
       v-if="post"
       class="my-1"
       :class="mobile ? 'rounded-0' : 'rounded-xl'"
-      variant="flat"
+      :elevation="elevation"
     >
       <v-card-item>
         <!-- <div class="d-flex justify-space-between border-solid"> -->
         <v-row>
           <v-col cols="11" sm="11">
-            <v-card-title class="text-h6">{{ post.title }}</v-card-title>
+            <v-card-title class="">{{ post.title }}</v-card-title>
             <div class="text-subtitle-2">
               <div class="d-flex align-center">
                 {{ post.poster.nickname }}
@@ -63,7 +63,7 @@
         ></v-img>
       </v-container>
 
-      <v-card-text class="text-body-1">
+      <v-card-text class="">
         {{ post.content }}
       </v-card-text>
 
@@ -110,6 +110,7 @@ import router from "@/router";
 import Like from "@/components/Like.vue";
 import { useUserStore } from "@/stores/user";
 import { useLikeStore } from "@/stores/like";
+import { ELEVATION } from "@/constants";
 const store = usePostStore();
 function onPageClicked(page: number) {
   store.fetchPostsByCategory(currentCategory.value.id, page);
@@ -121,6 +122,7 @@ const items = [
 ];
 
 const { mobile } = useDisplay();
+const elevation = ELEVATION;
 const post = computed(() => store.getPost as IPost);
 const route = useRoute();
 const categoryId = ref(route.query.category);
