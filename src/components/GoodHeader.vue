@@ -40,7 +40,7 @@
           <v-btn icon v-bind="props">
             <v-avatar
               class="border-solid"
-              :image="userStore.getUser.image ?? '../../src/assets/ship2.jpg'"
+              :image="userStore.getUser.image ?? '../../ship2.jpg'"
             ></v-avatar>
           </v-btn>
         </template>
@@ -49,7 +49,7 @@
             <div class="mx-auto text-center">
               <v-avatar
                 class="border-solid"
-                :image="userStore.getUser.image ?? '../../src/assets/ship2.jpg'"
+                :image="userStore.getUser.image ?? '../../ship2.jpg'"
               ></v-avatar>
               <h3>{{ userStore.getUser.nickname }}</h3>
               <p class="text-caption mt-1">

@@ -20,7 +20,7 @@
         <v-divider></v-divider>
       </div>
 
-      <v-list lines="one" class="px-1 py-0">
+      <v-list lines="one" class="px-1">
         <v-list-item
           class="px-3"
           v-for="(

@@ -6,12 +6,8 @@
       transition="false"
       style="width: 360px"
     >
-      <!-- <template v-slot:activator="{ props }">
-        <v-btn color="primary" v-bind="props"> Open Dialog </v-btn>
-      </template> -->
-
       <v-card class="py-3">
-        <v-card-title class="text-body-1"> 로그인 </v-card-title>
+        <v-card-title class=""> 로그인 </v-card-title>
         <v-form v-model="valid">
           <v-container class="py-0">
             <v-text-field
@@ -50,19 +46,32 @@
         <v-btn color="primary" @click="signupLocal" variant="text" rounded="lg">
           회원가입
         </v-btn>
+
+        <v-btn @click="naverLogin($refs.naver as HTMLButtonElement)"
+          >네이버</v-btn
+        >
       </v-card>
     </v-dialog>
+
+    <div id="naver_id_login" ref="naver" class="d-none"></div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { computed } from "vue";
+import { computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { ref } from "vue";
 
 import { useUserStore, type LoginLocalPayload } from "@/stores/user";
 import { AxiosError } from "axios";
 
+const NAVER_SERVICE_URL = import.meta.env.VITE_NAVER_SERVICE_URL;
+const NAVER_CALLBACK_URL = import.meta.env.VITE_NAVER_CALLBACK_URL;
+// const NAVER_SERVICE_URL =
+//   "http://ec2-13-125-230-220.ap-northeast-2.compute.amazonaws.com:3000/";
+// const NAVER_CALLBACK_URL =
+//   "http://ec2-13-125-230-220.ap-northeast-2.compute.amazonaws.com:3000/";
+const NAVER_CLIENT_ID = "ZmGFcvBGsjbKVJm4tkay";
 const props = defineProps({ hidden: Boolean });
 const emit = defineEmits(["hideLogin", "popSnackbar"]);
 const dialog = computed(() => props.hidden);
@@ -72,7 +81,6 @@ const IS_DEV = process.env.NODE_ENV === "development";
 
 const email = ref(IS_DEV ? "test@test.com" : "");
 const password = ref(IS_DEV ? "11111111" : "");
-const accessToken = computed(() => userStore.accessToken);
 const valid = true;
 const nameRules = [
   (v: string) => !!v || "Name is required",
@@ -100,4 +108,17 @@ async function loginLocal() {
     }
   }
 }
+function naverLogin(a: any) {
+  a.firstChild.click();
+}
+onMounted(() => {
+  const { naver_id_login, naver } = window as any;
+
+  var naver_id_login2 = new naver_id_login(NAVER_CLIENT_ID, NAVER_CALLBACK_URL);
+  var state = naver_id_login2.getUniqState();
+  naver_id_login2.setButton("white", 2, 40);
+  naver_id_login2.setDomain(NAVER_SERVICE_URL);
+  naver_id_login2.setState(state);
+  naver_id_login2.init_naver_id_login();
+});
 </script>

@@ -17,7 +17,7 @@
     </GoodButton>
   </div>
   <SimplePostList
-    v-if="mobile && currentCategory?.view === View.SIMPLE"
+    v-if="currentCategory?.view === View.SIMPLE"
     :category="currentCategory"
     :posts="postStore.getPosts"
     :title="false"

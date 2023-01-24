@@ -44,15 +44,20 @@ export const useUserStore = defineStore("User", () => {
     const { data } = await goodAxios.post("auth/login/local", payload);
     return setUserData(data);
   }
+
   function setUserData(data: { tokens: Tokens; user: User }) {
+    state.user = data.user;
+    return setTokens(data.tokens);
+  }
+
+  function setTokens(tokens: Tokens) {
     goodAxios.interceptors.request.use((config: AxiosRequestConfig<any>) => {
       if (accessToken.value && config.headers) {
         config.headers["Authorization"] = "Bearer " + accessToken.value;
       }
       return config;
     });
-    state.tokens = data.tokens as Tokens;
-    state.user = data.user;
+    state.tokens = tokens as Tokens;
     localStorage.setItem("accessToken", state.tokens.accessToken);
     localStorage.setItem("refreshToken", state.tokens.refreshToken);
     return state.tokens;
@@ -98,5 +103,6 @@ export const useUserStore = defineStore("User", () => {
     logout,
     editProfile,
     updateProfileImage,
+    setTokens,
   };
 });

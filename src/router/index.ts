@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Poster from "../components/Poster.vue";
 import Signup from "../components/Signup.vue";
+import NaverCallback from "../views/NaverCallback.vue";
 import HomeView from "../views/HomeView.vue";
 import PostListView from "../views/PostListView.vue";
 import PostView from "../views/PostView.vue";
@@ -38,6 +39,11 @@ const router = createRouter({
       component: Signup,
     },
     { path: "/profile", name: "Profile", component: Profile },
+    {
+      path: "/naver/callback",
+      name: "NaverCallback",
+      component: NaverCallback,
+    },
     {
       path: "/about",
       name: "about",
